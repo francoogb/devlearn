@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python (generador de apuntes en Word)
+.venv-docx/
+Apuntes_NextJS_TS.docx
