@@ -1,0 +1,202 @@
+{
+  "concepts": [
+    { "id": "variables", "name": "Variables", "status": "terminado" },
+    { "id": "tipos-de-datos", "name": "Tipos de datos", "status": "terminado" },
+    { "id": "condicionales", "name": "Condicionales", "status": "terminado" },
+    { "id": "bucles", "name": "Bucles", "status": "en-curso" },
+    { "id": "funciones", "name": "Funciones", "status": "terminado" },
+    { "id": "arreglos", "name": "Arreglos", "status": "en-curso" },
+    { "id": "objetos", "name": "Objetos", "status": "en-curso" },
+    { "id": "recursion", "name": "Recursión", "status": "pendiente" },
+    {
+      "id": "busqueda-y-ordenamiento",
+      "name": "Búsqueda y ordenamiento",
+      "status": "pendiente"
+    },
+    {
+      "id": "complejidad-basica",
+      "name": "Complejidad básica",
+      "status": "pendiente"
+    }
+  ],
+  "exercises": [
+    {
+      "id": 1,
+      "title": "Contador con botón",
+      "conceptId": "variables",
+      "category": "react",
+      "language": "JavaScript / React",
+      "date": "2026-10-05",
+      "codePath": "src/components/Contador.tsx",
+      "whatChanged": "Agregué un estado con useState para guardar los clics y un botón que lo incrementa.",
+      "whatWasHard": "Entender que el estado vive en el navegador y por eso el componente necesita \"use client\" en la primera línea.",
+      "codeSnippet": "\"use client\";\nimport { useState } from \"react\";\n\nexport default function Contador() {\n  const [cuenta, setCuenta] = useState(0);\n  return (\n    <button onClick={() => setCuenta(cuenta + 1)}>\n      Clics: {cuenta}\n    </button>\n  );\n}"
+    },
+    {
+      "id": 2,
+      "title": "Saludo dinámico por URL",
+      "conceptId": "funciones",
+      "category": "react",
+      "language": "JavaScript / Next.js",
+      "date": "2026-10-06",
+      "codePath": "src/app/saludo/[nombre]/page.tsx",
+      "whatChanged": "Creé una ruta dinámica que lee el parámetro nombre con await params y lo muestra en pantalla.",
+      "whatWasHard": "Que params es una Promise en Next.js 16: hay que hacerle await y envolver el componente en Suspense para no romper el prerender.",
+      "codeSnippet": "export default async function SaludoPage({ params }) {\n  const { nombre } = await params;\n  return <h1>¡Hola, {nombre}!</h1>;\n}"
+    },
+    {
+      "id": 3,
+      "title": "Metas semanales con checkboxes",
+      "conceptId": "arreglos",
+      "category": "js",
+      "language": "JavaScript / React",
+      "date": "2026-10-07",
+      "codePath": "src/components/MetasSemanales.tsx",
+      "whatChanged": "Guardé las metas en un arreglo y usé map() para renderizar un checkbox por cada una.",
+      "whatWasHard": "Recordar que map() devuelve un arreglo de elementos JSX y que cada uno necesita una key única.",
+      "codeSnippet": "const metas = [\"Crear ruta\", \"Tipar props\", \"Commit\"];\n\nreturn (\n  <ul>\n    {metas.map((meta, index) => (\n      <li key={index}>\n        <input type=\"checkbox\" /> {meta}\n      </li>\n    ))}\n  </ul>\n);"
+    },
+    {
+      "id": 4,
+      "title": "Lista de lecciones desde datos",
+      "conceptId": "objetos",
+      "category": "ts",
+      "language": "TypeScript / React",
+      "date": "2026-10-08",
+      "codePath": "src/components/RutaAprendizaje.tsx",
+      "whatChanged": "Definí la interface LearningStep y pasé los pasos por props en vez de escribirlos a mano en el JSX.",
+      "whatWasHard": "Diferenciar cuándo usar interface y cuándo type: ambos describen formas, pero interface se usa más para objetos.",
+      "codeSnippet": "interface LearningStep {\n  id: number;\n  title: string;\n  status: \"completed\" | \"in-progress\" | \"locked\";\n}\n\nexport function Ruta({ steps }: { steps: LearningStep[] }) {\n  return steps.map(s => <div key={s.id}>{s.title}</div>);\n}"
+    },
+    {
+      "id": 5,
+      "title": "Búsqueda lineal y conteo en arreglo",
+      "conceptId": "busqueda-y-ordenamiento",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/algoritmos.ts",
+      "whatChanged": "Implementé un algoritmo para recorrer arreglos elemento a elemento y contar repeticiones de un objetivo.",
+      "whatWasHard": "Entender que recorre todo el arreglo en tiempo lineal O(n) si el elemento está al final o repetido.",
+      "codeSnippet": "function linearSearchCount(arr, target) {\n  let count = 0;\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] === target) count++;\n  }\n  return count;\n}\n\nconsole.log(linearSearchCount([4, 2, 7, 2, 9, 2], 2)); // 3"
+    },
+    {
+      "id": 6,
+      "title": "Búsqueda binaria (Binary Search)",
+      "conceptId": "busqueda-y-ordenamiento",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/algoritmos.ts",
+      "whatChanged": "Programé la división de mitades con punteros left, right y mid sobre un arreglo ordenado.",
+      "whatWasHard": "Asegurar que right = mid - 1 y left = mid + 1 para evitar bucles infinitos en el cálculo de mid.",
+      "codeSnippet": "function binarySearch(arr, target) {\n  let left = 0, right = arr.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}"
+    },
+    {
+      "id": 7,
+      "title": "Ordenamiento burbuja con Swap",
+      "conceptId": "busqueda-y-ordenamiento",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/algoritmos.ts",
+      "whatChanged": "Creé un bucle anidado con intercambio por desestructuración [a, b] = [b, a] y bandera de salida temprana.",
+      "whatWasHard": "La bandera huboIntercambio para frenar cuando el arreglo ya esté ordenado y no hacer comparaciones innecesarias.",
+      "codeSnippet": "function bubbleSort(arr) {\n  const res = [...arr];\n  for (let i = 0; i < res.length - 1; i++) {\n    let swap = false;\n    for (let j = 0; j < res.length - 1 - i; j++) {\n      if (res[j] > res[j + 1]) {\n        [res[j], res[j + 1]] = [res[j + 1], res[j]];\n        swap = true;\n      }\n    }\n    if (!swap) break;\n  }\n  return res;\n}"
+    },
+    {
+      "id": 8,
+      "title": "Recursión: Factorial seguro",
+      "conceptId": "recursion",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/algoritmos.ts",
+      "whatChanged": "Escribí una función recursiva con caso base n <= 1 y validación de números negativos.",
+      "whatWasHard": "Comprender la pila de llamadas (call stack) y cómo los valores se calculan al desapilarse.",
+      "codeSnippet": "function factorial(n) {\n  if (n < 0) throw new Error(\"No negativos\");\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}\n\nconsole.log(factorial(5)); // 120"
+    },
+    {
+      "id": 9,
+      "title": "Fibonacci con Memorización (Cache)",
+      "conceptId": "recursion",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/algoritmos.ts",
+      "whatChanged": "Optimicé Fibonacci ingenuo O(2^n) usando un objeto memo para guardar resultados en O(n).",
+      "whatWasHard": "Identificar que las ramas del árbol recursivo recalculaban los mismos números repetidas veces.",
+      "codeSnippet": "function fibMemo(n, memo = {}) {\n  if (n in memo) return memo[n];\n  if (n <= 0) return 0;\n  if (n === 1) return 1;\n  memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);\n  return memo[n];\n}"
+    },
+    {
+      "id": 10,
+      "title": "Validador de paréntesis con Pila (LIFO)",
+      "conceptId": "objetos",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/estructurasDatos.ts",
+      "whatChanged": "Implementé una pila para verificar si los paréntesis de una cadena '(()())' abren y cierran ordenadamente.",
+      "whatWasHard": "El caso borde: cuando se encuentra un cierre ')' y la pila ya estaba vacía (retornar false de inmediato).",
+      "codeSnippet": "function estaBalanceado(texto) {\n  const stack = [];\n  for (const c of texto) {\n    if (c === \"(\") stack.push(c);\n    else if (c === \")\") {\n      if (stack.length === 0) return false;\n      stack.pop();\n    }\n  }\n  return stack.length === 0;\n}"
+    },
+    {
+      "id": 11,
+      "title": "Deduplicación de correos con Set",
+      "conceptId": "arreglos",
+      "category": "js",
+      "language": "JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/content/estructurasDatos.ts",
+      "whatChanged": "Utilicé la estructura nativa Set para comprobar en O(1) si una lista de correos contiene duplicados.",
+      "whatWasHard": "La diferencia entre comparar longitud arr.length con set.size para saber si hubo duplicados filtrados.",
+      "codeSnippet": "function sonCorreosUnicos(emails) {\n  const setCorreos = new Set(emails);\n  return setCorreos.size === emails.length;\n}\n\nconsole.log(sonCorreosUnicos([\"a@x.com\", \"b@x.com\", \"a@x.com\"])); // false"
+    },
+    {
+      "id": 12,
+      "title": "Función saludar tipada (JS vs TS)",
+      "conceptId": "funciones",
+      "category": "ts",
+      "language": "TypeScript / JavaScript",
+      "date": "2026-10-08",
+      "codePath": "src/components/leccion/ComparacionCodigo.tsx",
+      "whatChanged": "Comparé la misma función saludar en JS y TS para ver cómo TS frena errores antes de ejecutar.",
+      "whatWasHard": "Anotar tanto el parámetro (nombre: string) como el tipo de retorno (: string).",
+      "codeSnippet": "// En JS:\nfunction saludar(nombre) {\n  return \"Hola \" + nombre;\n}\n\n// En TS:\nfunction saludar(nombre: string): string {\n  return \"Hola \" + nombre;\n}"
+    }
+  ],
+  "sectionsProgress": [
+    {
+      "id": "ai-901",
+      "name": "AI-901 (Microsoft Azure AI Fundamentals)",
+      "status": "en-curso",
+      "completedItems": 2,
+      "totalItems": 7,
+      "lastReview": "2026-10-08"
+    },
+    {
+      "id": "ingles",
+      "name": "Inglés Técnico (Technical English)",
+      "status": "en-curso",
+      "completedItems": 4,
+      "totalItems": 12,
+      "lastReview": "2026-10-08"
+    },
+    {
+      "id": "algoritmos",
+      "name": "Algoritmos (Algorithms)",
+      "status": "en-curso",
+      "completedItems": 1,
+      "totalItems": 9,
+      "lastReview": "2026-10-08"
+    },
+    {
+      "id": "estructuras-de-datos",
+      "name": "Estructuras de Datos (Data Structures)",
+      "status": "en-curso",
+      "completedItems": 2,
+      "totalItems": 9,
+      "lastReview": "2026-10-08"
+    }
+  ]
+}

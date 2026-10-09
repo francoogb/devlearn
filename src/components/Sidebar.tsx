@@ -11,18 +11,24 @@ import { usePathname } from "next/navigation";
 
 // El menú: cada entrada apunta a una ruta real de nuestra app
 const enlaces = [
-  { href: "/", icon: "dashboard", label: "Inicio / Dashboard" },
-  { href: "/aprender/next", icon: "explore", label: "Explorador de Tecnologías" },
-  { href: "/aprender/ts", icon: "menu_book", label: "Lección en Curso" },
-  { href: "/practica", icon: "code", label: "Laboratorio" },
-  { href: "/contacto", icon: "mail", label: "Contacto" },
+  { href: "/", icon: "dashboard", label: "Dashboard" },
+  { href: "/aprender/js", icon: "javascript", label: "JS" },
+  { href: "/aprender/ts", icon: "code_blocks", label: "TS" },
+  { href: "/aprender/next", icon: "hub", label: "Next JS" },
+  { href: "/arquitectura", icon: "account_tree", label: "Arquitectura" },
+  { href: "/ejercicios", icon: "checklist", label: "Ejercicios" },
+  { href: "/progreso", icon: "trending_up", label: "Progreso" },
+  { href: "/ai-901", icon: "smart_toy", label: "AI-901" },
+  { href: "/ingles", icon: "translate", label: "Inglés" },
+  { href: "/algoritmos", icon: "reorder", label: "Algoritmos" },
+  { href: "/estructuras-de-datos", icon: "schema", label: "Estructuras" },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col gap-1 bg-surface-container-low p-4">
+    <aside className="flex w-64 shrink-0 flex-col gap-1 overflow-y-auto bg-surface-container-low p-4">
       {/* Logo */}
       <div className="mb-4 flex items-center gap-3 px-2 pt-2">
         <span className="material-symbols-outlined text-primary">terminal</span>

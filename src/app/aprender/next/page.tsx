@@ -213,7 +213,7 @@ export default function LeccionNextPage() {
                 <span className="font-display text-xl text-on-surface">
                   La Analogía del Restaurante
                 </span>
-                <p className="text-sm leading-relaxed text-on-surface-variant">
+                <p className="text-base leading-relaxed text-on-surface-variant">
                   El <code className="font-mono text-tertiary">servidor</code> es
                   la cocina: prepara el plato (el HTML) con ingredientes que el
                   comensal nunca ve (base de datos, claves API). El{" "}
@@ -234,7 +234,7 @@ export default function LeccionNextPage() {
                 <span className="font-display text-xl text-on-surface">
                   Trampa común: &quot;use client&quot; por todas partes
                 </span>
-                <p className="text-sm leading-relaxed text-on-surface-variant">
+                <p className="text-base leading-relaxed text-on-surface-variant">
                   Si agregas{" "}
                   <span className="font-semibold text-on-surface">
                     &quot;use client&quot;
@@ -253,7 +253,7 @@ export default function LeccionNextPage() {
               <span className="material-symbols-outlined text-[20px] text-secondary">
                 verified
               </span>
-              <span className="text-xs text-on-surface">
+              <span className="text-sm text-on-surface">
                 <strong>Buena Práctica:</strong> deja que los datos bajen del
                 servidor (fetch, BD) y sube solo la interacción al cliente
                 (botones, formularios). Uno Server envolviendo a varios Clients.

@@ -124,7 +124,7 @@ export default function ModuloTSPage() {
                 TypeScript es tu JavaScript...{" "}
                 <span className="text-primary">con un corrector ortográfico</span>
               </TituloLeccion>
-              <p className="text-sm leading-relaxed text-on-surface-variant">
+              <p className="text-base leading-relaxed text-on-surface-variant">
                 No estás aprendiendo un lenguaje nuevo: estás aprendiendo a
                 anotar tu JS. Todo código JS válido ES código TS válido. Lo que
                 agrega TS es una capa de <strong className="text-on-surface">tipos que se
@@ -172,7 +172,7 @@ export default function ModuloTSPage() {
                 <span className="material-symbols-outlined text-[20px] text-tertiary">
                   lightbulb
                 </span>
-                <p className="text-xs text-on-surface">
+                <p className="text-sm text-on-surface">
                   <strong>Recuerda:</strong> el navegador nunca ve TypeScript.
                   Se compila a JS normal. Los tipos son entrenamiento para ti y
                   seguridad en desarrollo, no código extra en producción.
@@ -187,7 +187,7 @@ export default function ModuloTSPage() {
                 Los 4 tipos que usarás el{" "}
                 <span className="text-primary">90% del tiempo</span>
               </TituloLeccion>
-              <p className="text-sm leading-relaxed text-on-surface-variant">
+              <p className="text-base leading-relaxed text-on-surface-variant">
                 <code className="font-mono text-secondary">string</code>,{" "}
                 <code className="font-mono text-secondary">number</code>,{" "}
                 <code className="font-mono text-secondary">boolean</code> y{" "}
@@ -242,7 +242,7 @@ export default function ModuloTSPage() {
 
               <div className="flex items-start gap-3 rounded-xl bg-surface-container-high p-4">
                 <span className="material-symbols-outlined text-[22px] text-error">warning</span>
-                <p className="text-xs leading-relaxed text-on-surface-variant">
+                <p className="text-sm leading-relaxed text-on-surface-variant">
                   <strong className="text-on-surface">Trampa común — el tipo any:</strong>{" "}
                   cuando TS marca un error, cambiar el tipo a{" "}
                   <code className="font-mono text-error">any</code> silencia el
@@ -259,7 +259,7 @@ export default function ModuloTSPage() {
                 Interfaces: la{" "}
                 <span className="text-primary">ficha del objeto</span>
               </TituloLeccion>
-              <p className="text-sm leading-relaxed text-on-surface-variant">
+              <p className="text-base leading-relaxed text-on-surface-variant">
                 Cuando un dato tiene varias propiedades (un usuario, un
                 producto, una tarea), en vez de anotar propiedad por propiedad
                 defines una <code className="font-mono text-tertiary">interface</code>:
@@ -314,7 +314,7 @@ export default function ModuloTSPage() {
                 <span className="material-symbols-outlined text-[20px] text-tertiary">
                   lightbulb
                 </span>
-                <p className="text-xs text-on-surface">
+                <p className="text-sm text-on-surface">
                   <strong>Recuerda:</strong> si un error dice{" "}
                   <em>Property &quot;edad&quot; does not exist on type &quot;Usuario&quot;</em>,
                   no es un bug de TS — es TS haciendo su trabajo. O falta en la
@@ -330,7 +330,7 @@ export default function ModuloTSPage() {
                 Props: el lugar donde{" "}
                 <span className="text-primary">TS brilla en React</span>
               </TituloLeccion>
-              <p className="text-sm leading-relaxed text-on-surface-variant">
+              <p className="text-base leading-relaxed text-on-surface-variant">
                 Un componente es una función; las props son sus parámetros. En
                 TypeScript, defines la <strong className="text-on-surface">interface de las
                 props</strong> y el compilador verifica cada lugar donde usas el
@@ -389,7 +389,7 @@ export default function ModuloTSPage() {
                 Reto práctico:{" "}
                 <span className="text-secondary">tu primer código tipado</span>
               </TituloLeccion>
-              <p className="text-sm leading-relaxed text-on-surface-variant">
+              <p className="text-base leading-relaxed text-on-surface-variant">
                 Abre tu editor y crea una interface{" "}
                 <code className="font-mono text-primary">Usuario</code> con las
                 propiedades{" "}
@@ -409,7 +409,7 @@ export default function ModuloTSPage() {
                 <span className="material-symbols-outlined text-[20px] text-secondary">
                   verified
                 </span>
-                <span className="text-xs text-on-surface">
+                <span className="text-sm text-on-surface">
                   <strong>Buena Práctica:</strong> tipa primero los datos que
                   vienen de afuera (APIs, props). El interior de las funciones
                   déjalo que TS lo infiera.

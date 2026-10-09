@@ -35,21 +35,21 @@ export default function ComparacionCodigo({
         {/* JavaScript */}
         <div className="overflow-hidden rounded-lg bg-surface-container-lowest">
           <EncabezadoLenguaje lenguaje="JavaScript" color="text-tertiary" />
-          <div className="border-t border-surface-container p-3 font-mono text-xs leading-[20px] text-on-surface">
+          <div className="border-t border-surface-container p-3 font-mono text-sm leading-[22px] text-on-surface">
             {codigoJs}
           </div>
         </div>
         {/* TypeScript */}
         <div className="overflow-hidden rounded-lg bg-surface-container-lowest ring-1 ring-primary/30">
           <EncabezadoLenguaje lenguaje="TypeScript" color="text-secondary" />
-          <div className="border-t border-surface-container p-3 font-mono text-xs leading-[20px] text-on-surface">
+          <div className="border-t border-surface-container p-3 font-mono text-sm leading-[22px] text-on-surface">
             {codigoTs}
           </div>
         </div>
       </div>
       {nota && (
-        <p className="flex items-start gap-1.5 text-xs text-on-surface-variant">
-          <span className="material-symbols-outlined mt-0.5 text-[14px] text-secondary">
+        <p className="flex items-start gap-1.5 text-sm text-on-surface-variant">
+          <span className="material-symbols-outlined mt-0.5 text-[16px] text-secondary">
             arrow_downward
           </span>
           {nota}

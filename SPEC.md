@@ -99,6 +99,90 @@ Handler.
 - El envío usa una Server Action o una Route Handler (`app/api/lessons/route.ts`),
   no un `fetch` a un endpoint externo.
 
+### F5 — Página de progreso (/progreso)
+
+Una lista de conceptos de programación con su estado (`pendiente`,
+`en-curso`, `terminado`) y el número de ejercicios resueltos de cada uno.
+Arranca con: variables, tipos de datos, condicionales, bucles, funciones,
+arreglos, objetos, recursión, búsqueda y ordenamiento, complejidad básica.
+
+**Criterios de aceptación:**
+- Existen las interfaces `Concept` y `ConceptStatus` en
+  `src/types/progress.ts`, y el JSON se valida contra ellas en
+  `src/lib/progress.ts` (error de compilación si el JSON incumple el contrato).
+- `/progreso` lista todos los conceptos con su estado y el conteo de
+  ejercicios se CALCULA filtrando el arreglo (no se guarda a mano).
+- El resumen superior (terminados / en curso / pendientes / total de
+  ejercicios) se calcula a partir de los datos, no está hardcodeado.
+- Los contadores de la barra lateral y del resumen cambian solos al
+  editar el JSON.
+
+### F6 — Bitácora de ejercicios (/ejercicios)
+
+Cada ejercicio tiene: título, concepto al que pertenece, fecha, ruta del
+código, qué cambié yo y qué me costó. Los datos viven en
+`src/data/progreso.json`, versionables y editables a mano. Añadir un
+ejercicio = añadir una entrada al arreglo `exercises` del JSON.
+
+**Criterios de aceptación:**
+- Existe la interface `Exercise` en `src/types/progress.ts` y se usa al
+  importar el JSON.
+- `/ejercicios` muestra todos los ejercicios ordenados por fecha (más
+  reciente primero) con los 6 campos visibles.
+- Si no hay ejercicios, se muestra un mensaje amigable, no una lista vacía.
+- Añadir una entrada al JSON hace aparecer el ejercicio en la página sin
+  tocar código; un JSON inválido (campo faltante, estado inexistente)
+  produce error de TypeScript en compilación.
+- La barra lateral enlaza a `/progreso` y `/ejercicios`.
+
+### F7 — Repaso de certificación AI-901 (/ai-901)
+
+Espacio dedicado al repaso del examen "Examen AI-901: aspectos básicos de la inteligencia artificial de Microsoft Azure". Contenido en `src/content/ai901.ts` y progreso en `src/data/progreso.json`.
+
+**Criterios de aceptación:**
+- Ruta `/ai-901` disponible y enlazada en la barra lateral.
+- Muestra el título oficial verificado y puntuación mínima aprobatoria de 700 puntos.
+- Desglose de los 2 dominios oficiales: identificación de conceptos y funcionalidades de IA (40-45%) e implementación de soluciones mediante Microsoft Foundry (55-60%).
+- Estado de idioma verificado: inglés confirmado; español para Chile explícitamente marcado como "por verificar".
+- Enlaces oficiales verificados a la página del examen, Study Guide y ruta de conceptos.
+- Enlace a evaluación de práctica indicando inicio de sesión en AI Skills Navigator, con URL directa marcada como por verificar.
+- Lista de repaso interactiva con casillas basada en la guía oficial.
+- Bitácora interactiva para registrar preguntas falladas en la práctica y qué concepto no se dominaba.
+- Progreso vinculado a `src/data/progreso.json` a través de `src/lib/progress.ts`.
+
+### F8 — Práctica de inglés técnico (/ingles)
+
+Sección de entrenamiento en gramática, vocabulario para desarrollo y comprensión lectora. Contenido en `src/content/ingles.ts` y progreso en `src/data/progreso.json`.
+
+**Criterios de aceptación:**
+- Ruta `/ingles` disponible y enlazada en la barra lateral.
+- Gramática con explicaciones cortas en español y ejercicios interactivos de completar y de opción múltiple para: pasado simple (con irregulares), presente perfecto con for/since, voz pasiva, condicional tipo 1 y modales (can, must, should).
+- Vocabulario técnico inglés-español con casillas interactivas para marcar términos dominados.
+- Comprensión lectora con fragmentos de documentación técnica y preguntas de opción múltiple.
+- Registro interactivo de resultados y notas de sesión.
+- Progreso vinculado a `src/data/progreso.json`.
+
+### F9 — Procedimientos algorítmicos básicos (/algoritmos)
+
+Estudio de procedimientos y algoritmos fundamentales con código JavaScript y análisis de complejidad. Contenido en `src/content/algoritmos.ts` y progreso en `src/data/progreso.json`.
+
+**Criterios de aceptación:**
+- Ruta `/algoritmos` disponible y enlazada en la barra lateral.
+- Cubre búsqueda lineal y búsqueda binaria; ordenamiento por burbuja, selección e inserción; recursión (factorial, Fibonacci y suma de arreglo); y complejidad Big O: O(1), O(n), O(log n) y O(n²).
+- Cada tema cuenta con: resumen, términos técnicos en inglés entre paréntesis, explicación paso a paso, código en JavaScript, complejidad temporal/espacial y ejercicio con solución desplegable.
+- Progreso vinculado a `src/data/progreso.json`.
+
+### F10 — Estructuras de datos (/estructuras-de-datos)
+
+Guía completa de cómo se almacenan y estructuran los datos en programación. Contenido en `src/content/estructurasDatos.ts` y progreso en `src/data/progreso.json`.
+
+**Criterios de aceptación:**
+- Ruta `/estructuras-de-datos` disponible y enlazada en la barra lateral.
+- Cubre las 9 estructuras: arreglos, objetos, Map, Set, pilas (stacks), colas (queues), listas enlazadas (linked lists), árboles binarios básicos y grafos.
+- Cada estructura detalla: qué es, cuándo usarla, versión fuertemente tipada en TypeScript, comparación con JavaScript y un mini ejercicio interactivo con solución desplegable.
+- Términos técnicos en inglés entre paréntesis.
+- Progreso vinculado a `src/data/progreso.json`.
+
 ## Fuera de alcance en v1
 
 - Base de datos y autenticación.
