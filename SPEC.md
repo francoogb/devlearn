@@ -142,7 +142,7 @@ Espacio dedicado al repaso del examen "Examen AI-901: aspectos básicos de la in
 **Criterios de aceptación:**
 - Ruta `/ai-901` disponible y enlazada en la barra lateral.
 - Muestra el título oficial verificado y puntuación mínima aprobatoria de 700 puntos.
-- Desglose de los 2 dominios oficiales: identificación de conceptos y funcionalidades de IA (40-45%) e implementación de soluciones mediante Microsoft Foundry (55-60%).
+- Sección "Avance del Curso" con las unidades vistas de la ruta "Introducción a los conceptos de IA", actualizada conforme avanza el curso, e indicación de la próxima unidad pendiente.
 - Estado de idioma verificado: inglés confirmado; español para Chile explícitamente marcado como "por verificar".
 - Enlaces oficiales verificados a la página del examen, Study Guide y ruta de conceptos.
 - Enlace a evaluación de práctica indicando inicio de sesión en AI Skills Navigator, con URL directa marcada como por verificar.
@@ -150,15 +150,18 @@ Espacio dedicado al repaso del examen "Examen AI-901: aspectos básicos de la in
 - Bitácora interactiva para registrar preguntas falladas en la práctica y qué concepto no se dominaba.
 - Progreso vinculado a `src/data/progreso.json` a través de `src/lib/progress.ts`.
 
-### F8 — Práctica de inglés técnico (/ingles)
+### F8 — Práctica de inglés (/ingles)
 
-Sección de entrenamiento en gramática, vocabulario para desarrollo y comprensión lectora. Contenido en `src/content/ingles.ts` y progreso en `src/data/progreso.json`.
+Sección de entrenamiento dividida en dos bloques. Contenido en `src/content/ingles.ts` y progreso en `src/data/progreso.json`.
 
 **Criterios de aceptación:**
 - Ruta `/ingles` disponible y enlazada en la barra lateral.
-- Gramática con explicaciones cortas en español y ejercicios interactivos de completar y de opción múltiple para: pasado simple (con irregulares), presente perfecto con for/since, voz pasiva, condicional tipo 1 y modales (can, must, should).
-- Vocabulario técnico inglés-español con casillas interactivas para marcar términos dominados.
-- Comprensión lectora con fragmentos de documentación técnica y preguntas de opción múltiple.
+- Bloque 1, inglés técnico (para informática): vocabulario técnico inglés-español con casillas interactivas para marcar términos dominados y comprensión lectora con fragmentos de documentación técnica y preguntas de opción múltiple.
+- Bloque 2, inglés básico:
+  - Estructuras gramaticales con explicaciones cortas en español y ejercicios interactivos de completar y de opción múltiple para: pasado simple (con irregulares), presente perfecto con for/since, voz pasiva, condicional tipo 1 y modales (can, must, should).
+  - Frases para aprender (inglés-español).
+  - Tabla de verbos irregulares (infinitivo, pasado simple, participio, español).
+  - Textos en inglés con preguntas de comprensión de opción múltiple.
 - Registro interactivo de resultados y notas de sesión.
 - Progreso vinculado a `src/data/progreso.json`.
 

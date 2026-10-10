@@ -167,6 +167,14 @@
   ],
   "sectionsProgress": [
     {
+      "id": "fundamentos",
+      "name": "Fundamentos de Programación (Core Foundations)",
+      "status": "en-curso",
+      "completedItems": 1,
+      "totalItems": 5,
+      "lastReview": "2026-10-09"
+    },
+    {
       "id": "ai-901",
       "name": "AI-901 (Microsoft Azure AI Fundamentals)",
       "status": "en-curso",

@@ -1,11 +1,47 @@
 // Página /progreso — el "recordatorio" de qué conceptos estoy estudiando,
 // en qué estado está cada uno y cuántos ejercicios he resuelto de cada uno.
-// Server Component: lee el JSON a través de src/lib/progress.ts y lo presenta.
+// Server Component: los datos vienen del backend NestJS (backend/), que a su
+// vez lee el mismo src/data/progreso.json. Si el backend no responde, la
+// página DEGRADA a los datos locales del JSON en vez de romperse.
 // El conteo de ejercicios se CALCULA filtrando el arreglo, no se guarda a mano.
 
 import Link from "next/link";
-import { concepts, exercises, exercisesFor } from "@/lib/progress";
-import type { ConceptStatus } from "@/types/progress";
+import { Suspense } from "react";
+import type { Concept, ConceptStatus, Exercise } from "@/types/progress";
+
+import {
+  concepts as localConcepts,
+  exercises as localExercises,
+} from "@/lib/progress";
+
+// URL del backend; se puede sobreescribir con la variable de entorno API_URL.
+const API_URL = process.env.API_URL ?? "http://localhost:3001";
+
+// Consulta GET /api/progreso del backend. cache: "no-store" = siempre datos
+// frescos. Si el backend no responde, devolvemos los datos locales y
+// fromBackend = false para que la página lo avise.
+async function getProgreso(): Promise<{
+  concepts: Concept[];
+  exercises: Exercise[];
+  fromBackend: boolean;
+}> {
+  try {
+    const res = await fetch(`${API_URL}/api/progreso`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return { ...(await res.json()), fromBackend: true };
+  } catch {
+    return {
+      concepts: localConcepts,
+      exercises: localExercises,
+      fromBackend: false,
+    };
+  }
+}
+
+// Misma lógica que src/lib/progress.ts, pero sobre los datos recibidos.
+function exercisesFor(exercises: Exercise[], conceptId: string): Exercise[] {
+  return exercises.filter((e) => e.conceptId === conceptId);
+}
 
 // Aspecto del badge según el estado del concepto
 const statusBadge: Record<
@@ -29,7 +65,32 @@ const statusBadge: Record<
   },
 };
 
+// Componente de página (síncrono): con Cache Components activado, la parte que
+// pide datos al backend va dentro de <Suspense> para ejecutarse en cada
+// petición (request time) y no congelarse durante el prerender.
 export default function ProgresoPage() {
+  return (
+    <Suspense fallback={<ProgresoCargando />}>
+      <ProgresoContenido />
+    </Suspense>
+  );
+}
+
+// Fallback mínimo mientras llega la respuesta del backend.
+function ProgresoCargando() {
+  return (
+    <div className="rounded-xl bg-surface-container-low px-6 py-4 shadow-md">
+      <p className="text-sm text-on-surface-variant">
+        Cargando progreso desde el backend…
+      </p>
+    </div>
+  );
+}
+
+// Componente async: consulta el backend (o el JSON local como respaldo) y pinta.
+async function ProgresoContenido() {
+  const { concepts, exercises, fromBackend } = await getProgreso();
+
   // Los contadores del resumen se calculan solos a partir del arreglo
   const terminados = concepts.filter((c) => c.status === "terminado").length;
   const enCurso = concepts.filter((c) => c.status === "en-curso").length;
@@ -51,6 +112,30 @@ export default function ProgresoPage() {
           Recordatorio personal
         </span>
       </div>
+
+      {/* Aviso cuando el backend no responde y estamos viendo el JSON local */}
+      {!fromBackend && (
+        <div className="flex items-center gap-3 rounded-xl bg-surface-container-high p-4">
+          <span className="material-symbols-outlined text-[20px] text-primary">
+            cloud_off
+          </span>
+          <p className="text-xs text-on-surface">
+            <strong>Backend no disponible</strong> en{" "}
+            <code className="rounded bg-surface-container-highest px-1 py-0.5 font-mono text-secondary">
+              {API_URL}
+            </code>
+            : mostrando los datos locales de{" "}
+            <code className="rounded bg-surface-container-highest px-1 py-0.5 font-mono text-secondary">
+              src/data/progreso.json
+            </code>
+            . Arranca el backend con{" "}
+            <code className="rounded bg-surface-container-highest px-1 py-0.5 font-mono text-secondary">
+              cd backend &amp;&amp; npm run start:dev
+            </code>{" "}
+            y recarga.
+          </p>
+        </div>
+      )}
 
       {/* Resumen calculado */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -101,7 +186,7 @@ export default function ProgresoPage() {
 
         {concepts.map((concept) => {
           const badge = statusBadge[concept.status];
-          const count = exercisesFor(concept.id).length;
+          const count = exercisesFor(exercises, concept.id).length;
           return (
             <div
               key={concept.id}
@@ -140,21 +225,23 @@ export default function ProgresoPage() {
         })}
       </section>
 
-      {/* Aviso de dónde se editan los datos */}
+      {/* Aviso de dónde viven y se editan los datos */}
       <div className="flex items-center gap-3 rounded-xl bg-surface-container-high p-4">
         <span className="material-symbols-outlined text-[20px] text-tertiary">
           edit_note
         </span>
         <p className="text-xs text-on-surface">
-          <strong>Cómo actualizarlo:</strong> edita{" "}
+          <strong>Arquitectura actual:</strong> esta página pide los datos al
+          backend NestJS (carpeta{" "}
+          <code className="rounded bg-surface-container-highest px-1 py-0.5 font-mono text-secondary">
+            backend/
+          </code>
+          ), que los sirve desde{" "}
           <code className="rounded bg-surface-container-highest px-1 py-0.5 font-mono text-secondary">
             src/data/progreso.json
-          </code>{" "}
-          y cambia el{" "}
-          <code className="rounded bg-surface-container-highest px-1 py-0.5 font-mono text-secondary">
-            status
-          </code>{" "}
-          o añade ejercicios. TypeScript valida que no te equivoques al escribir.
+          </code>
+          . Edita ese JSON para cambiar estados o añadir ejercicios; el
+          backend se reinicia solo en modo desarrollo.
         </p>
       </div>
     </div>

@@ -9,13 +9,13 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   examInfo,
-  domains,
-  topics,
   prerequisites,
   reviewChecklist,
   resources,
   practiceAssessment,
   failedQuestions as initialFailed,
+  courseUnits,
+  nextCourseUnit,
   type FailedQuestion,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
@@ -146,58 +146,71 @@ export default function AI901Page() {
         </div>
       </div>
 
-      {/* Dominios del Examen */}
+      {/* Avance del curso: unidades vistas hasta ahora */}
       <section className="flex flex-col gap-3 rounded-xl bg-surface-container-low p-5 shadow-md">
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-xl text-on-surface">
-            Dominios del Examen (Exam Domains)
-          </h2>
-          <span className="font-mono text-xs text-outline">2 Dominios oficiales</span>
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[22px] text-primary">
+              menu_book
+            </span>
+            <h2 className="font-display text-xl text-on-surface">
+              Avance del Curso (Course Progress)
+            </h2>
+          </div>
+          <span className="font-mono text-xs text-outline">
+            {courseUnits.length} unidades completadas
+          </span>
         </div>
+        <p className="text-sm text-on-surface-variant">
+          Ruta de aprendizaje &quot;Introducción a los conceptos de IA&quot;
+          (Microsoft Learn). Se actualiza conforme avanza el curso.
+        </p>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {domains.map((dom) => (
-            <div
-              key={dom.id}
-              className="flex flex-col gap-2 rounded-lg bg-surface-container p-4"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs uppercase tracking-wider text-outline">
-                  Dominio {dom.id}
-                </span>
-                <span className="rounded bg-primary/20 px-2 py-0.5 font-mono text-xs font-bold text-primary">
-                  {dom.weight}
-                </span>
-              </div>
-              <h3 className="font-display text-base font-semibold text-on-surface">
-                {dom.title}
-              </h3>
-              <p className="text-xs leading-relaxed text-on-surface-variant">
-                {dom.summary}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Temas clave cubiertos */}
-      <section className="flex flex-col gap-3 rounded-xl bg-surface-container-low p-5 shadow-md">
-        <h2 className="font-display text-lg text-on-surface">
-          Temas Evaluados en la Guía Oficial
-        </h2>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-          {topics.map((t) => (
-            <div
-              key={t}
-              className="flex items-center gap-2 rounded-lg bg-surface-container px-3 py-2 text-xs text-on-surface"
-            >
-              <span className="material-symbols-outlined text-[16px] text-secondary">
-                check
+        {/* Línea de avance vertical: se lee hacia abajo, unidad por unidad */}
+        <ol className="relative ml-3 flex flex-col gap-6 border-l-2 border-surface-container-high pl-6">
+          {courseUnits.map((unit) => (
+            <li key={unit.id} className="relative flex flex-col gap-2">
+              {/* Número de unidad sobre la línea */}
+              <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full bg-primary font-mono text-sm font-bold text-on-primary">
+                {unit.id}
               </span>
-              <span>{t}</span>
-            </div>
+              <h3 className="font-display text-lg font-semibold text-on-surface">
+                {unit.title}
+              </h3>
+              <p className="text-base leading-relaxed text-on-surface-variant">
+                {unit.summary}
+              </p>
+              {unit.points && (
+                <ul className="flex flex-col gap-2 pt-0.5">
+                  {unit.points.map((p, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2.5 text-base leading-relaxed text-on-surface-variant"
+                    >
+                      <span className="material-symbols-outlined mt-0.5 text-[18px] text-secondary">
+                        check
+                      </span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
-        </div>
+
+          {/* Próxima unidad pendiente */}
+          <li className="relative flex items-center gap-2.5">
+            <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-tertiary bg-surface-container-low">
+              <span className="material-symbols-outlined text-[16px] text-tertiary">
+                schedule
+              </span>
+            </span>
+            <span className="text-base text-on-surface-variant">
+              <strong className="text-on-surface">Próxima unidad:</strong>{" "}
+              {nextCourseUnit} (pendiente).
+            </span>
+          </li>
+        </ol>
       </section>
 
       {/* Lista de repaso con casillas */}

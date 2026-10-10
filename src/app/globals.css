@@ -28,15 +28,20 @@
 
   /* Acentos */
   --color-primary: #c0c1ff;
+  --color-on-primary: #26264f; /* texto sobre primary (#c0c1ff) */
   --color-primary-container: #8083ff;
+  --color-on-primary-container: #101232; /* texto sobre primary-container */
   --color-primary-fixed-dim: #c0c1ff;
   --color-secondary: #4edea3;
+  --color-on-secondary: #003824;
   --color-secondary-container: #00a572;
   --color-secondary-fixed: #6ffbbe;
-  --color-on-secondary: #003824;
   --color-tertiary: #ddb7ff;
+  --color-on-tertiary: #3b1a5e; /* texto sobre tertiary (#ddb7ff) */
   --color-tertiary-container: #b76dff;
+  --color-on-tertiary-container: #2a0a4d; /* texto sobre tertiary-container */
   --color-error: #ffb4ab;
+  --color-on-error: #690005; /* texto sobre error */
 }
 
 /* Fondo oscuro global */
