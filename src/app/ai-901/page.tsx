@@ -33,6 +33,9 @@ export default function AI901Page() {
     genai: true,
   });
 
+  // Estado para abanico / colapsar el Módulo 1 (permite cerrar y abrir para futuros módulos)
+  const [isModule1Open, setIsModule1Open] = useState<boolean>(true);
+
   const toggleCheck = (id: string) => {
     setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
   };
@@ -135,39 +138,63 @@ export default function AI901Page() {
         {/* COLUMNA IZQUIERDA (8 COLS): AVANCE DEL CURSO Y RESUMEN INTEGRAL           */}
         {/* ========================================================================= */}
         <div className="lg:col-span-8 flex flex-col gap-6">
-          <section className="flex flex-col gap-5 rounded-xl bg-surface-container-low p-6 shadow-md border border-outline-variant/10">
-            {/* Cabecera del Módulo 1 */}
-            <div className="flex flex-wrap items-start justify-between gap-3 border-b border-surface-container-high pb-4">
-              <div className="flex flex-col gap-1">
+          <section className="flex flex-col rounded-xl bg-surface-container-low shadow-md border border-outline-variant/10 overflow-hidden transition-all">
+            {/* Cabecera del Módulo 1 (Actúa como botón de abanico / acordeón) */}
+            <div
+              onClick={() => setIsModule1Open((prev) => !prev)}
+              className="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6 cursor-pointer bg-surface-container-low hover:bg-surface-container transition-colors select-none"
+            >
+              <div className="flex flex-col gap-1.5 max-w-xl">
                 <div className="flex items-center gap-2">
                   <span className="rounded bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
-                    Módulo · {module1Info.totalUnits} Unidades
+                    Módulo 1 · {module1Info.totalUnits} Unidades
                   </span>
                   <span className="rounded bg-secondary/15 px-2.5 py-0.5 font-mono text-xs font-bold text-secondary">
                     ⏱️ {module1Info.duration}
                   </span>
+                  <span className="rounded bg-surface-container-highest px-2 py-0.5 font-mono text-[10px] text-outline font-semibold">
+                    {isModule1Open ? "Abierto" : "Cerrado"}
+                  </span>
                 </div>
-                <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface">
-                  <a
-                    href={module1Info.officialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline flex items-center gap-1.5"
-                  >
-                    {module1Info.title}
-                    <span className="material-symbols-outlined text-[18px] text-primary">
-                      open_in_new
-                    </span>
-                  </a>
+                <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface flex items-center gap-2">
+                  <span>{module1Info.title}</span>
                 </h2>
-                <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl">
+                <p className="text-xs sm:text-sm text-on-surface-variant line-clamp-2">
                   {module1Info.description}
                 </p>
               </div>
+
+              {/* Botón visual de Abanico / Flecha */}
+              <div className="flex items-center gap-2">
+                <a
+                  href={module1Info.officialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="rounded-lg p-2 text-primary hover:bg-primary/10 transition-colors"
+                  title="Abrir en Microsoft Learn"
+                >
+                  <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+                </a>
+
+                <div className="flex items-center gap-1.5 rounded-xl bg-surface-container-high px-3 py-2 font-mono text-xs font-bold text-on-surface shadow-sm">
+                  <span>{isModule1Open ? "Plegar módulo" : "Desplegar módulo"}</span>
+                  <span
+                    className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${
+                      isModule1Open ? "rotate-180 text-secondary" : "rotate-0 text-outline"
+                    }`}
+                  >
+                    expand_more
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Línea de avance vertical: las 10 unidades oficiales */}
-            <ol className="relative ml-4 flex flex-col gap-5 border-l-2 border-surface-container-high pl-6 pt-2">
+            {/* Contenido desplegable del Abanico: Unidades y Resumen */}
+            {isModule1Open && (
+              <div className="flex flex-col gap-6 p-6 pt-2 border-t border-surface-container-high animate-in fade-in duration-200">
+                {/* Línea de avance vertical: las 10 unidades oficiales */}
+                <ol className="relative ml-4 flex flex-col gap-5 border-l-2 border-surface-container-high pl-6 pt-4">
               {courseUnits.map((unit) => (
                 <li key={unit.id} className="relative flex flex-col gap-1.5">
                   {/* Número de unidad sobre la línea */}
@@ -261,7 +288,9 @@ export default function AI901Page() {
                 ))}
               </div>
             </div>
-          </section>
+          </div>
+        )}
+      </section>
         </div>
 
         {/* ========================================================================= */}
