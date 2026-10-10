@@ -43,14 +43,14 @@ export default function PrismaPage() {
             <span className="material-symbols-outlined text-[28px] text-primary">
               dataset
             </span>
-            <h1 className="font-display text-2xl font-bold text-on-surface">
+            <h1 className="font-display text-3xl font-bold text-on-surface">
               Prisma ORM en NestJS
             </h1>
-            <span className="rounded-full bg-primary/20 px-2.5 py-0.5 font-mono text-[11px] font-bold text-primary">
+            <span className="rounded-full bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
               Base de Datos & Type-Safety
             </span>
           </div>
-          <p className="text-sm text-on-surface-variant max-w-2xl">
+          <p className="text-base text-on-surface-variant max-w-2xl leading-relaxed">
             La capa de datos moderna para tu backend NestJS: qué es un ORM, cómo funciona el schema, migraciones automáticas, inyección de PrismaService y consultas con 100% de tipado TypeScript.
           </p>
         </div>
@@ -89,13 +89,13 @@ export default function PrismaPage() {
                 key={c.id}
                 type="button"
                 onClick={() => setSelectedConceptId(c.id)}
-                className={`flex items-center gap-2 rounded-xl px-3.5 py-2.5 font-mono text-xs font-medium transition-all ${
+                className={`flex items-center gap-2 rounded-xl px-4 py-2.5 font-mono text-sm font-medium transition-all ${
                   isSelected
                     ? "bg-primary font-bold text-on-primary shadow-md ring-2 ring-primary/40"
                     : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
                 }`}
               >
-                <span className="material-symbols-outlined text-[18px]">
+                <span className="material-symbols-outlined text-[20px]">
                   {c.icon}
                 </span>
                 <span>{c.title.split("(")[0].trim()}</span>
@@ -127,7 +127,7 @@ export default function PrismaPage() {
                 {activeConcept.englishTerm}
               </span>
             </div>
-            <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-on-surface">
               {activeConcept.title}
             </h2>
           </div>
@@ -135,13 +135,13 @@ export default function PrismaPage() {
           <button
             type="button"
             onClick={() => toggleMastered(activeConcept.id)}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs font-semibold transition-all ${
+            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 font-mono text-sm font-semibold transition-all ${
               masteredConcepts[activeConcept.id]
                 ? "bg-secondary text-on-secondary shadow-md"
                 : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
             }`}
           >
-            <span className="material-symbols-outlined text-sm">
+            <span className="material-symbols-outlined text-base">
               {masteredConcepts[activeConcept.id] ? "check_circle" : "radio_button_unchecked"}
             </span>
             {masteredConcepts[activeConcept.id] ? "Dominado" : "Marcar como dominado"}
@@ -149,58 +149,58 @@ export default function PrismaPage() {
         </div>
 
         {/* 1. ANALOGÍA COTIDIANA */}
-        <div className="flex flex-col gap-2 rounded-xl bg-amber-500/10 border border-amber-500/20 p-4">
-          <div className="flex items-center gap-2 text-amber-400 font-semibold text-sm">
-            <span className="material-symbols-outlined text-lg">lightbulb</span>
+        <div className="flex flex-col gap-2 rounded-xl bg-amber-500/10 border border-amber-500/20 p-5">
+          <div className="flex items-center gap-2 text-amber-400 font-semibold text-base">
+            <span className="material-symbols-outlined text-xl">lightbulb</span>
             <span>Analogía de la vida real (Mental Model)</span>
           </div>
-          <p className="text-sm text-on-surface leading-relaxed italic">
-            "{activeConcept.analogy}"
+          <p className="text-base text-on-surface leading-relaxed italic">
+            &quot;{activeConcept.analogy}&quot;
           </p>
         </div>
 
         {/* 2. EXPLICACIÓN TÉCNICA CLARA */}
         <div className="flex flex-col gap-2">
-          <h3 className="flex items-center gap-2 font-display text-base font-semibold text-on-surface">
-            <span className="material-symbols-outlined text-primary text-lg">psychology</span>
+          <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-on-surface">
+            <span className="material-symbols-outlined text-primary text-xl">psychology</span>
             Explicación Técnica para Juniors
           </h3>
-          <p className="text-sm text-on-surface-variant leading-relaxed">
+          <p className="text-base text-on-surface-variant leading-relaxed">
             {activeConcept.explanation}
           </p>
         </div>
 
         {/* 3. DIAGRAMA DE FLUJO INTERACTIVO */}
-        <div className="flex flex-col gap-3 rounded-xl bg-surface-container p-4">
+        <div className="flex flex-col gap-3 rounded-xl bg-surface-container p-5">
           <div className="flex items-center justify-between">
-            <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-outline font-semibold">
-              <span className="material-symbols-outlined text-primary text-base">alt_route</span>
+            <h3 className="flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-outline font-semibold">
+              <span className="material-symbols-outlined text-primary text-lg">alt_route</span>
               {activeConcept.flowTitle}
             </h3>
-            <span className="font-mono text-[11px] text-outline">
+            <span className="font-mono text-xs text-outline">
               Paso a paso en orden
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-2.5 pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-3 pt-2">
             {activeConcept.flowSteps.map((step, idx) => (
               <div
                 key={idx}
-                className="flex flex-col gap-1.5 rounded-lg bg-surface-container-high p-3 border border-outline-variant/15 relative"
+                className="flex flex-col gap-2 rounded-lg bg-surface-container-high p-4 border border-outline-variant/15 relative"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-bold text-primary">
+                  <span className="font-mono text-xs font-bold text-primary">
                     0{idx + 1}
                   </span>
-                  <span className="rounded px-1.5 py-0.2 font-mono text-[9px] uppercase bg-surface-container text-outline">
+                  <span className="rounded px-1.5 py-0.5 font-mono text-[10px] uppercase bg-surface-container text-outline">
                     {step.type}
                   </span>
                 </div>
-                <p className="font-mono text-xs font-semibold text-on-surface">
+                <p className="font-mono text-sm font-semibold text-on-surface">
                   {step.label}
                 </p>
                 {step.detail && (
-                  <p className="font-mono text-[10px] text-on-surface-variant leading-snug">
+                  <p className="font-mono text-xs text-on-surface-variant leading-snug">
                     {step.detail}
                   </p>
                 )}
@@ -212,44 +212,44 @@ export default function PrismaPage() {
         {/* 4. CÓDIGO REAL Y EXPLICACIÓN */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <h3 className="flex items-center gap-2 font-display text-base font-semibold text-on-surface">
-              <span className="material-symbols-outlined text-secondary text-lg">code</span>
+            <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-on-surface">
+              <span className="material-symbols-outlined text-secondary text-xl">code</span>
               Código Ejemplo
             </h3>
-            <span className="font-mono text-xs text-outline">
+            <span className="font-mono text-sm text-outline">
               {activeConcept.codeExample.language}
             </span>
           </div>
 
           <div className="overflow-hidden rounded-xl border border-surface-container-highest bg-surface-container-lowest">
-            <div className="flex items-center justify-between border-b border-surface-container-high px-4 py-2 bg-surface-container-high/40">
-              <span className="font-mono text-[11px] text-on-surface-variant">
+            <div className="flex items-center justify-between border-b border-surface-container-high px-4 py-2.5 bg-surface-container-high/40">
+              <span className="font-mono text-xs text-on-surface-variant">
                 Snippet de implementación
               </span>
-              <span className="font-mono text-[10px] text-outline">NestJS + Prisma</span>
+              <span className="font-mono text-[11px] text-outline">NestJS + Prisma</span>
             </div>
-            <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-on-surface">
+            <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed text-on-surface">
               <code>{activeConcept.codeExample.code}</code>
             </pre>
           </div>
-          <p className="text-xs text-on-surface-variant italic">
+          <p className="text-sm text-on-surface-variant italic leading-relaxed">
             💡 {activeConcept.codeExample.description}
           </p>
         </div>
 
         {/* 5. MINI EJERCICIO INTERACTIVO (QUIZ) */}
-        <div className="flex flex-col gap-3 rounded-xl border border-primary/20 bg-primary/5 p-4">
+        <div className="flex flex-col gap-3 rounded-xl border border-primary/20 bg-primary/5 p-5">
           <div className="flex items-center justify-between">
-            <h3 className="flex items-center gap-2 font-display text-sm font-semibold text-primary">
-              <span className="material-symbols-outlined text-base">quiz</span>
+            <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-primary">
+              <span className="material-symbols-outlined text-xl">quiz</span>
               Mini Ejercicio: Comprueba lo aprendido
             </h3>
-            <span className="font-mono text-[11px] text-outline">
+            <span className="font-mono text-xs text-outline">
               Pregunta interactiva
             </span>
           </div>
 
-          <p className="text-sm font-medium text-on-surface">
+          <p className="text-base font-medium text-on-surface leading-relaxed">
             {activeConcept.exercise.question}
           </p>
 
@@ -277,17 +277,17 @@ export default function PrismaPage() {
                   key={optIdx}
                   type="button"
                   onClick={() => handleSelectAnswer(activeConcept.id, optIdx)}
-                  className={`flex items-start gap-3 rounded-lg border p-3 text-left font-mono text-xs transition-all ${btnStyle}`}
+                  className={`flex items-start gap-3 rounded-lg border p-4 text-left font-mono text-sm leading-relaxed transition-all ${btnStyle}`}
                 >
                   <span className="font-bold shrink-0">{String.fromCharCode(65 + optIdx)})</span>
                   <span className="flex-1">{opt}</span>
                   {hasAnswered && isCorrect && (
-                    <span className="material-symbols-outlined text-sm text-secondary shrink-0">
+                    <span className="material-symbols-outlined text-base text-secondary shrink-0">
                       check_circle
                     </span>
                   )}
                   {hasAnswered && isSelected && !isCorrect && (
-                    <span className="material-symbols-outlined text-sm text-error shrink-0">
+                    <span className="material-symbols-outlined text-base text-error shrink-0">
                       cancel
                     </span>
                   )}
@@ -297,7 +297,7 @@ export default function PrismaPage() {
           </div>
 
           {quizAnswers[activeConcept.id] !== undefined && quizAnswers[activeConcept.id] !== null && (
-            <div className="mt-2 rounded-lg bg-surface-container-high p-3 text-xs text-on-surface border border-outline-variant/20">
+            <div className="mt-2 rounded-lg bg-surface-container-high p-4 text-sm text-on-surface border border-outline-variant/20 leading-relaxed">
               <span className="font-bold text-primary">Explicación: </span>
               {activeConcept.exercise.explanation}
             </div>
@@ -305,20 +305,20 @@ export default function PrismaPage() {
         </div>
 
         {/* 6. BANNER DE NAVEGACIÓN RÁPIDA */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-surface-container-high">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-5 border-t border-surface-container-high">
           <Link
             href="/nestjs"
-            className="flex items-center gap-2 font-mono text-xs text-primary hover:underline"
+            className="flex items-center gap-2 font-mono text-sm text-primary hover:underline"
           >
-            <span className="material-symbols-outlined text-sm">dns</span>
+            <span className="material-symbols-outlined text-base">dns</span>
             Volver al módulo NestJS
           </Link>
 
           <Link
             href="/arquitectura"
-            className="flex items-center gap-2 font-mono text-xs text-secondary hover:underline"
+            className="flex items-center gap-2 font-mono text-sm text-secondary hover:underline"
           >
-            <span className="material-symbols-outlined text-sm">account_tree</span>
+            <span className="material-symbols-outlined text-base">account_tree</span>
             Ver Arquitectura del Proyecto
           </Link>
         </div>

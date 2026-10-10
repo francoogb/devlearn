@@ -17,7 +17,8 @@ import {
   practiceAssessment,
   courseUnits,
   nextCourseUnit,
-  aiCourseComprehensiveSummary,
+  module1Info,
+  module1Summary,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
 
@@ -134,46 +135,81 @@ export default function AI901Page() {
         {/* COLUMNA IZQUIERDA (8 COLS): AVANCE DEL CURSO Y RESUMEN INTEGRAL           */}
         {/* ========================================================================= */}
         <div className="lg:col-span-8 flex flex-col gap-6">
-          <section className="flex flex-col gap-4 rounded-xl bg-surface-container-low p-6 shadow-md border border-outline-variant/10">
-            <div className="flex items-center justify-between border-b border-surface-container-high pb-3">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[24px] text-primary">
-                  menu_book
-                </span>
-                <h2 className="font-display text-xl font-bold text-on-surface">
-                  Avance del Curso (Course Progress)
+          <section className="flex flex-col gap-5 rounded-xl bg-surface-container-low p-6 shadow-md border border-outline-variant/10">
+            {/* Cabecera del Módulo 1 */}
+            <div className="flex flex-wrap items-start justify-between gap-3 border-b border-surface-container-high pb-4">
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+                    Módulo · {module1Info.totalUnits} Unidades
+                  </span>
+                  <span className="rounded bg-secondary/15 px-2.5 py-0.5 font-mono text-xs font-bold text-secondary">
+                    ⏱️ {module1Info.duration}
+                  </span>
+                </div>
+                <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface">
+                  <a
+                    href={module1Info.officialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline flex items-center gap-1.5"
+                  >
+                    {module1Info.title}
+                    <span className="material-symbols-outlined text-[18px] text-primary">
+                      open_in_new
+                    </span>
+                  </a>
                 </h2>
+                <p className="text-xs sm:text-sm text-on-surface-variant max-w-2xl">
+                  {module1Info.description}
+                </p>
               </div>
-              <span className="font-mono text-xs text-secondary font-semibold">
-                {courseUnits.length} unidades completadas
-              </span>
             </div>
-            <p className="text-sm text-on-surface-variant">
-              Ruta de aprendizaje &quot;Introducción a los conceptos de IA&quot; (Microsoft Learn).
-            </p>
 
-            {/* Línea de avance vertical */}
-            <ol className="relative ml-4 flex flex-col gap-6 border-l-2 border-surface-container-high pl-6 pt-2">
+            {/* Línea de avance vertical: las 10 unidades oficiales */}
+            <ol className="relative ml-4 flex flex-col gap-5 border-l-2 border-surface-container-high pl-6 pt-2">
               {courseUnits.map((unit) => (
-                <li key={unit.id} className="relative flex flex-col gap-2">
+                <li key={unit.id} className="relative flex flex-col gap-1.5">
                   {/* Número de unidad sobre la línea */}
-                  <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full bg-primary font-mono text-sm font-bold text-on-primary shadow-sm">
+                  <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full bg-primary font-mono text-xs font-bold text-on-primary shadow-sm">
                     {unit.id}
                   </span>
-                  <h3 className="font-display text-lg font-bold text-on-surface">
-                    {unit.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-on-surface-variant">
+
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-display text-base font-bold text-on-surface">
+                      {unit.url ? (
+                        <a
+                          href={unit.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline text-on-surface hover:text-primary flex items-center gap-1.5"
+                        >
+                          {unit.title}
+                          <span className="material-symbols-outlined text-[15px] opacity-70">
+                            open_in_new
+                          </span>
+                        </a>
+                      ) : (
+                        unit.title
+                      )}
+                    </h3>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-mono text-[11px] text-outline font-semibold">
+                      {unit.duration}
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm leading-relaxed text-on-surface-variant">
                     {unit.summary}
                   </p>
+
                   {unit.points && (
-                    <ul className="flex flex-col gap-2 pt-1">
+                    <ul className="flex flex-col gap-1.5 pt-1">
                       {unit.points.map((p, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2.5 text-sm leading-relaxed text-on-surface-variant"
+                          className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed text-on-surface-variant"
                         >
-                          <span className="material-symbols-outlined mt-0.5 text-[18px] text-secondary shrink-0">
+                          <span className="material-symbols-outlined mt-0.5 text-[16px] text-secondary shrink-0">
                             check
                           </span>
                           <span>{p}</span>
@@ -185,44 +221,42 @@ export default function AI901Page() {
               ))}
 
               {/* Próximo paso */}
-              <li className="relative flex items-center gap-2.5 pt-1">
+              <li className="relative flex items-center gap-2.5 pt-2">
                 <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-tertiary bg-surface-container-low">
                   <span className="material-symbols-outlined text-[16px] text-tertiary">
                     schedule
                   </span>
                 </span>
-                <span className="text-sm text-on-surface-variant">
+                <span className="text-xs sm:text-sm text-on-surface-variant">
                   <strong className="text-on-surface">Próximo paso:</strong>{" "}
                   {nextCourseUnit}.
                 </span>
               </li>
             </ol>
 
-            {/* Resumen breve consolidado de todo lo visto */}
-            <div className="mt-4 flex flex-col gap-3 rounded-xl border border-secondary/30 bg-secondary/10 p-5 shadow-inner">
+            {/* Resumen oficial del Módulo 1 */}
+            <div className="mt-4 flex flex-col gap-4 rounded-xl border border-secondary/30 bg-secondary/5 p-5 sm:p-6 shadow-inner">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[24px] text-secondary">
-                  insights
+                <span className="material-symbols-outlined text-[26px] text-secondary">
+                  fact_check
                 </span>
-                <h3 className="font-display text-lg font-bold text-on-surface">
-                  {aiCourseComprehensiveSummary.title}
+                <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
+                  {module1Summary.title}
                 </h3>
               </div>
-              <p className="text-sm leading-relaxed text-on-surface">
-                {aiCourseComprehensiveSummary.overview}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                {aiCourseComprehensiveSummary.pillars.map((pil, idx) => (
+
+              <div className="flex flex-col gap-3">
+                {module1Summary.sections.map((sec, idx) => (
                   <div
                     key={idx}
-                    className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 text-xs border border-outline-variant/15"
+                    className="flex flex-col gap-1 rounded-lg bg-surface-container p-3.5 border border-outline-variant/15"
                   >
-                    <span className="font-mono font-bold text-primary text-xs">
-                      {pil.name}
+                    <span className="font-mono font-bold text-xs sm:text-sm text-primary">
+                      📌 {sec.title}
                     </span>
-                    <span className="text-on-surface-variant leading-relaxed">
-                      {pil.desc}
-                    </span>
+                    <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed whitespace-pre-line">
+                      {sec.content}
+                    </p>
                   </div>
                 ))}
               </div>

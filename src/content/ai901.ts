@@ -1,12 +1,9 @@
 // Contenido de la sección /ai-901 — repaso del examen
 // "AI-901: aspectos básicos de la inteligencia artificial de Microsoft Azure".
-//
-// REGLA DE ORO: solo datos verificados. Si algo no está confirmado, se marca
-// como "por verificar" (verified: false) y la página lo muestra como tal.
-// Fuentes oficiales:
+// Fuentes oficiales verificadas:
 //   https://learn.microsoft.com/es-es/credentials/certifications/exams/ai-901/
 //   https://aka.ms/AI901-StudyGuide
-//   https://learn.microsoft.com/es-es/training/paths/ai-concepts/
+//   https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/
 
 // Información general del examen
 export const examInfo = {
@@ -15,7 +12,6 @@ export const examInfo = {
     "Examen AI-901: aspectos básicos de la inteligencia artificial de Microsoft Azure",
   provider: "Microsoft",
   passingScore: 700, // puntuación mínima aprobatoria
-  // Idioma: el inglés está confirmado; el español para Chile NO está verificado.
   languageEnglish: true,
   languageSpanishChile: false, // por verificar: no afirmar que existe
 };
@@ -92,6 +88,10 @@ export interface Resource {
 
 export const resources: Resource[] = [
   {
+    label: "Módulo oficial: Introducción a los conceptos de IA (40 min)",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/",
+  },
+  {
     label: "Página oficial del examen AI-901",
     url: "https://learn.microsoft.com/es-es/credentials/certifications/exams/ai-901/",
   },
@@ -105,138 +105,205 @@ export const resources: Resource[] = [
   },
 ];
 
-// Evaluación de práctica: el acceso es a través de AI Skills Navigator
-// (requiere iniciar sesión). El enlace directo NO está verificado:
-// por eso url es null y la página lo muestra como "por verificar".
 export const practiceAssessment = {
   tool: "AI Skills Navigator",
   note: "La evaluación de práctica se hace desde AI Skills Navigator y requiere iniciar sesión con una cuenta Microsoft.",
-  url: null as string | null, // por verificar: no inventar el enlace directo
+  url: null as string | null,
 };
 
-// Espacio para anotar las preguntas que fallé en la práctica y por qué.
-// Para agregar una: añade un objeto { date, question, why } a este arreglo.
 export interface FailedQuestion {
-  date: string; // ISO, ej. "2026-10-15"
-  question: string; // de qué trataba la pregunta (sin copiar texto del examen)
-  why: string; // por qué la fallé: qué concepto no dominaba
+  date: string;
+  question: string;
+  why: string;
 }
 
 export const failedQuestions: FailedQuestion[] = [];
 
-// ---------- AVANCE DEL CURSO ----------
-// Ruta de aprendizaje "Introducción a los conceptos de IA" (Microsoft Learn).
-// Se actualiza conforme avanza Fran en el curso.
-
+// ---------- MÓDULO 1: OFICIAL DE MICROSOFT LEARN ----------
+// Título: Introducción a los conceptos de inteligencia artificial
+// Duración estimada: 40 min | 10 Unidades
 export interface CourseUnit {
-  id: number; // número de unidad
+  id: number;
   title: string;
-  summary: string; // de qué trata la unidad, en mis palabras
-  points?: string[]; // detalles o subtemas vistos
+  duration: string; // ej. "2 min", "15 min"
+  url?: string;
+  summary: string;
+  points?: string[];
 }
 
+export const module1Info = {
+  title: "Introducción a los conceptos de inteligencia artificial",
+  officialUrl: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/",
+  duration: "40 min.",
+  totalUnits: 10,
+  description:
+    "¿Tiene curiosidad por la inteligencia artificial? ¿Quieres entender de qué trata el revuelo? En este módulo se presenta el mundo de la inteligencia artificial.",
+};
+
+// Las 10 Unidades oficiales exactas del Módulo 1 de Microsoft Learn:
 export const courseUnits: CourseUnit[] = [
   {
     id: 1,
-    title: "Introducción a la Inteligencia Artificial",
+    title: "Introducción a la inteligencia artificial",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/1-introduction/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
     summary:
-      "Fundamentos sobre qué es la inteligencia artificial y cómo simula " +
-      "capacidades humanas para resolver problemas y automatizar procesos.",
+      "Fundamentos sobre qué es la inteligencia artificial y cómo simula capacidades humanas para resolver problemas y automatizar procesos.",
     points: [
-      "La IA permite a la computadora hacer tareas que antes requerían una persona: entender texto, reconocer imágenes, conversar y predecir resultados.",
-      "Tipos de cargas de trabajo de IA (clave para el examen): predicción (machine learning), visión (Computer Vision), lenguaje (NLP) y generación de contenido (IA generativa).",
+      "Permite a los sistemas informáticos simular capacidades humanas para resolver problemas complejos y automatizar tareas repetitivas.",
+      "Tareas tradicionales que antes requerían personas: entender texto, reconocer imágenes, conversar y predecir resultados.",
+      "Concepto clave de examen: 4 tipos de cargas de trabajo (Predicción/Machine Learning, Visión, Lenguaje/NLP y Generación de contenido).",
     ],
   },
   {
     id: 2,
     title: "Inteligencia artificial y agentes generativos",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/2-generative-ai/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
     summary:
-      "Modelos capaces de generar contenido nuevo (texto, código, imágenes) " +
-      "a partir de instrucciones, sirviendo como asistentes y agentes conversacionales.",
+      "Sistemas capaces de generar contenido nuevo (texto, código, imágenes) a partir de instrucciones en lugar de solo clasificar datos existentes.",
     points: [
-      "También se le llama IA generativa (generative AI): crea contenido nuevo, no solo clasifica lo que existe.",
-      "Ejemplos cotidianos: chatbots, asistentes que escriben código y generadores de imágenes.",
+      "Modelos generativos (Generative AI) que crean material original a partir de prompts.",
+      "Agentes conversacionales y asistentes inteligentes que asisten en la redacción, razonamiento y programación.",
     ],
   },
   {
     id: 3,
-    title: "Procesamiento de Lenguaje Natural (PLN / NLP)",
-    summary: "Permite a las computadoras entender, analizar y generar lenguaje humano.",
+    title: "Texto y lenguaje natural",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/5-natural-language-processing/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Procesamiento del lenguaje humano tanto en texto como en contexto conversacional.",
     points: [
-      "Comprensión y generación de lenguaje natural a escala computacional.",
-      "Análisis de sentimientos: evaluación de opiniones y tono emocional (positivo, negativo, neutro).",
-      "Extracción de frases y términos clave (Key Phrase Extraction) para sintetizar ideas centrales.",
-      "Reconocimiento de entidades nombradas (NER - Named Entity Recognition): personas, lugares, organizaciones y fechas.",
-      "Detección y censura de información de identificación personal (PII) para privacidad y seguridad de datos.",
+      "Comprensión, análisis y síntesis de lenguaje humano por parte de computadoras.",
+      "Análisis de sentimiento (tono positivo, negativo, neutro) y extracción de términos clave.",
+      "Reconocimiento de entidades nombradas (NER) y censura de información personal identificable (PII).",
     ],
   },
   {
     id: 4,
-    title: "Traducción de Idiomas y Speech (Discurso)",
-    summary: "Herramientas de traducción automática multilingüe y procesamiento de voz para accesibilidad y asistentes virtuales.",
+    title: "Discurso",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/4-speech/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Capacidad para procesar, transcribir y sintetizar audio y voz humana.",
     points: [
-      "Traducción automática de texto y documentos entre decenas de idiomas conservando el significado contextual.",
-      "Voz a texto (Speech-to-Text): transcripción rápida y precisa de audio humano a texto digital.",
-      "Texto a voz (Text-to-Speech): síntesis de audio con voces naturales, modulación y entonación humana.",
-      "Aplicaciones directas: subtitulado en tiempo real, accesibilidad universal y agentes virtuales conversacionales.",
+      "Voz a texto (Speech-to-Text): transcripción de audio humano a texto digital estructurado.",
+      "Texto a voz (Text-to-Speech): síntesis de audio con voces naturales moduladas.",
+      "Habilita accesibilidad universal, subtitulado en tiempo real e interfaces de voz.",
     ],
   },
   {
     id: 5,
-    title: "Visión por Computadora (Computer Vision)",
-    summary: "Modelos principales para la percepción, clasificación e interpretación visual de imágenes y video.",
+    title: "Visión por ordenador",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/3-computer-vision/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Procesamiento e interpretación visual de imágenes y videos del mundo real.",
     points: [
-      "Clasificación de imágenes: predicción de la etiqueta o categoría principal de la imagen.",
-      "Detección de objetos: localización de elementos específicos mediante cuadros delimitadores (bounding boxes).",
-      "Segmentación semántica: clasificación y etiquetado exacto a nivel de píxeles individuales.",
-      "Modelos multimodales: análisis simultáneo de texto e imágenes para generar descripciones y razonamiento visual.",
+      "Clasificación de imágenes: predicción de la categoría o etiqueta general de una fotografía.",
+      "Detección de objetos: ubicación de múltiples elementos específicos marcados con bounding boxes.",
+      "Segmentación semántica: detección precisa a nivel de píxeles individuales.",
+      "Modelos multimodales: combinación de razonamiento visual con texto.",
     ],
   },
   {
     id: 6,
-    title: "Modelos de Lenguaje Grande (LLMs) y Azure OpenAI",
-    summary: "Modelos fundacionales generativos de escala masiva para redacción, análisis, generación de código y razonamiento.",
+    title: "Extracción de información",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/6-extract-insights/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Capacidad preliminar de los sistemas para extraer datos y valores específicos de distintos orígenes de información.",
     points: [
-      "Introducción a modelos avanzados (GPT-4o, Codex) capaces de redactar, resumir documentos, escribir/depurar código y mantener diálogos complejos.",
-      "Diseño e ingeniería de prompts: instrucciones claras, contexto del sistema (system prompt) y ejemplos (few-shot learning).",
-      "Control de hiperparámetros de generación: temperatura (creatividad vs determinismo), top_p y límites de tokens.",
-      "Integración empresarial con Azure OpenAI: seguridad de grado corporativo, redes virtuales y SLA garantizado.",
+      "Extracción de insights, pares clave-valor y tablas a partir de documentos no estructurados.",
+      "Integración de OCR (reconocimiento óptico de caracteres) para digitalizar formularios y facturas.",
     ],
   },
   {
     id: 7,
-    title: "IA Generativa Responsable y Mejores Prácticas",
-    summary: "Principios éticos de Microsoft y mecanismos de salvaguarda para desplegar IA confiable y segura.",
+    title: "Inteligencia artificial responsable",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/7-responsible-ai/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Principios éticos de Microsoft para garantizar el desarrollo y uso seguro de la tecnología.",
     points: [
-      "Los 6 principios éticos de Microsoft: Equidad, Confiabilidad y Seguridad, Privacidad y Seguridad, Inclusión, Transparencia y Responsabilidad (Accountability).",
-      "Gestión de riesgos en IA generativa: alucinaciones, fuga de información confidencial e inyección de prompts.",
-      "Mitigación activa de sesgos (fairness) y evaluación imparcial de respuestas generadas.",
-      "Barandillas de seguridad (Content Filters / Azure AI Content Safety): bloqueo de contenido dañino, odio, violencia, autolesiones y protección de propiedad intelectual.",
+      "Los 6 principios éticos clave de Microsoft: Equidad, Fiabilidad y Seguridad, Privacidad y Seguridad, Inclusión, Transparencia y Responsabilidad.",
+      "Mitigación activa de sesgos, protección de datos y establecimiento de barandillas de seguridad (Content Filters).",
+    ],
+  },
+  {
+    id: 8,
+    title: "Ejercicio: Exploración de las cargas de trabajo de IA",
+    duration: "15 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/7b-exercise/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Práctica guiada para explorar y probar directamente los diferentes tipos de cargas de trabajo de IA en un entorno interactivo.",
+    points: [
+      "Interacción práctica con predicción, visión por computadora, lenguaje y generación de contenido.",
+      "Fijación de los conceptos teóricos mediante experimentación directa.",
+    ],
+  },
+  {
+    id: 9,
+    title: "Evaluación del módulo",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/8-knowledge-check/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Comprobación de conocimientos (Knowledge Check) con preguntas tipo examen sobre los conceptos del módulo.",
+    points: [
+      "Preguntas de autoevaluación para validar la comprensión de cargas de trabajo, agentes e IA responsable.",
+      "Preparación directa para el formato de preguntas del examen oficial AI-901.",
+    ],
+  },
+  {
+    id: 10,
+    title: "Resumen",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/get-started-ai-fundamentals/9-summary/?ns-enrollment-type=learningpath&ns-enrollment-id=learn.ai-technical-concepts",
+    summary:
+      "Cierre del Módulo 1 recapitulando los aprendizajes esenciales antes de avanzar al siguiente módulo.",
+    points: [
+      "Síntesis de fundamentos, capacidades generativas y consideraciones éticas.",
+      "Conexión con los siguientes módulos de la ruta de certificación oficial.",
     ],
   },
 ];
 
-// Resumen integral y consolidado de todo lo aprendido en la ruta Microsoft AI-901
-export const aiCourseComprehensiveSummary = {
-  title: "Resumen Consolidado de la Ruta de IA (Microsoft AI-901)",
-  overview:
-    "La Inteligencia Artificial moderna en Azure abarca desde el aprendizaje automático clásico hasta la IA generativa de última generación. Los sistemas combinan la comprensión perceptiva (visión artificial con Computer Vision y procesamiento de voz con Speech) con el análisis semántico y cognitivo (PLN / NLP y LLMs con Azure OpenAI).",
-  pillars: [
+// Resumen del Módulo 1 según especificación
+export const module1Summary = {
+  title: "Resumen del Módulo 1: Introducción a los conceptos de inteligencia artificial",
+  sections: [
     {
-      name: "Percepción & Lenguaje",
-      desc: "Modelos multimodales, OCR, transcripción Speech-to-Text y procesamiento PLN con análisis de sentimientos y NER.",
+      title: "Fundamentos de la IA",
+      content:
+        "La inteligencia artificial permite que los sistemas informáticos simulen capacidades humanas para resolver problemas, automatizar procesos y realizar tareas que tradicionalmente requerían la intervención de una persona (como entender texto, reconocer imágenes o conversar).",
     },
     {
-      name: "Generación & Razonamiento",
-      desc: "LLMs en Azure OpenAI gestionados mediante ingeniería de prompts y ajuste fino de parámetros de respuesta.",
+      title: "Tipos de cargas de trabajo de IA (Concepto clave para el examen)",
+      content:
+        "1. Predicción / Machine Learning: Análisis de datos para predecir tendencias o resultados futuros.\n2. Visión (Computer Vision): Procesamiento e interpretación de imágenes y videos.\n3. Lenguaje (NLP): Comprensión y análisis del lenguaje escrito y hablado.\n4. Generación de contenido (IA Generativa): Creación de material nuevo a partir de instrucciones.",
     },
     {
-      name: "Gobernanza Ética",
-      desc: "Adopción estricta de filtros de contenido (Content Filters), mitigación de sesgos, protección de PII y cumplimiento de los 6 principios de IA Responsable.",
+      title: "IA Generativa y Agentes",
+      content:
+        "Introducción al concepto de sistemas capaces de generar contenido nuevo (texto, código o imágenes) en lugar de limitarse a clasificar información existente, sirviendo como asistentes y agentes conversacionales.",
+    },
+    {
+      title: "Procesamiento de Lenguaje Natural, Discurso y Visión (Visión General)",
+      content:
+        "Primer vistazo a cómo las aplicaciones interpretan el lenguaje natural, procesan audio/voz y realizan análisis visuales de elementos gráficos.",
+    },
+    {
+      title: "Extracción de información",
+      content:
+        "Capacidad preliminar de los sistemas para extraer datos y valores específicos de distintos orígenes.",
+    },
+    {
+      title: "IA Generativa Responsable",
+      content:
+        "Los principios éticos fundamentales de Microsoft para garantizar un desarrollo y uso seguro de la tecnología (enfocados en la equidad, fiabilidad, seguridad, privacidad, inclusión, transparencia y responsabilidad).",
     },
   ],
 };
 
-// Próxima unidad o fase del curso
-export const nextCourseUnit = "Laboratorios Prácticos en Microsoft Foundry y Simulador de Examen";
-
+export const nextCourseUnit = "Módulo 2: Exploración de la visión por computadora y Azure Foundry";
