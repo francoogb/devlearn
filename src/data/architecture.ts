@@ -273,6 +273,12 @@ export const structureSections: StructureSection[] = [
         description:
           "Guía y documentación interactiva de Prisma ORM en NestJS: schemas, migraciones, PrismaService y Type-Safety.",
       },
+      {
+        path: "src/app/shadcn/",
+        kind: "folder",
+        description:
+          "Guía interactiva de shadcn/ui: qué es (no es un paquete, es código tuyo), la trinidad Tailwind+Radix+CVA, la función cn(), variants con CVA, patrón asChild/Slot y cómo adaptar los tokens al tema Electric Slate.",
+      },
     ],
   },
   {
@@ -337,6 +343,12 @@ export const structureSections: StructureSection[] = [
         kind: "folder",
         description:
           "Componentes reutilizables de las lecciones: RutaAprendizaje (por props) y ComparacionCodigo (JS vs TS lado a lado).",
+      },
+      {
+        path: "src/components/ui/",
+        kind: "folder",
+        description:
+          "Componentes de shadcn/ui (Button, Card, Tabs, Dialog). NO vienen de node_modules: son archivos .tsx propios del proyecto, generados por la CLI de shadcn y editados para usar los tokens Electric Slate (bg-primary / text-on-primary) en vez de los defaults de shadcn (bg-primary / text-primary-foreground).",
       },
     ],
   },

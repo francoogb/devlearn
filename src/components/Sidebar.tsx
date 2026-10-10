@@ -40,6 +40,7 @@ const frontendLinks: NavLink[] = [
   { href: "/aprender/js", icon: "javascript", label: "JavaScript" },
   { href: "/aprender/ts", icon: "code_blocks", label: "TypeScript" },
   { href: "/aprender/next", icon: "hub", label: "Next.js" },
+  { href: "/shadcn", icon: "widgets", label: "shadcn/ui", badge: "UI" },
 ];
 
 // 3. Los únicos dos submenús agrupados necesarios para mantener limpio el sidebar
@@ -168,6 +169,11 @@ export default function Sidebar() {
                 </span>
                 <span>{link.label}</span>
               </div>
+              {link.badge && (
+                <span className="rounded px-1.5 py-0.2 font-mono text-[10px] font-bold bg-surface-container-highest text-secondary">
+                  {link.badge}
+                </span>
+              )}
             </Link>
           );
         })}

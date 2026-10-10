@@ -117,20 +117,20 @@ export interface VideoResource {
 // Videos de referencia y estudio relacionados con AI-901 y Microsoft Azure
 export const videoResources: VideoResource[] = [
   {
-    id: "vid-ai-intro",
-    title: "Microsoft Azure AI Fundamentals (AI-900 / AI-901) Full Course",
-    url: "https://www.youtube.com/results?search_query=microsoft+azure+ai+fundamentals+full+course",
-    channel: "Microsoft Developer / FreeCodeCamp",
-    duration: "3h 40m",
-    topic: "Conceptos Generales y Cargas de Trabajo",
+    id: "vid-ai901-course-ep2",
+    title: "Aprende Inteligencia Artificial desde CERO | Curso Completo AI-901",
+    url: "https://www.youtube.com/watch?v=WwboyWlJ8FQ&list=PLPhpRpUjvyyc&index=2",
+    channel: "Curso Completo AI-901",
+    duration: "Lección en Español",
+    topic: "Principios de IA Responsable y Fundamentos",
   },
   {
-    id: "vid-nlp-speech",
-    title: "Procesamiento de Lenguaje Natural y Speech en Azure AI",
-    url: "https://www.youtube.com/results?search_query=azure+ai+natural+language+processing+speech+tutorial",
-    channel: "Azure Community",
-    duration: "45m",
-    topic: "NLP, NER y Speech-to-Text",
+    id: "vid-ai900-real-questions",
+    title: "AI-900 / AI-901 Exam: Real Exam Questions & Practice Test",
+    url: "https://www.youtube.com/watch?v=FFKIGhPCp8Q",
+    channel: "Certification Practice",
+    duration: "Simulador de Examen",
+    topic: "Cargas de Trabajo, NLP, Visión y Ética",
   },
   {
     id: "vid-azure-openai",
