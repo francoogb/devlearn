@@ -160,36 +160,83 @@ export const courseUnits: CourseUnit[] = [
   },
   {
     id: 3,
-    title: "Texto y lenguaje natural (NLP)",
-    summary: "Técnicas clave de procesamiento de lenguaje natural (NLP).",
+    title: "Procesamiento de Lenguaje Natural (PLN / NLP)",
+    summary: "Permite a las computadoras entender, analizar y generar lenguaje humano.",
     points: [
-      "Detección de idioma: identificación automática del idioma base.",
-      "Clasificación de texto y análisis de sentimiento: clasificación de documentos y evaluación de opiniones (positivas, negativas, neutras).",
-      "Extracción de términos clave y entidades: localización de palabras clave y menciones (nombres, lugares); incluye la censura de información de identificación personal (PII).",
-      "Resumen de texto: síntesis de documentos manteniendo los puntos principales.",
+      "Comprensión y generación de lenguaje natural a escala computacional.",
+      "Análisis de sentimientos: evaluación de opiniones y tono emocional (positivo, negativo, neutro).",
+      "Extracción de frases y términos clave (Key Phrase Extraction) para sintetizar ideas centrales.",
+      "Reconocimiento de entidades nombradas (NER - Named Entity Recognition): personas, lugares, organizaciones y fechas.",
+      "Detección y censura de información de identificación personal (PII) para privacidad y seguridad de datos.",
     ],
   },
   {
     id: 4,
-    title: "Discurso (Speech)",
-    summary: "Componentes principales del procesamiento de voz.",
+    title: "Traducción de Idiomas y Speech (Discurso)",
+    summary: "Herramientas de traducción automática multilingüe y procesamiento de voz para accesibilidad y asistentes virtuales.",
     points: [
-      "Voz a texto (Speech-to-Text): transcripción de audio humano a texto escrito.",
-      "Texto a voz (Text-to-Speech): conversión de texto escrito en voz natural sintetizada.",
+      "Traducción automática de texto y documentos entre decenas de idiomas conservando el significado contextual.",
+      "Voz a texto (Speech-to-Text): transcripción rápida y precisa de audio humano a texto digital.",
+      "Texto a voz (Text-to-Speech): síntesis de audio con voces naturales, modulación y entonación humana.",
+      "Aplicaciones directas: subtitulado en tiempo real, accesibilidad universal y agentes virtuales conversacionales.",
     ],
   },
   {
     id: 5,
-    title: "Visión por ordenador (Computer Vision)",
-    summary: "Modelos principales de visión artificial.",
+    title: "Visión por Computadora (Computer Vision)",
+    summary: "Modelos principales para la percepción, clasificación e interpretación visual de imágenes y video.",
     points: [
-      "Clasificación de imágenes: predicción de la etiqueta o asunto principal de una imagen.",
-      "Detección de objetos: localización de elementos específicos marcándolos con cuadros (bounding boxes).",
-      "Segmentación semántica: identificación precisa a nivel de píxeles de los objetos detectados.",
-      "Modelos multimodales: combinación de elementos visuales y texto para generar explicaciones completas.",
+      "Clasificación de imágenes: predicción de la etiqueta o categoría principal de la imagen.",
+      "Detección de objetos: localización de elementos específicos mediante cuadros delimitadores (bounding boxes).",
+      "Segmentación semántica: clasificación y etiquetado exacto a nivel de píxeles individuales.",
+      "Modelos multimodales: análisis simultáneo de texto e imágenes para generar descripciones y razonamiento visual.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Modelos de Lenguaje Grande (LLMs) y Azure OpenAI",
+    summary: "Modelos fundacionales generativos de escala masiva para redacción, análisis, generación de código y razonamiento.",
+    points: [
+      "Introducción a modelos avanzados (GPT-4o, Codex) capaces de redactar, resumir documentos, escribir/depurar código y mantener diálogos complejos.",
+      "Diseño e ingeniería de prompts: instrucciones claras, contexto del sistema (system prompt) y ejemplos (few-shot learning).",
+      "Control de hiperparámetros de generación: temperatura (creatividad vs determinismo), top_p y límites de tokens.",
+      "Integración empresarial con Azure OpenAI: seguridad de grado corporativo, redes virtuales y SLA garantizado.",
+    ],
+  },
+  {
+    id: 7,
+    title: "IA Generativa Responsable y Mejores Prácticas",
+    summary: "Principios éticos de Microsoft y mecanismos de salvaguarda para desplegar IA confiable y segura.",
+    points: [
+      "Los 6 principios éticos de Microsoft: Equidad, Confiabilidad y Seguridad, Privacidad y Seguridad, Inclusión, Transparencia y Responsabilidad (Accountability).",
+      "Gestión de riesgos en IA generativa: alucinaciones, fuga de información confidencial e inyección de prompts.",
+      "Mitigación activa de sesgos (fairness) y evaluación imparcial de respuestas generadas.",
+      "Barandillas de seguridad (Content Filters / Azure AI Content Safety): bloqueo de contenido dañino, odio, violencia, autolesiones y protección de propiedad intelectual.",
     ],
   },
 ];
 
-// Próxima unidad pendiente del curso.
-export const nextCourseUnit = "Unidad 6: Extracción de información";
+// Resumen integral y consolidado de todo lo aprendido en la ruta Microsoft AI-901
+export const aiCourseComprehensiveSummary = {
+  title: "Resumen Consolidado de la Ruta de IA (Microsoft AI-901)",
+  overview:
+    "La Inteligencia Artificial moderna en Azure abarca desde el aprendizaje automático clásico hasta la IA generativa de última generación. Los sistemas combinan la comprensión perceptiva (visión artificial con Computer Vision y procesamiento de voz con Speech) con el análisis semántico y cognitivo (PLN / NLP y LLMs con Azure OpenAI).",
+  pillars: [
+    {
+      name: "Percepción & Lenguaje",
+      desc: "Modelos multimodales, OCR, transcripción Speech-to-Text y procesamiento PLN con análisis de sentimientos y NER.",
+    },
+    {
+      name: "Generación & Razonamiento",
+      desc: "LLMs en Azure OpenAI gestionados mediante ingeniería de prompts y ajuste fino de parámetros de respuesta.",
+    },
+    {
+      name: "Gobernanza Ética",
+      desc: "Adopción estricta de filtros de contenido (Content Filters), mitigación de sesgos, protección de PII y cumplimiento de los 6 principios de IA Responsable.",
+    },
+  ],
+};
+
+// Próxima unidad o fase del curso
+export const nextCourseUnit = "Laboratorios Prácticos en Microsoft Foundry y Simulador de Examen";
+

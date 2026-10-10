@@ -28,33 +28,122 @@ export const structureSections: StructureSection[] = [
         path: "package.json",
         kind: "file",
         description:
-          "La ficha del proyecto: nombre (devlearn), scripts (dev, build, lint) y dependencias.",
+          "La 'ficha de identidad' del proyecto en Node.js: su nombre (devlearn), los scripts que podés correr con 'npm run <nombre>' (dev, build, lint) y la lista completa de dependencias. Cuando alguien clona el repo, 'npm install' lee este archivo para saber qué instalar.",
       },
       {
         path: "tsconfig.json",
         kind: "file",
         description:
-          "Configuración de TypeScript en modo estricto. Define el alias @/* → src/* y permite importar JSON.",
+          "Configuración de TypeScript en modo 'strict' (máxima rigurosidad). Define el alias '@/*' para que puedas escribir 'import x from \"@/components/X\"' en vez de '../../../components/X'. También permite importar archivos .json como si fueran módulos.",
       },
       {
         path: "next.config.ts",
         kind: "file",
-        description: "Configuración de Next.js. Por ahora usa los valores por defecto.",
+        description:
+          "Configuración de Next.js. Acá se personalizarían cosas como redirecciones, dominios de imágenes externas o variables de entorno públicas. Hoy usa los valores por defecto; se tocaría cuando el proyecto necesite features avanzadas.",
       },
       {
         path: "eslint.config.mjs",
         kind: "file",
-        description: "Reglas de lint del proyecto (npm run lint).",
+        description:
+          "Reglas de ESLint (el 'corrector automático' del código): detecta errores comunes antes de ejecutar, como variables no usadas, imports mal escritos o malos patrones de React. Se corre con 'npm run lint'.",
       },
       {
         path: "postcss.config.mjs",
         kind: "file",
-        description: "Conecta Tailwind CSS v4 con el build de Next.",
+        description:
+          "Conecta PostCSS con Next.js. PostCSS es el procesador que transforma el CSS escrito con directivas de Tailwind v4 (@theme, @tailwind, etc.) en el CSS final que entiende el navegador.",
       },
       {
         path: ".gitignore",
         kind: "file",
-        description: "Qué archivos NO se suben a GitHub: node_modules, .next, .venv-docx, etc.",
+        description:
+          "Qué archivos NO se suben a GitHub: node_modules, .next, .venv-docx y todos los .env* (excepto .env.example que sí se versiona como plantilla).",
+      },
+    ],
+  },
+  {
+    id: "backend",
+    title: "backend/ — NestJS + Prisma + Postgres",
+    icon: "dns",
+    items: [
+      {
+        path: "backend/package.json",
+        kind: "file",
+        description:
+          "Dependencias y scripts del backend: NestJS, Prisma, @prisma/client y los runners ts-node-dev (dev) y tsx (seed).",
+      },
+      {
+        path: "backend/.env",
+        kind: "file",
+        description:
+          "Credenciales reales de Postgres (DATABASE_URL). IGNORADO por git — nunca se sube al repo.",
+      },
+      {
+        path: "backend/.env.example",
+        kind: "file",
+        description:
+          "Plantilla del .env con placeholder en lugar de contraseña. Esta sí se versiona para que otros devs sepan qué variables configurar.",
+      },
+      {
+        path: "backend/src/main.ts",
+        kind: "file",
+        description:
+          "Punto de entrada: arranca Nest, pone el prefijo /api, habilita CORS y escucha en el puerto 3001.",
+      },
+      {
+        path: "backend/src/app.module.ts",
+        kind: "file",
+        description:
+          "Módulo raíz: importa PrismaModule (global) y ProgresoModule. Donde se 'enchufan' los módulos de la app.",
+      },
+      {
+        path: "backend/src/prisma/prisma.service.ts",
+        kind: "file",
+        description:
+          "Wrapper de PrismaClient como servicio Nest. Conecta a Postgres en onModuleInit y cierra la conexión en onModuleDestroy.",
+      },
+      {
+        path: "backend/src/prisma/prisma.module.ts",
+        kind: "file",
+        description:
+          "Módulo @Global que expone PrismaService a toda la app sin tener que importarlo en cada módulo.",
+      },
+      {
+        path: "backend/src/progreso/progreso.module.ts",
+        kind: "file",
+        description:
+          "Módulo del dominio progreso: agrupa el controller y el service.",
+      },
+      {
+        path: "backend/src/progreso/progreso.controller.ts",
+        kind: "file",
+        description:
+          "Controlador: expone GET /api/progreso. Inyecta ProgresoService vía DI.",
+      },
+      {
+        path: "backend/src/progreso/progreso.service.ts",
+        kind: "file",
+        description:
+          "Servicio del dominio. ANTES leía src/data/progreso.json; AHORA consulta Postgres con Prisma. Transforma el enum 'en_curso' → 'en-curso' para no romper el frontend.",
+      },
+      {
+        path: "backend/prisma/schema.prisma",
+        kind: "file",
+        description:
+          "El 'models.py' de Prisma: define datasource (Postgres), generator (cliente TS) y los modelos Concept, Exercise y SectionProgress + 2 enums.",
+      },
+      {
+        path: "backend/prisma/migrations/",
+        kind: "folder",
+        description:
+          "Migraciones SQL generadas por 'prisma migrate dev'. Cada carpeta es un snapshot versionado en git — equivalente a las migraciones de Django.",
+      },
+      {
+        path: "backend/prisma/seed.ts",
+        kind: "file",
+        description:
+          "Script que lee src/data/progreso.json y lo inserta en Postgres. Idempotente: se puede correr varias veces. Se ejecuta con 'npx prisma db seed'.",
       },
     ],
   },
@@ -82,7 +171,38 @@ export const structureSections: StructureSection[] = [
       {
         path: "src/app/not-found.tsx",
         kind: "file",
-        description: "Página 404 personalizada para rutas que no existen.",
+        description:
+          "Página 404 personalizada que se renderiza automáticamente cuando el usuario entra a una URL que no coincide con ninguna carpeta de app/.",
+      },
+      {
+        path: "src/app/page.module.css",
+        kind: "file",
+        description:
+          "CSS Module específico de la página raíz (/). CSS Modules es la alternativa de Next.js al CSS global: los estilos se encapsulan por archivo, así class 'card' en page.module.css no colisiona con 'card' de otro componente.",
+      },
+      {
+        path: "src/app/practica/",
+        kind: "folder",
+        description:
+          "Laboratorio pedagógico: una lista de usuarios obtenida con fetch en el SERVIDOR (Server Component dentro de <Suspense>) + el Contador interactivo en el CLIENTE. Sirve para contrastar visualmente ambos tipos de componentes.",
+      },
+      {
+        path: "src/app/about/",
+        kind: "folder",
+        description:
+          "Página 'Acerca de': resumen de los aprendizajes clave de Next.js y TypeScript que ha ido acumulando el proyecto.",
+      },
+      {
+        path: "src/app/contacto/",
+        kind: "folder",
+        description:
+          "Página de contacto simple con un email de referencia. Útil como demo de layout centrado con card.",
+      },
+      {
+        path: "src/app/biblioteca/",
+        kind: "folder",
+        description:
+          "DevLearn Knowledge Hub: biblioteca de conocimiento jerárquica (Áreas → Módulos → Temas → Lecciones). Incluye buscador global en tiempo real, filtros por estado, 10 componentes pedagógicos por lección y registro de sesiones + errores comunes.",
       },
       {
         path: "src/app/aprender/",
@@ -179,13 +299,44 @@ export const structureSections: StructureSection[] = [
       {
         path: "src/components/Contador.tsx",
         kind: "file",
-        description: "Ejercicio clásico de estado: un contador con useState.",
+        description:
+          "Ejercicio clásico de estado: un contador con useState. Es Client Component porque usa un hook — por eso la primera línea es 'use client'.",
+      },
+      {
+        path: "src/components/CalendarioEstudio.tsx",
+        kind: "file",
+        description:
+          "Calendario interactivo clásico: permite planificar días de estudio y registrar sesiones de código. Client Component (usa useState para los días seleccionados).",
+      },
+      {
+        path: "src/components/CalendarioProgresoStitch.tsx",
+        kind: "file",
+        description:
+          "Versión 'Stitch' del calendario: diseño rediseñado con tema Electric Slate y telemetría visual del progreso. Persiste en localStorage para que la racha sobreviva al refresh.",
+      },
+      {
+        path: "src/components/MetasCodigoStitch.tsx",
+        kind: "file",
+        description:
+          "Metas de código con sistema de XP: cada meta tiene puntos, y marcarla como completada suma XP. Diseño alineado con Stitch.",
+      },
+      {
+        path: "src/components/PanelLateralStitch.tsx",
+        kind: "file",
+        description:
+          "Columna derecha del dashboard (Métricas IA, Rutas en Curso, Cursos Pendientes, Scratchpad). Los cursos pendientes se definen como un array (cursosPendientes) para que agregar nuevos sea solo una línea.",
+      },
+      {
+        path: "src/components/EnglishCurriculumExplorer.tsx",
+        kind: "file",
+        description:
+          "Visor interactivo del Programa de Inglés A1-A2: panel izquierdo con la lección actual, panel derecho con la lista de lecciones del módulo. Soporta vocabulario, lecturas, verbos y actividades (multiple-choice, fill-in-blank, word-order, error-correction).",
       },
       {
         path: "src/components/leccion/",
         kind: "folder",
         description:
-          "Componentes reutilizables de las lecciones: RutaAprendizaje (por props) y ComparacionCodigo (JS vs TS).",
+          "Componentes reutilizables de las lecciones: RutaAprendizaje (por props) y ComparacionCodigo (JS vs TS lado a lado).",
       },
     ],
   },
@@ -230,6 +381,12 @@ export const structureSections: StructureSection[] = [
         description:
           "Conceptos de Prisma ORM para NestJS: ORM vs SQL, schemas, migraciones, PrismaService y CRUD.",
       },
+      {
+        path: "src/content/fundamentos.ts",
+        kind: "file",
+        description:
+          "Conceptos esenciales de programación para estudiantes/juniors: cada tema trae analogía cotidiana, explicación en español (con términos en inglés), diagrama de flujo paso a paso y mini ejercicio con código.",
+      },
     ],
   },
   {
@@ -251,17 +408,44 @@ export const structureSections: StructureSection[] = [
       {
         path: "src/data/architecture.ts",
         kind: "file",
-        description: "Los datos de esta página: la estructura del proyecto como arreglo tipado.",
+        description:
+          "Los datos de ESTA página: estructura del proyecto (structureSections) + cronología pedagógica paso a paso (projectStepsChronology). Al añadir archivos nuevos al proyecto, se documentan aquí.",
+      },
+      {
+        path: "src/data/knowledgeRepository.ts",
+        kind: "file",
+        description:
+          "Repositorio semilla del DevLearn Knowledge Hub: Áreas, Módulos, Temas y Lecciones estructuradas (con objetivos, ejemplos, errores comunes y quizzes). Incluye sesiones de estudio y errores registrados.",
+      },
+      {
+        path: "src/data/englishCurriculumData.ts",
+        kind: "file",
+        description:
+          "Datos del Programa de Inglés A1-A2: módulos con lecciones de vocabulario, lecturas y verbos irregulares. Cada lección tipada con el contrato de englishCurriculum.ts.",
       },
       {
         path: "src/lib/progress.ts",
         kind: "file",
-        description: "El puente: importa el JSON y le fija los tipos (la 'frontera').",
+        description:
+          "El puente (capa 'frontera'): importa el JSON crudo y le fija los tipos con 'as'. A partir de este archivo, el resto del código tiene autocompletado real y chequeo de tipos. Si quisiéramos validación en runtime, iría zod aquí.",
       },
       {
         path: "src/types/progress.ts",
         kind: "file",
-        description: "Los contratos: interfaces Concept, Exercise, SectionProgress y ConceptStatus.",
+        description:
+          "Contratos del progreso: interfaces Concept, Exercise, SectionProgress y el tipo union ConceptStatus. Si el JSON no cumple esta forma, TypeScript lo detecta antes de compilar.",
+      },
+      {
+        path: "src/types/knowledge.ts",
+        kind: "file",
+        description:
+          "Contratos del Knowledge Hub: tipos de la jerarquía Área → Módulo → Tema → Lección → Actividades. Soporta sesiones de estudio y tracking de errores frecuentes.",
+      },
+      {
+        path: "src/types/englishCurriculum.ts",
+        kind: "file",
+        description:
+          "Contratos del Programa de Inglés: niveles CEFR (A1/A2), tipos de actividades (multiple-choice, fill-in-blank, word-order, error-correction) y la jerarquía Nivel → Módulo → Tema → Lección.",
       },
     ],
   },
@@ -271,24 +455,40 @@ export const structureSections: StructureSection[] = [
     icon: "description",
     items: [
       {
+        path: "README.md",
+        kind: "file",
+        description:
+          "Puerta de entrada del repo. Lo primero que ve alguien al abrir el proyecto en GitHub: qué es, cómo arrancarlo, qué comandos usar.",
+      },
+      {
         path: "SPEC.md",
         kind: "file",
-        description: "Especificación del proyecto: funcionalidades y criterios de aceptación.",
+        description:
+          "Especificación viva del proyecto: funcionalidades planeadas, rutas, criterios de aceptación. Se usa como contrato entre lo que hay y lo que falta.",
       },
       {
         path: "APUNTES.md",
         kind: "file",
-        description: "Apuntes del curso de Next.js + TypeScript, en Markdown.",
+        description:
+          "Apuntes del curso de Next.js + TypeScript en Markdown — son los que se transforman en Word con generar_docx.py.",
+      },
+      {
+        path: "APUNTES_IA.md",
+        kind: "file",
+        description:
+          "Apuntes complementarios enfocados en IA, agentes de código y herramientas aplicadas al aprendizaje con asistentes.",
       },
       {
         path: "PROGRESO.md",
         kind: "file",
-        description: "Registro de lo aprendido en cada sesión, con ejercicios pendientes.",
+        description:
+          "Bitácora de aprendizaje por sesión: qué se logró, qué quedó pendiente, qué conceptos ya se dominan. Útil para no perder el hilo entre sesiones.",
       },
       {
         path: "generar_docx.py",
         kind: "file",
-        description: "Script de Python que genera el Word (Apuntes_NextJS_TS.docx) desde los apuntes.",
+        description:
+          "Script de Python (en el .venv-docx local) que convierte APUNTES.md en un archivo Word (Apuntes_NextJS_TS.docx) con formato, para imprimir o compartir fuera del repo.",
       },
     ],
   },
@@ -554,5 +754,93 @@ Route (app)
 └ ○ /arquitectura`,
     notes:
       "Tip Junior: Si 'npm run build' pasa con código 0, puedes estar 100% seguro de que no vas a romper producción.",
+  },
+  {
+    number: 8,
+    phase: "Capa de Datos Real: PostgreSQL + Prisma ORM",
+    title: "8. Persistencia Profesional con Postgres + Prisma",
+    subtitle: "¿Cómo pasar del JSON plano a una base de datos real sin romper el frontend?",
+    explanation:
+      "Hasta este punto los datos vivían en 'src/data/progreso.json' (plano, sin persistencia por usuario). El salto profesional es: PostgreSQL 17 como almacenamiento + Prisma 6.19 como ORM tipado. Prisma hace lo mismo que el ORM de Django ('models.py' + 'migrate'), pero en TypeScript: definís modelos en 'schema.prisma', corrés 'prisma migrate dev' y Prisma genera un cliente con tipos para hacer queries seguras. El 'ProgresoService' ya no lee JSON — ahora llama 'prisma.concept.findMany()' y Postgres responde.",
+    keyFiles: [
+      {
+        path: "backend/.env",
+        purpose:
+          "DATABASE_URL con usuario, contraseña y nombre de la BD. IGNORADO por git (seguridad).",
+      },
+      {
+        path: "backend/.env.example",
+        purpose:
+          "Plantilla sin contraseña real. ESTA sí se sube al repo para documentar qué variables se necesitan.",
+      },
+      {
+        path: "backend/prisma/schema.prisma",
+        purpose:
+          "Define el datasource (postgres), el generator (cliente TS) y los modelos Concept, Exercise, SectionProgress + enums ConceptStatus y ExerciseCategory.",
+      },
+      {
+        path: "backend/prisma/migrations/",
+        purpose:
+          "Carpeta con migraciones SQL versionadas en git. Equivalente a los archivos que crea 'makemigrations' de Django.",
+      },
+      {
+        path: "backend/prisma/seed.ts",
+        purpose:
+          "Script que lee el JSON y lo inserta en Postgres via Prisma. Idempotente (se puede correr varias veces).",
+      },
+      {
+        path: "backend/src/prisma/prisma.service.ts",
+        purpose:
+          "Wrapper de PrismaClient que se integra al ciclo de vida de Nest (conecta en onModuleInit, desconecta en onModuleDestroy).",
+      },
+      {
+        path: "backend/src/prisma/prisma.module.ts",
+        purpose:
+          "Módulo @Global que expone PrismaService a toda la app sin tener que importarlo en cada módulo.",
+      },
+      {
+        path: "backend/src/progreso/progreso.service.ts",
+        purpose:
+          "Refactorizado: ahora inyecta PrismaService y hace 3 queries en paralelo (concepts, exercises, sections) con Promise.all. Preserva el shape original del JSON para no romper el frontend.",
+      },
+    ],
+    takeaways: [
+      "ORM = traducir código TypeScript ↔ SQL. En vez de 'SELECT * FROM concepts WHERE status = ?' escribís 'prisma.concept.findMany({ where: { status } })' y es type-safe.",
+      "Migraciones = snapshots del schema versionados en git. Cada vez que cambiás schema.prisma corrés 'prisma migrate dev --name <descripcion>' y queda un .sql reproducible.",
+      "El @map('en-curso') del enum conserva el valor exacto del JSON en Postgres, pero el nombre TS del enum (en_curso) es con guión bajo porque Prisma no permite guiones en identificadores.",
+      "Prisma Studio ('npx prisma studio') es la 'Django Admin' de Prisma: una GUI web para ver/editar la BD en vivo.",
+      "Gotcha importante: en NestJS, 'tsx' (basado en esbuild) NO emite emitDecoratorMetadata, lo que rompe la inyección de dependencias cuando un service tiene parámetros en el constructor. Por eso 'npm run start:dev' usa 'ts-node-dev' (TypeScript real) y no tsx.",
+    ],
+    codeSnippet: `// backend/prisma/schema.prisma (fragmento):
+model Concept {
+  id        String        @id
+  name      String
+  status    ConceptStatus
+  exercises Exercise[]
+  @@map("concepts")
+}
+
+enum ConceptStatus {
+  pendiente
+  en_curso  @map("en-curso")
+  terminado
+}
+
+// backend/src/progreso/progreso.service.ts (refactor):
+@Injectable()
+export class ProgresoService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async getProgreso() {
+    const [concepts, exercises, sections] = await Promise.all([
+      this.prisma.concept.findMany(),
+      this.prisma.exercise.findMany({ orderBy: { id: "asc" } }),
+      this.prisma.sectionProgress.findMany(),
+    ]);
+    return { concepts, exercises, sectionsProgress: sections };
+  }
+}`,
+    notes:
+      "Tip Junior: antes de correr 'prisma migrate dev' por primera vez, hay que crear la BD en Postgres manualmente (CREATE DATABASE devlearn) y configurar DATABASE_URL en backend/.env. Prisma crea las TABLAS, pero no la BD contenedora.",
   },
 ];

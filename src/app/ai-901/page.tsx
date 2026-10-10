@@ -16,6 +16,7 @@ import {
   failedQuestions as initialFailed,
   courseUnits,
   nextCourseUnit,
+  aiCourseComprehensiveSummary,
   type FailedQuestion,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
@@ -206,11 +207,41 @@ export default function AI901Page() {
               </span>
             </span>
             <span className="text-base text-on-surface-variant">
-              <strong className="text-on-surface">Próxima unidad:</strong>{" "}
-              {nextCourseUnit} (pendiente).
+              <strong className="text-on-surface">Próximo paso:</strong>{" "}
+              {nextCourseUnit}.
             </span>
           </li>
         </ol>
+
+        {/* Resumen breve consolidado de todo lo visto */}
+        <div className="mt-4 flex flex-col gap-3 rounded-xl border border-secondary/20 bg-secondary/5 p-5">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[24px] text-secondary">
+              insights
+            </span>
+            <h3 className="font-display text-lg font-bold text-on-surface">
+              {aiCourseComprehensiveSummary.title}
+            </h3>
+          </div>
+          <p className="text-sm leading-relaxed text-on-surface">
+            {aiCourseComprehensiveSummary.overview}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+            {aiCourseComprehensiveSummary.pillars.map((pil, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 text-xs border border-outline-variant/10"
+              >
+                <span className="font-mono font-bold text-primary text-xs">
+                  {pil.name}
+                </span>
+                <span className="text-on-surface-variant leading-relaxed">
+                  {pil.desc}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Lista de repaso con casillas */}

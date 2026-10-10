@@ -56,7 +56,7 @@ export default function ArquitecturaPage() {
               type="button"
               onClick={() =>
                 copySnippet(
-                  "git clone https://github.com/fran/next-js-introducing.git && cd next-js-introducing && npm install && cd backend && npm install && cd .. && npm run dev",
+                  "# 1) Clonar + instalar deps\ngit clone https://github.com/fran/next-js-introducing.git\ncd next-js-introducing\nnpm install\ncd backend && npm install && cd ..\n\n# 2) Crear BD en Postgres (requiere Postgres corriendo)\npsql -U postgres -c \"CREATE DATABASE devlearn;\"\n\n# 3) Configurar backend/.env (copiar desde .env.example y poner tu password)\ncp backend/.env.example backend/.env\n\n# 4) Correr migración + seed\ncd backend\nnpx prisma migrate deploy\nnpx prisma db seed\ncd ..\n\n# 5) Arrancar frontend\nnpm run dev",
                   "Script de setup fullstack copiado al portapapeles"
                 )
               }
@@ -82,8 +82,8 @@ export default function ArquitecturaPage() {
               type="button"
               onClick={() =>
                 copySnippet(
-                  "# DevLearn Architecture Specification v2.4\nFrontend: Next.js 16.4.0 (Turbopack, port 3000) + React 19.3.0\nBackend: NestJS 10.4.15 (Express, port 3001) /api/progreso\nDesign System: Electric Slate (Stitch) + Tailwind CSS v4\nPersistence: localStorage (Month-indexed) + NestJS REST fallback\nAI Telemetry: DevAgent / Antigravity JSON Protocol",
-                  "Tech Spec exportada al portapapeles"
+                  "# DevLearn Architecture Specification v2.5\nFrontend:   Next.js 16.4.0 (Turbopack, port :3000) + React 19.3.0\nBackend:    NestJS 10.4.15 (Express, port :3001) /api/progreso\nDatabase:   PostgreSQL 17 (devlearn, port :5432, local)\nORM:        Prisma 6.19.3 (type-safe client + versioned migrations)\nDev Runner: ts-node-dev (NO tsx — tsx no emite decorator metadata)\nDesign System: Electric Slate (Stitch) + Tailwind CSS v4\nPersistence: Postgres (fuente de verdad) + localStorage (UI cache)\nAI Telemetry: DevAgent / Antigravity JSON Protocol",
+                  "Tech Spec v2.5 exportada al portapapeles"
                 )
               }
               className="px-3.5 py-2 rounded-xl bg-primary-container hover:bg-primary text-on-primary-container text-xs font-mono font-semibold shadow-sm transition-all flex items-center gap-2"
@@ -104,6 +104,14 @@ export default function ArquitecturaPage() {
             <span className="w-2 h-2 rounded-full bg-rose-400" />
             Backend: NestJS 10.4.15 (Port :3001)
           </span>
+          <span className="bg-surface-container-low px-2.5 py-1 rounded-lg text-sky-400 flex items-center gap-1.5 shadow-sm border border-surface-container-high font-bold">
+            <span className="w-2 h-2 rounded-full bg-sky-400" />
+            Database: PostgreSQL 17 (Port :5432)
+          </span>
+          <span className="bg-surface-container-low px-2.5 py-1 rounded-lg text-tertiary flex items-center gap-1.5 shadow-sm border border-surface-container-high font-bold">
+            <span className="w-2 h-2 rounded-full bg-tertiary" />
+            ORM: Prisma 6.19 (type-safe)
+          </span>
           <span className="bg-surface-container-low px-2.5 py-1 rounded-lg text-on-surface-variant border border-surface-container-high">
             React 19.3.0
           </span>
@@ -114,7 +122,7 @@ export default function ArquitecturaPage() {
             Tailwind CSS v4
           </span>
           <span className="bg-secondary/15 text-secondary px-2.5 py-1 rounded-lg font-mono text-xs font-bold border border-secondary/25">
-            Fullstack Connected (CORS Enabled)
+            Fullstack + DB Connected (CORS Enabled)
           </span>
         </div>
       </header>
@@ -130,10 +138,10 @@ export default function ArquitecturaPage() {
             <span className="material-symbols-outlined text-[20px] text-secondary">check_circle</span>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-display text-3xl font-bold text-on-surface">6 / 6</span>
+            <span className="font-display text-3xl font-bold text-on-surface">7 / 7</span>
             <span className="text-xs text-secondary font-mono font-bold">100% Core</span>
           </div>
-          <p className="text-xs text-on-surface-variant mt-1">Next.js Frontend + NestJS Backend</p>
+          <p className="text-xs text-on-surface-variant mt-1">Next.js + NestJS + Postgres/Prisma</p>
           <div className="w-full bg-surface-container-highest h-1 rounded-full mt-3 overflow-hidden">
             <div className="bg-secondary h-full rounded-full w-full" />
           </div>
@@ -477,6 +485,185 @@ export default function ArquitecturaPage() {
               </div>
             </div>
           </article>
+
+          {/* FASE 07: Persistencia con PostgreSQL + Prisma */}
+          <article className="flex flex-col lg:flex-row gap-4 lg:gap-6 relative">
+            <div className="flex lg:flex-col items-center gap-2 lg:w-16 z-10 shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold font-display text-lg shadow-md border border-sky-400/40">
+                07
+              </div>
+              <span className="font-mono text-[11px] text-sky-400 font-semibold">T+68m</span>
+            </div>
+
+            <div className="flex-1 bg-surface-container-low rounded-xl p-5 shadow-sm flex flex-col gap-3 border border-surface-container-high/60">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-display text-lg font-bold text-on-surface">
+                    Capa de Datos Real: PostgreSQL + Prisma ORM
+                  </h3>
+                  <span className="bg-sky-500/15 text-sky-400 px-2 py-0.5 rounded-full font-mono text-[10px] font-bold">
+                    PERSISTENCE LAYER
+                  </span>
+                </div>
+                <span className="font-mono text-xs text-outline">
+                  Postgres :5432 • Prisma 6.19 • Migraciones versionadas
+                </span>
+              </div>
+
+              <p className="text-xs md:text-sm text-on-surface-variant leading-relaxed">
+                El salto de JSON plano a base de datos real. Se instaló{" "}
+                <strong className="text-sky-400">PostgreSQL 17</strong> local, se
+                creó la BD <code className="font-mono text-xs text-sky-300">devlearn</code>{" "}
+                y se adoptó <strong className="text-tertiary">Prisma 6.19</strong>{" "}
+                como ORM tipado. En{" "}
+                <code className="font-mono text-xs">backend/prisma/schema.prisma</code>{" "}
+                se modelaron 3 tablas (<code className="font-mono text-xs">concepts</code>,{" "}
+                <code className="font-mono text-xs">exercises</code>,{" "}
+                <code className="font-mono text-xs">sections_progress</code>) y
+                2 enums nativos de Postgres. El{" "}
+                <code className="font-mono text-xs">ProgresoService</code> dejó
+                de leer JSON y ahora inyecta{" "}
+                <code className="font-mono text-xs">PrismaService</code> para
+                hacer queries type-safe. La respuesta del endpoint conserva el
+                shape original para no romper el frontend.
+              </p>
+
+              {/* Sub-grid: 4 pilares de la Fase 07 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-1">
+                <div className="p-2.5 rounded-lg bg-surface-container flex flex-col gap-0.5 border border-surface-container-high">
+                  <span className="font-mono text-[10px] text-outline uppercase tracking-wider">
+                    Schema
+                  </span>
+                  <span className="font-mono text-xs text-sky-300">
+                    schema.prisma + 2 enums
+                  </span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-surface-container flex flex-col gap-0.5 border border-surface-container-high">
+                  <span className="font-mono text-[10px] text-outline uppercase tracking-wider">
+                    Migraciones
+                  </span>
+                  <span className="font-mono text-xs text-sky-300">
+                    prisma/migrations/ (versionadas)
+                  </span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-surface-container flex flex-col gap-0.5 border border-surface-container-high">
+                  <span className="font-mono text-[10px] text-outline uppercase tracking-wider">
+                    Seed
+                  </span>
+                  <span className="font-mono text-xs text-sky-300">
+                    seed.ts (JSON → Postgres, idempotente)
+                  </span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-surface-container flex flex-col gap-0.5 border border-surface-container-high">
+                  <span className="font-mono text-[10px] text-outline uppercase tracking-wider">
+                    DI Fix
+                  </span>
+                  <span className="font-mono text-xs text-tertiary">
+                    tsx → ts-node-dev (decorator metadata)
+                  </span>
+                </div>
+              </div>
+
+              {/* Comando copiable: setup inicial de Prisma */}
+              <div className="rounded-xl bg-surface-container-lowest p-3 flex flex-col gap-1 border border-surface-container-high">
+                <div className="flex items-center justify-between pb-1 text-outline font-mono text-[11px]">
+                  <span>Setup inicial Postgres + Prisma</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      copySnippet(
+                        "# 1) Crear BD en pgAdmin o psql:\nCREATE DATABASE devlearn;\n\n# 2) Configurar backend/.env con DATABASE_URL\n#    (copiar desde backend/.env.example y poner tu password)\n\n# 3) Instalar deps y correr migración + seed\ncd backend\nnpm install\nnpx prisma migrate dev --name init\nnpx prisma db seed\n\n# 4) Explorar la BD en GUI (equivalente a Django Admin)\nnpx prisma studio",
+                        "Setup Postgres + Prisma copiado"
+                      )
+                    }
+                    className="text-on-surface-variant hover:text-sky-400 font-mono text-xs flex items-center gap-1"
+                  >
+                    <span className="material-symbols-outlined text-[14px]">
+                      content_copy
+                    </span>
+                    <span>Copiar Setup DB</span>
+                  </button>
+                </div>
+                <pre className="font-mono text-xs text-on-surface overflow-x-auto leading-relaxed py-1">
+                  <span className="text-outline"># 1) Crear la BD contenedora (Prisma no la crea sola)</span><br />
+                  <span className="text-primary">$</span> psql -U postgres -c <span className="text-tertiary">&quot;CREATE DATABASE devlearn;&quot;</span><br /><br />
+                  <span className="text-outline"># 2) Configurar backend/.env con DATABASE_URL</span><br />
+                  <span className="text-sky-300">DATABASE_URL</span>=<span className="text-tertiary">&quot;postgresql://postgres:TU_PASS@localhost:5432/devlearn?schema=public&quot;</span><br /><br />
+                  <span className="text-outline"># 3) Correr migración + seed</span><br />
+                  <span className="text-primary">$</span> <span className="text-secondary">cd</span> backend<br />
+                  <span className="text-primary">$</span> <span className="text-secondary">npx prisma migrate dev</span> --name init<br />
+                  <span className="text-primary">$</span> <span className="text-secondary">npx prisma db seed</span><br /><br />
+                  <span className="text-outline"># 4) GUI visual (como Django Admin)</span><br />
+                  <span className="text-primary">$</span> <span className="text-secondary">npx prisma studio</span>
+                </pre>
+              </div>
+
+              {/* Snippet del service refactorizado */}
+              <div className="rounded-xl bg-surface-container-lowest p-3 flex flex-col gap-1 border border-surface-container-high">
+                <div className="flex items-center justify-between pb-1 text-outline font-mono text-[11px]">
+                  <span>backend/src/progreso/progreso.service.ts (refactor)</span>
+                  <span className="text-sky-400 font-bold">JSON → Prisma</span>
+                </div>
+                <pre className="font-mono text-xs text-on-surface overflow-x-auto leading-relaxed py-1">
+                  <span className="text-rose-400">@Injectable</span>()<br />
+                  <span className="text-secondary">export class</span> <span className="text-primary">ProgresoService</span> &#123;<br />
+                  &nbsp;&nbsp;<span className="text-secondary">constructor</span>(<span className="text-tertiary">private readonly</span> prisma: PrismaService) &#123;&#125;<br /><br />
+                  &nbsp;&nbsp;<span className="text-secondary">async</span> <span className="text-primary">getProgreso</span>() &#123;<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-outline">// 3 queries en paralelo con Promise.all</span><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-secondary">const</span> [concepts, exercises, sections] = <span className="text-secondary">await</span> Promise.all([<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-tertiary">this</span>.prisma.<span className="text-sky-300">concept</span>.findMany(),<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-tertiary">this</span>.prisma.<span className="text-sky-300">exercise</span>.findMany(&#123; orderBy: &#123; id: <span className="text-tertiary">&apos;asc&apos;</span> &#125; &#125;),<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-tertiary">this</span>.prisma.<span className="text-sky-300">sectionProgress</span>.findMany(),<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;]);<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-secondary">return</span> &#123; concepts, exercises, sectionsProgress: sections &#125;;<br />
+                  &nbsp;&nbsp;&#125;<br />
+                  &#125;
+                </pre>
+              </div>
+
+              {/* Nota técnica importante */}
+              <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/20 flex gap-2.5">
+                <span className="material-symbols-outlined text-amber-400 text-[18px] shrink-0 mt-0.5">
+                  warning
+                </span>
+                <div className="flex flex-col gap-1">
+                  <span className="font-mono text-xs text-amber-400 font-bold">
+                    Gotcha descubierto en esta fase
+                  </span>
+                  <span className="text-xs text-on-surface-variant leading-relaxed">
+                    <code className="font-mono text-xs text-amber-300">tsx</code>{" "}
+                    (basado en esbuild) <strong>NO</strong> emite{" "}
+                    <code className="font-mono text-xs">emitDecoratorMetadata</code>
+                    , lo que rompe la inyección de dependencias de NestJS cuando
+                    un service recibe parámetros en el constructor. Por eso{" "}
+                    <code className="font-mono text-xs">npm run start:dev</code>{" "}
+                    ahora usa{" "}
+                    <code className="font-mono text-xs text-tertiary">
+                      ts-node-dev
+                    </code>{" "}
+                    (TypeScript real). El seed sigue con tsx porque no usa
+                    decoradores.
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 flex-wrap font-mono text-[11px] text-outline pt-1">
+                <span>Archivos nuevos:</span>
+                <span className="bg-surface-container px-2 py-0.5 rounded text-sky-300">
+                  backend/prisma/schema.prisma
+                </span>
+                <span className="bg-surface-container px-2 py-0.5 rounded text-sky-300">
+                  backend/prisma/seed.ts
+                </span>
+                <span className="bg-surface-container px-2 py-0.5 rounded text-sky-300">
+                  backend/src/prisma/prisma.service.ts
+                </span>
+                <span className="bg-surface-container px-2 py-0.5 rounded text-sky-300">
+                  backend/.env.example
+                </span>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -565,36 +752,40 @@ export default function ArquitecturaPage() {
           </div>
 
           {/* Capa 03 */}
-          <div className="rounded-xl bg-surface-container-low p-5 shadow-sm flex flex-col justify-between gap-4 border border-surface-container-high">
+          <div className="rounded-xl bg-surface-container-low p-5 shadow-sm flex flex-col justify-between gap-4 border border-surface-container-high border-t-2 border-t-sky-500">
             <div className="flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] bg-tertiary/20 text-tertiary px-2 py-0.5 rounded-full font-bold">
+                <span className="font-mono text-[11px] bg-sky-500/20 text-sky-400 px-2 py-0.5 rounded-full font-bold">
                   CAPA 03
                 </span>
-                <span className="material-symbols-outlined text-tertiary text-[22px]">database</span>
+                <span className="material-symbols-outlined text-sky-400 text-[22px]">database</span>
               </div>
-              <h3 className="font-display text-base font-bold text-on-surface">Estado &amp; Context Hub</h3>
+              <h3 className="font-display text-base font-bold text-on-surface">Postgres + Prisma (Persistencia)</h3>
               <p className="text-xs text-on-surface-variant leading-relaxed">
-                Almacenamiento reactivo local de tareas, cálculo dinámico de XP, racha y persistencia mensual.
+                PostgreSQL 17 local como fuente de verdad + Prisma 6.19 como ORM tipado. localStorage del dashboard queda como caché de UI.
               </p>
               <div className="flex flex-col gap-1.5 pt-1">
                 <div className="p-2 rounded bg-surface-container text-on-surface font-mono text-xs flex items-center justify-between border border-surface-container-high">
-                  <span>Month Store JSON</span>
-                  <span className="text-secondary font-bold">✓ Synced</span>
+                  <span>devlearn @ :5432</span>
+                  <span className="text-secondary font-bold">✓ Running</span>
                 </div>
                 <div className="p-2 rounded bg-surface-container text-on-surface font-mono text-xs flex items-center justify-between border border-surface-container-high">
-                  <span>Streak &amp; Level (Lv 4)</span>
-                  <span className="text-secondary font-bold">✓ 3,420 XP</span>
+                  <span>Prisma Migrations</span>
+                  <span className="text-secondary font-bold">✓ Versioned</span>
                 </div>
                 <div className="p-2 rounded bg-surface-container text-on-surface font-mono text-xs flex items-center justify-between border border-surface-container-high">
-                  <span>Graceful Fallback</span>
-                  <span className="text-secondary font-bold">✓ Zero Error</span>
+                  <span>3 tablas · 2 enums</span>
+                  <span className="text-secondary font-bold">✓ Type-Safe</span>
+                </div>
+                <div className="p-2 rounded bg-surface-container text-on-surface font-mono text-xs flex items-center justify-between border border-surface-container-high">
+                  <span>localStorage (UI cache)</span>
+                  <span className="text-tertiary font-bold">✓ Hybrid</span>
                 </div>
               </div>
             </div>
             <div className="pt-2 border-t border-surface-container-highest/40 flex items-center justify-between font-mono text-[11px] text-outline">
-              <span>Persistencia: Híbrida</span>
-              <span className="text-tertiary font-bold">Zero data-loss</span>
+              <span>Puerto DB: 5432</span>
+              <span className="text-sky-400 font-bold">PostgreSQL + Prisma</span>
             </div>
           </div>
 
@@ -639,8 +830,14 @@ export default function ArquitecturaPage() {
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-[24px] text-secondary">terminal</span>
           <div className="flex flex-col">
-            <span className="font-mono text-xs font-bold text-on-surface">Arranque Fullstack (Next.js + NestJS)</span>
-            <span className="text-xs text-on-surface-variant">Ejecuta el frontend en el puerto 3000 y el backend en el puerto 3001 simultáneamente.</span>
+            <span className="font-mono text-xs font-bold text-on-surface">
+              Arranque Diario (Postgres + NestJS + Next.js)
+            </span>
+            <span className="text-xs text-on-surface-variant">
+              Postgres debe estar corriendo (servicio{" "}
+              <code className="font-mono text-[11px]">postgresql-x64-17</code> en
+              Windows). Luego: frontend en :3000, backend en :3001.
+            </span>
           </div>
         </div>
 
@@ -648,8 +845,8 @@ export default function ArquitecturaPage() {
           type="button"
           onClick={() =>
             copySnippet(
-              "# Terminal 1 (Frontend Next.js):\nnpm run dev\n\n# Terminal 2 (Backend NestJS):\ncd backend && npm run start:dev",
-              "Comandos de ejecución copiada"
+              "# 0) Verificar que Postgres esté corriendo (Windows):\n#    Get-Service postgresql-x64-17  →  Status: Running\n\n# Terminal 1 (Frontend Next.js, puerto 3000):\nnpm run dev\n\n# Terminal 2 (Backend NestJS, puerto 3001):\ncd backend && npm run start:dev\n\n# Opcional — GUI de la BD (equivalente a Django Admin):\ncd backend && npx prisma studio",
+              "Comandos de arranque copiados"
             )
           }
           className="px-4 py-2 rounded-xl bg-secondary text-on-secondary font-mono text-xs font-bold hover:bg-secondary-fixed transition-colors flex items-center gap-2 shadow-sm shrink-0"
