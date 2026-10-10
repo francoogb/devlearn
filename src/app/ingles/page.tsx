@@ -29,6 +29,7 @@ import {
   type IrregularVerb,
 } from "@/content/ingles";
 import { sectionProgressById } from "@/lib/progress";
+import EnglishCurriculumExplorer from "@/components/EnglishCurriculumExplorer";
 
 // Secciones disponibles
 type SectionTab = "basico" | "frases" | "tecnico" | "lectura" | "verbos" | "intermedio";
@@ -582,32 +583,37 @@ export default function InglesPage() {
       )}
 
       {/* ======================================================== */}
-      {/* 3. SECCIÓN: INGLÉS BÁSICO (Leyendo hacia abajo continuo) */}
+      {/* 3. SECCIÓN: INGLÉS BÁSICO (Programa Estructurado A1-A2 + Guía de Estudio) */}
       {/* ======================================================== */}
       {activeTab === "basico" && (
-        <section className="flex flex-col gap-8 rounded-xl bg-surface-container-low p-6 shadow-md">
-          {/* Cabecera */}
-          <div className="flex items-center justify-between border-b border-surface-container-high pb-4">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[26px] text-secondary">
-                school
-              </span>
-              <div>
-                <h2 className="font-display text-2xl font-bold text-on-surface">
-                  Inglés Básico (Guía de Estudio)
-                </h2>
-                <p className="text-sm text-on-surface-variant">
-                  Estructuras gramaticales explicadas en orden, leyendo de corrido hacia abajo.
-                </p>
-              </div>
-            </div>
-            <span className="font-mono text-xs text-outline">
-              {basicStructures.length} Estructuras gramaticales
-            </span>
-          </div>
+        <section className="flex flex-col gap-8">
+          {/* A. NUEVO PROGRAMA DE ESTUDIOS SECUENCIAL (A1 - A2) */}
+          <EnglishCurriculumExplorer />
 
-          {/* LECTURA CONTINUA HACIA ABAJO DE CADA ESTRUCTURA GRAMATICAL */}
-          <div className="flex flex-col gap-8">
+          {/* B. GUÍA DE LECTURA CONTINUA DE ESTRUCTURAS HISTÓRICAS */}
+          <div className="flex flex-col gap-8 rounded-xl bg-surface-container-low p-6 shadow-md border border-outline-variant/10">
+            {/* Cabecera */}
+            <div className="flex items-center justify-between border-b border-surface-container-high pb-4">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-[26px] text-secondary">
+                  history_edu
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-bold text-on-surface">
+                    Estructuras Gramaticales Históricas (Repaso Directo)
+                  </h3>
+                  <p className="text-xs text-on-surface-variant">
+                    Estructuras esenciales preservadas: Pasado Simple, Presente Perfecto, Voz Pasiva, Condicional 1 y Modales.
+                  </p>
+                </div>
+              </div>
+              <span className="font-mono text-xs text-outline">
+                {basicStructures.length} Estructuras preservadas
+              </span>
+            </div>
+
+            {/* LECTURA CONTINUA HACIA ABAJO DE CADA ESTRUCTURA GRAMATICAL */}
+            <div className="flex flex-col gap-8">
             {basicStructures.map((structure, index) => (
               <article
                 key={structure.id}
@@ -708,6 +714,7 @@ export default function InglesPage() {
               ))}
             </div>
           )}
+          </div>
         </section>
       )}
 
