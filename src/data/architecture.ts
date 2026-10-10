@@ -60,6 +60,12 @@ export const structureSections: StructureSection[] = [
         description:
           "Qué archivos NO se suben a GitHub: node_modules, .next, .venv-docx y todos los .env* (excepto .env.example que sí se versiona como plantilla).",
       },
+      {
+        path: "components.json",
+        kind: "file",
+        description:
+          "Config de shadcn/ui: le dice a la CLI dónde generar los componentes (src/components/ui), qué alias usar (@/components, @/lib/utils) y qué estilo base aplicar. Si corrés 'npx shadcn@latest add card' en el futuro, lee este archivo.",
+      },
     ],
   },
   {
@@ -399,6 +405,12 @@ export const structureSections: StructureSection[] = [
         description:
           "Conceptos esenciales de programación para estudiantes/juniors: cada tema trae analogía cotidiana, explicación en español (con términos en inglés), diagrama de flujo paso a paso y mini ejercicio con código.",
       },
+      {
+        path: "src/content/shadcn.ts",
+        kind: "file",
+        description:
+          "Contenido pedagógico de shadcn/ui: 6 conceptos (qué es, trinidad Tailwind+Radix+CVA, cn(), variants, asChild, adaptación de tokens) con analogía, explicación técnica, flujo de 5 pasos, código real y quiz interactivo. Mismo contrato que prisma.ts y nestjs.ts.",
+      },
     ],
   },
   {
@@ -440,6 +452,12 @@ export const structureSections: StructureSection[] = [
         kind: "file",
         description:
           "El puente (capa 'frontera'): importa el JSON crudo y le fija los tipos con 'as'. A partir de este archivo, el resto del código tiene autocompletado real y chequeo de tipos. Si quisiéramos validación en runtime, iría zod aquí.",
+      },
+      {
+        path: "src/lib/utils.ts",
+        kind: "file",
+        description:
+          "Helper cn() de shadcn/ui: combina clsx (classNames condicionales) + tailwind-merge (resuelve conflictos entre utility classes de Tailwind, ej. 'px-2 px-8' → 'px-8'). Lo usan TODOS los componentes de src/components/ui/ para permitir overrides del className desde fuera.",
       },
       {
         path: "src/types/progress.ts",

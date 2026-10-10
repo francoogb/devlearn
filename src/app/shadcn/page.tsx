@@ -9,6 +9,24 @@ import { useState } from "react";
 import Link from "next/link";
 import { shadcnConcepts } from "@/content/shadcn";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 export default function ShadcnPage() {
@@ -18,6 +36,11 @@ export default function ShadcnPage() {
 
   const [masteredConcepts, setMasteredConcepts] = useState<Record<string, boolean>>({});
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number | null>>({});
+
+  // Estado del Playground (sección de ejemplos vivos al final de la página)
+  const [buttonClicks, setButtonClicks] = useState<Record<string, number>>({});
+  const incrementClick = (variant: string) =>
+    setButtonClicks((prev) => ({ ...prev, [variant]: (prev[variant] ?? 0) + 1 }));
 
   const activeConcept =
     shadcnConcepts.find((c) => c.id === selectedConceptId) || shadcnConcepts[0];
@@ -329,6 +352,291 @@ export default function ShadcnPage() {
           </Button>
         </div>
       </article>
+
+      {/* ============================================================= */}
+      {/* PLAYGROUND: COMPONENTES SHADCN EN VIVO (click, interactúa)   */}
+      {/* ============================================================= */}
+      <section className="flex flex-col gap-6 rounded-2xl bg-surface-container-low p-6 shadow-md border border-outline-variant/10">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-surface-container-high pb-4">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-tertiary text-[28px]">
+                stadia_controller
+              </span>
+              <h2 className="font-display text-2xl font-bold text-on-surface">
+                Playground: los 4 componentes en vivo
+              </h2>
+            </div>
+            <p className="text-base text-on-surface-variant max-w-2xl leading-relaxed">
+              Esto no es un screenshot — es shadcn/ui corriendo de verdad en esta página.
+              Hacé click, abrí el modal, cambiá de pestaña y mirá cómo los componentes
+              responden con los tokens Electric Slate aplicados.
+            </p>
+          </div>
+          <span className="font-mono text-xs text-tertiary bg-tertiary/15 px-3 py-1 rounded-full font-bold">
+            Vivos & interactivos
+          </span>
+        </div>
+
+        {/* ---------- BLOQUE 1: BUTTON (todos los variants + sizes) ---------- */}
+        <div className="flex flex-col gap-3 rounded-xl bg-surface-container p-5">
+          <div className="flex items-center justify-between">
+            <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-on-surface">
+              <span className="material-symbols-outlined text-primary text-xl">
+                smart_button
+              </span>
+              Button — todas las variants
+            </h3>
+            <span className="font-mono text-xs text-outline">
+              Click para ver el contador
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <Button variant="default" onClick={() => incrementClick("default")}>
+              default ({buttonClicks.default ?? 0})
+            </Button>
+            <Button variant="secondary" onClick={() => incrementClick("secondary")}>
+              secondary ({buttonClicks.secondary ?? 0})
+            </Button>
+            <Button variant="tertiary" onClick={() => incrementClick("tertiary")}>
+              tertiary ({buttonClicks.tertiary ?? 0})
+            </Button>
+            <Button variant="destructive" onClick={() => incrementClick("destructive")}>
+              destructive ({buttonClicks.destructive ?? 0})
+            </Button>
+            <Button variant="outline" onClick={() => incrementClick("outline")}>
+              outline ({buttonClicks.outline ?? 0})
+            </Button>
+            <Button variant="ghost" onClick={() => incrementClick("ghost")}>
+              ghost ({buttonClicks.ghost ?? 0})
+            </Button>
+            <Button variant="link" onClick={() => incrementClick("link")}>
+              link ({buttonClicks.link ?? 0})
+            </Button>
+          </div>
+
+          <div className="pt-3 border-t border-surface-container-high/50 flex flex-wrap items-center gap-3">
+            <span className="font-mono text-xs text-outline mr-1">Sizes:</span>
+            <Button size="sm">sm</Button>
+            <Button size="default">default</Button>
+            <Button size="lg">lg</Button>
+            <Button size="xl">xl</Button>
+            <Button size="icon" aria-label="Buscar">
+              <span className="material-symbols-outlined text-base">search</span>
+            </Button>
+          </div>
+
+          <div className="pt-3 border-t border-surface-container-high/50 flex flex-wrap items-center gap-3">
+            <span className="font-mono text-xs text-outline mr-1">asChild (Link):</span>
+            <Button asChild variant="secondary">
+              <Link href="/prisma">
+                <span className="material-symbols-outlined text-base">dataset</span>
+                Soy un &lt;Link&gt; con pinta de Button
+              </Link>
+            </Button>
+            <span className="font-mono text-[11px] text-on-surface-variant italic">
+              HTML real: &lt;a href=&quot;/prisma&quot;&gt;...&lt;/a&gt; (no &lt;button&gt;)
+            </span>
+          </div>
+        </div>
+
+        {/* ---------- BLOQUE 2: CARD ---------- */}
+        <div className="flex flex-col gap-3 rounded-xl bg-surface-container p-5">
+          <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-on-surface">
+            <span className="material-symbols-outlined text-secondary text-xl">
+              dashboard
+            </span>
+            Card — contenedor con partes nombradas
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            <Card>
+              <CardHeader>
+                <CardTitle>Ejemplo mínimo</CardTitle>
+                <CardDescription>
+                  Card + CardHeader + CardTitle + CardDescription + CardContent.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  Las partes son opcionales — podés usar solo Card + CardContent si
+                  no necesitás header. La idea es tener bloques nombrados en vez
+                  de un div genérico con 5 classes.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Con footer y acción</CardTitle>
+                <CardDescription>
+                  Las cards aceptan Button adentro sin pelearse de estilos.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  Todo respeta los tokens Electric Slate: fondo
+                  <code className="font-mono text-[11px] text-tertiary px-1">
+                    surface-container-low
+                  </code>
+                  , borde outline sutil, texto on-surface.
+                </p>
+              </CardContent>
+              <CardFooter className="justify-end">
+                <Button variant="ghost" size="sm">
+                  Cancelar
+                </Button>
+                <Button variant="default" size="sm">
+                  Confirmar
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </div>
+
+        {/* ---------- BLOQUE 3: TABS ---------- */}
+        <div className="flex flex-col gap-3 rounded-xl bg-surface-container p-5">
+          <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-on-surface">
+            <span className="material-symbols-outlined text-primary text-xl">
+              tab
+            </span>
+            Tabs — con teclado (←/→) y accesibilidad por Radix
+          </h3>
+
+          <Tabs defaultValue="js" className="w-full pt-1">
+            <TabsList>
+              <TabsTrigger value="js">JavaScript</TabsTrigger>
+              <TabsTrigger value="ts">TypeScript</TabsTrigger>
+              <TabsTrigger value="prisma">Prisma</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="js">
+              <Card>
+                <CardContent className="pt-5">
+                  <p className="text-base text-on-surface leading-relaxed">
+                    <strong>JavaScript</strong> es el lenguaje. No tipa en tiempo
+                    de compilación — los errores de tipeo saltan en runtime, con el
+                    código ya corriendo en el navegador.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="ts">
+              <Card>
+                <CardContent className="pt-5">
+                  <p className="text-base text-on-surface leading-relaxed">
+                    <strong>TypeScript</strong> es JavaScript + un sistema de tipos
+                    que detecta errores antes de ejecutar. Se compila a JS plano
+                    para que lo entienda el navegador.
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="prisma">
+              <Card>
+                <CardContent className="pt-5">
+                  <p className="text-base text-on-surface leading-relaxed">
+                    <strong>Prisma</strong> es el ORM: traduce TypeScript ↔ SQL con
+                    cliente tipado. Reemplazó el &quot;SELECT * FROM users&quot;
+                    como string plano por{" "}
+                    <code className="font-mono text-sm text-primary">
+                      prisma.user.findMany()
+                    </code>
+                    .
+                  </p>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+
+          <p className="text-xs text-on-surface-variant italic">
+            💡 Tip: hacé click en una pestaña y después usá ← / → en el teclado —
+            Radix maneja la navegación automática.
+          </p>
+        </div>
+
+        {/* ---------- BLOQUE 4: DIALOG (MODAL) ---------- */}
+        <div className="flex flex-col gap-3 rounded-xl bg-surface-container p-5">
+          <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-on-surface">
+            <span className="material-symbols-outlined text-tertiary text-xl">
+              dynamic_form
+            </span>
+            Dialog (modal) — focus trap, ESC para cerrar, overlay con blur
+          </h3>
+
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="default">
+                  <span className="material-symbols-outlined text-base">
+                    open_in_full
+                  </span>
+                  Abrir modal
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>¡Hola desde el Dialog de Radix!</DialogTitle>
+                  <DialogDescription>
+                    Este modal está montado en un portal al{" "}
+                    <code className="font-mono text-xs">&lt;body&gt;</code> — por
+                    eso aparece por encima de todo sin problemas de z-index.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="flex flex-col gap-2 text-sm text-on-surface-variant leading-relaxed">
+                  <p>
+                    Probá apretar <kbd className="font-mono text-xs bg-surface-container-high px-1.5 py-0.5 rounded">Esc</kbd>{" "}
+                    o hacer click fuera para cerrarlo. El foco vuelve
+                    automáticamente al botón que lo abrió.
+                  </p>
+                  <p>
+                    También probá <kbd className="font-mono text-xs bg-surface-container-high px-1.5 py-0.5 rounded">Tab</kbd>:
+                    el foco queda atrapado adentro del modal (focus trap), no se escapa a
+                    elementos de la página de atrás. Todo gratis con Radix.
+                  </p>
+                </div>
+                <DialogFooter>
+                  <Button variant="ghost">Cancelar</Button>
+                  <Button variant="default">Entendido</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="destructive">
+                  <span className="material-symbols-outlined text-base">
+                    delete
+                  </span>
+                  Borrar algo
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>¿Estás seguro?</DialogTitle>
+                  <DialogDescription>
+                    Esta acción no se puede deshacer. (Tranquilo, acá no borramos
+                    nada de verdad — es solo una demo.)
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <Button variant="outline">Cancelar</Button>
+                  <Button variant="destructive">Sí, borrar</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          <p className="text-xs text-on-surface-variant italic">
+            💡 Patrón típico: Dialog para confirmaciones destructivas (verificar
+            intención antes de borrar) o para forms que no justifican una ruta
+            propia.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
