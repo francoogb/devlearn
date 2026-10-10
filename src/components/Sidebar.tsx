@@ -39,6 +39,7 @@ const directMainLinks: NavLink[] = [
 const frontendLinks: NavLink[] = [
   { href: "/aprender/js", icon: "javascript", label: "JavaScript" },
   { href: "/aprender/ts", icon: "code_blocks", label: "TypeScript" },
+  { href: "/aprender/react", icon: "flutter", label: "React", badge: "Core" },
   { href: "/aprender/next", icon: "hub", label: "Next.js" },
   { href: "/shadcn", icon: "widgets", label: "shadcn/ui", badge: "UI" },
 ];
