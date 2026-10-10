@@ -1,0 +1,88 @@
+// Schema de Prisma: define cómo se conecta a la BD y qué modelos existen.
+// Equivalente al models.py de Django. Cada "model" acá se vuelve una tabla
+// en Postgres cuando corremos `prisma migrate dev`.
+//
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- ENUMS ---------------------------------------------------------
+// Prisma convierte estos enums en tipos ENUM nativos de Postgres.
+// Como los identificadores de enum no admiten guiones (-), usamos
+// snake_case y los mapeamos al valor exacto que vive en el JSON actual
+// con @map, para que el frontend NO se entere del cambio interno.
+
+enum ConceptStatus {
+  pendiente
+  en_curso  @map("en-curso")
+  terminado
+}
+
+enum ExerciseCategory {
+  js
+  react
+  ts
+  algoritmos
+  estructuras
+}
+
+// --- MODELOS -------------------------------------------------------
+
+// Un concepto de programación que estoy estudiando.
+model Concept {
+  // id "humano", ej. "variables". Lo usamos como PK porque los Exercise
+  // apuntan a este string. Es más legible que un UUID en este dominio.
+  id     String        @id
+  name   String
+  status ConceptStatus
+
+  // Relación 1-a-N: un concepto tiene muchos ejercicios.
+  // Esto NO crea columna en la tabla Concept; es solo para que Prisma
+  // sepa que puede incluir `exercises` cuando hagas `findMany`.
+  exercises Exercise[]
+
+  @@map("concepts")
+}
+
+// Un ejercicio resuelto, anotado en la bitácora.
+model Exercise {
+  id          Int               @id @default(autoincrement())
+  title       String
+  // FK: columna real en Postgres. Debe coincidir con Concept.id (String).
+  conceptId   String
+  category    ExerciseCategory?
+  language    String?
+  // Dejamos las fechas como String ISO para no romper el frontend actual.
+  // Mejora futura: migrar a DateTime y actualizar el tipo del frontend.
+  date        String
+  codePath    String
+  whatChanged String
+  whatWasHard String
+  codeSnippet String?
+
+  // Relación hacia Concept. `fields` apunta a la columna FK local,
+  // `references` apunta a la PK del otro modelo.
+  concept Concept @relation(fields: [conceptId], references: [id])
+
+  @@map("exercises")
+}
+
+// Progreso general de las secciones temáticas de la barra lateral.
+// No se relaciona con los otros modelos (es una tabla "plana").
+model SectionProgress {
+  id             String        @id
+  name           String
+  status         ConceptStatus
+  completedItems Int
+  totalItems     Int
+  lastReview     String
+
+  @@map("sections_progress")
+}

@@ -29,6 +29,7 @@ interface NavDropdown {
 // 1. Enlaces directos principales
 const directMainLinks: NavLink[] = [
   { href: "/", icon: "dashboard", label: "Dashboard" },
+  { href: "/biblioteca", icon: "local_library", label: "Biblioteca", badge: "Hub" },
   { href: "/arquitectura", icon: "account_tree", label: "Arquitectura", badge: "Fullstack" },
   { href: "/ejercicios", icon: "checklist", label: "Ejercicios" },
   { href: "/fundamentos", icon: "school", label: "Fundamentos" },
