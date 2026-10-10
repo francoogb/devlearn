@@ -105,6 +105,43 @@ export const resources: Resource[] = [
   },
 ];
 
+export interface VideoResource {
+  id: string;
+  title: string;
+  url: string;
+  channel?: string;
+  duration?: string;
+  topic?: string;
+}
+
+// Videos de referencia y estudio relacionados con AI-901 y Microsoft Azure
+export const videoResources: VideoResource[] = [
+  {
+    id: "vid-ai-intro",
+    title: "Microsoft Azure AI Fundamentals (AI-900 / AI-901) Full Course",
+    url: "https://www.youtube.com/results?search_query=microsoft+azure+ai+fundamentals+full+course",
+    channel: "Microsoft Developer / FreeCodeCamp",
+    duration: "3h 40m",
+    topic: "Conceptos Generales y Cargas de Trabajo",
+  },
+  {
+    id: "vid-nlp-speech",
+    title: "Procesamiento de Lenguaje Natural y Speech en Azure AI",
+    url: "https://www.youtube.com/results?search_query=azure+ai+natural+language+processing+speech+tutorial",
+    channel: "Azure Community",
+    duration: "45m",
+    topic: "NLP, NER y Speech-to-Text",
+  },
+  {
+    id: "vid-azure-openai",
+    title: "Introducción a Azure OpenAI Service y Modelos Generativos",
+    url: "https://www.youtube.com/results?search_query=azure+openai+service+getting+started",
+    channel: "Microsoft Mechanics",
+    duration: "25m",
+    topic: "LLMs, Prompts y Filtros de Contenido",
+  },
+];
+
 export const practiceAssessment = {
   tool: "AI Skills Navigator",
   note: "La evaluación de práctica se hace desde AI Skills Navigator y requiere iniciar sesión con una cuenta Microsoft.",

@@ -19,6 +19,7 @@ import {
   nextCourseUnit,
   module1Info,
   module1Summary,
+  videoResources,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
 
@@ -423,6 +424,61 @@ export default function AI901Page() {
                   <span className="material-symbols-outlined text-[16px] text-outline shrink-0">
                     open_in_new
                   </span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* 4. Videos de Estudio Relacionados */}
+          <div className="flex flex-col gap-3 rounded-xl bg-surface-container-low p-5 shadow-md border border-outline-variant/10">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-on-surface">
+                <span className="material-symbols-outlined text-[20px] text-red-400">
+                  smart_display
+                </span>
+                <h2 className="font-display text-base font-bold">
+                  Videos de Estudio Relacionados
+                </h2>
+              </div>
+              <span className="font-mono text-[11px] text-outline">
+                {videoResources.length} videos
+              </span>
+            </div>
+            <p className="text-[11px] text-on-surface-variant">
+              Material audiovisual complementario para afianzar conceptos clave.
+            </p>
+
+            <div className="flex flex-col gap-2 pt-1">
+              {videoResources.map((vid) => (
+                <a
+                  key={vid.id}
+                  href={vid.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col gap-1 rounded-lg bg-surface-container p-3 transition-all hover:bg-surface-container-high hover:border-red-400/40 border border-outline-variant/10 group"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="text-xs font-semibold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                      {vid.title}
+                    </span>
+                    <span className="material-symbols-outlined text-[16px] text-red-400 shrink-0">
+                      play_circle
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[10px] text-outline font-mono pt-0.5">
+                    <span>{vid.channel}</span>
+                    {vid.duration && (
+                      <span className="rounded bg-surface-container-highest px-1.5 py-0.2 text-secondary font-bold">
+                        ⏱️ {vid.duration}
+                      </span>
+                    )}
+                  </div>
+                  {vid.topic && (
+                    <span className="text-[10px] text-on-surface-variant italic">
+                      Tema: {vid.topic}
+                    </span>
+                  )}
                 </a>
               ))}
             </div>

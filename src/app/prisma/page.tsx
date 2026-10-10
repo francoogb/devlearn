@@ -7,6 +7,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { prismaConcepts } from "@/content/prisma";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function PrismaPage() {
   // Estado para la pestaña/concepto seleccionado
@@ -85,15 +87,16 @@ export default function PrismaPage() {
             const isSelected = c.id === selectedConceptId;
             const isDone = !!masteredConcepts[c.id];
             return (
-              <button
+              <Button
                 key={c.id}
                 type="button"
+                variant={isSelected ? "default" : "ghost"}
+                size="default"
                 onClick={() => setSelectedConceptId(c.id)}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2.5 font-mono text-sm font-medium transition-all ${
-                  isSelected
-                    ? "bg-primary font-bold text-on-primary shadow-md ring-2 ring-primary/40"
-                    : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
-                }`}
+                className={cn(
+                  "h-auto py-2.5",
+                  isSelected && "ring-2 ring-primary/40"
+                )}
               >
                 <span className="material-symbols-outlined text-[20px]">
                   {c.icon}
@@ -101,14 +104,15 @@ export default function PrismaPage() {
                 <span>{c.title.split("(")[0].trim()}</span>
                 {isDone && (
                   <span
-                    className={`material-symbols-outlined text-[16px] ${
+                    className={cn(
+                      "material-symbols-outlined text-[16px]",
                       isSelected ? "text-on-primary" : "text-secondary"
-                    }`}
+                    )}
                   >
                     check_circle
                   </span>
                 )}
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -132,20 +136,17 @@ export default function PrismaPage() {
             </h2>
           </div>
 
-          <button
+          <Button
             type="button"
+            variant={masteredConcepts[activeConcept.id] ? "secondary" : "outline"}
+            size="default"
             onClick={() => toggleMastered(activeConcept.id)}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2.5 font-mono text-sm font-semibold transition-all ${
-              masteredConcepts[activeConcept.id]
-                ? "bg-secondary text-on-secondary shadow-md"
-                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-            }`}
           >
             <span className="material-symbols-outlined text-base">
               {masteredConcepts[activeConcept.id] ? "check_circle" : "radio_button_unchecked"}
             </span>
             {masteredConcepts[activeConcept.id] ? "Dominado" : "Marcar como dominado"}
-          </button>
+          </Button>
         </div>
 
         {/* 1. ANALOGÍA COTIDIANA */}
@@ -260,24 +261,34 @@ export default function PrismaPage() {
               const isCorrect = optIdx === activeConcept.exercise.correctIndex;
               const hasAnswered = selectedAnswer !== undefined && selectedAnswer !== null;
 
-              let btnStyle =
-                "bg-surface-container hover:bg-surface-container-high text-on-surface border-transparent";
+              // El quiz tiene estados visuales muy específicos (correcta/incorrecta/elegida)
+              // que no mapean a los variants estándar. Usamos variant="outline" como base
+              // y override con className para los estados post-respuesta.
+              let stateClasses = "border-outline-variant/30 bg-surface-container hover:bg-surface-container-high";
               if (hasAnswered) {
                 if (isCorrect) {
-                  btnStyle = "bg-secondary/20 border-secondary text-secondary font-semibold";
+                  stateClasses =
+                    "bg-secondary/20 border-secondary text-secondary font-semibold hover:bg-secondary/20";
                 } else if (isSelected) {
-                  btnStyle = "bg-error/20 border-error text-error";
+                  stateClasses =
+                    "bg-error/20 border-error text-error hover:bg-error/20";
                 } else {
-                  btnStyle = "opacity-50 bg-surface-container text-outline";
+                  stateClasses =
+                    "opacity-50 bg-surface-container text-outline hover:bg-surface-container";
                 }
               }
 
               return (
-                <button
+                <Button
                   key={optIdx}
                   type="button"
+                  variant="outline"
+                  size="lg"
                   onClick={() => handleSelectAnswer(activeConcept.id, optIdx)}
-                  className={`flex items-start gap-3 rounded-lg border p-4 text-left font-mono text-sm leading-relaxed transition-all ${btnStyle}`}
+                  className={cn(
+                    "h-auto justify-start items-start text-left py-4 whitespace-normal",
+                    stateClasses
+                  )}
                 >
                   <span className="font-bold shrink-0">{String.fromCharCode(65 + optIdx)})</span>
                   <span className="flex-1">{opt}</span>
@@ -291,7 +302,7 @@ export default function PrismaPage() {
                       cancel
                     </span>
                   )}
-                </button>
+                </Button>
               );
             })}
           </div>
