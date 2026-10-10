@@ -141,6 +141,18 @@ export const structureSections: StructureSection[] = [
         description:
           "Conceptos esenciales de programación: variables, funciones, qué es una API y diagramas de flujo interactivos.",
       },
+      {
+        path: "src/app/nestjs/",
+        kind: "folder",
+        description:
+          "Fundamentos de backend con NestJS: módulos, controladores, servicios e inyección de dependencias.",
+      },
+      {
+        path: "src/app/prisma/",
+        kind: "folder",
+        description:
+          "Guía y documentación interactiva de Prisma ORM en NestJS: schemas, migraciones, PrismaService y Type-Safety.",
+      },
     ],
   },
   {
@@ -205,6 +217,18 @@ export const structureSections: StructureSection[] = [
         kind: "file",
         description:
           "9 estructuras de datos con análisis, tipado TypeScript y comparaciones.",
+      },
+      {
+        path: "src/content/nestjs.ts",
+        kind: "file",
+        description:
+          "Conceptos pedagógicos de NestJS: módulos, controladores, servicios y flujo HTTP.",
+      },
+      {
+        path: "src/content/prisma.ts",
+        kind: "file",
+        description:
+          "Conceptos de Prisma ORM para NestJS: ORM vs SQL, schemas, migraciones, PrismaService y CRUD.",
       },
     ],
   },
