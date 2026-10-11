@@ -306,56 +306,193 @@ export const courseUnits: CourseUnit[] = [
   },
 ];
 
-// Resumen del Módulo 1 según especificación oficial completada
+// Resumen del Módulo 1 (Conceptos Fundamentales de IA)
 export const module1Summary = {
+  title: "Resumen del Módulo 1: Introducción a los conceptos de inteligencia artificial",
+  sections: [
+    {
+      title: "Fundamentos de la IA",
+      content:
+        "La inteligencia artificial permite que los sistemas informáticos simulen capacidades humanas para resolver problemas, automatizar procesos y realizar tareas que tradicionalmente requerían la intervención de una persona (como entender texto, reconocer imágenes o conversar).",
+    },
+    {
+      title: "Tipos de cargas de trabajo de IA (Concepto clave para el examen)",
+      content:
+        "1. Predicción / Machine Learning: Análisis de datos para predecir tendencias o resultados futuros.\n2. Visión (Computer Vision): Procesamiento e interpretación de imágenes y videos.\n3. Lenguaje (NLP): Comprensión y análisis del lenguaje escrito y hablado.\n4. Generación de contenido (IA Generativa): Creación de material nuevo a partir de instrucciones.",
+    },
+    {
+      title: "IA Generativa y Agentes",
+      content:
+        "Introducción al concepto de sistemas capaces de generar contenido nuevo (texto, código o imágenes) en lugar de limitarse a clasificar información existente, sirviendo como asistentes y agentes conversacionales.",
+    },
+    {
+      title: "Procesamiento de Lenguaje Natural, Discurso y Visión (Visión General)",
+      content:
+        "Primer vistazo a cómo las aplicaciones interpretan el lenguaje natural, procesan audio/voz y realizan análisis visuales de elementos gráficos.",
+    },
+    {
+      title: "Extracción de información",
+      content:
+        "Capacidad preliminar de los sistemas para extraer datos y valores específicos de distintos orígenes.",
+    },
+    {
+      title: "IA Generativa Responsable",
+      content:
+        "Los principios éticos fundamentales de Microsoft para garantizar un desarrollo y uso seguro de la tecnología (enfocados en la equidad, fiabilidad, seguridad, privacidad, inclusión, transparencia y responsabilidad).",
+    },
+  ],
+};
+
+// ---------- MÓDULO 2: OFICIAL DE MICROSOFT LEARN ----------
+// Título: Introducción a la inteligencia artificial y los agentes generativos
+// Duración estimada: 35 min | 7 Unidades
+export const module2Info = {
+  title: "Introducción a la inteligencia artificial y los agentes generativos",
+  officialUrl:
+    "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/",
+  duration: "35 min.",
+  totalUnits: 7,
+  description:
+    "Exploración profunda de modelos de lenguaje grande (LLM), arquitectura Transformer, mensajes del sistema (prompts), RAG y la anatomía de agentes de IA.",
+};
+
+export const module2Units: CourseUnit[] = [
+  {
+    id: 1,
+    title: "Introducción",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/1-introduction/",
+    summary:
+      "Presentación del alcance de los modelos generativos avanzados y los asistentes basados en IA.",
+    points: [
+      "Evolución desde modelos analíticos tradicionales a modelos generativos de lenguaje y multimodales.",
+      "Capacidad de sintetizar y generar contenido contextual con alta fidelidad.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Modelos de lenguaje grandes (LLM)",
+    duration: "6 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/2-large-language-models/",
+    summary:
+      "Arquitectura y funcionamiento de los LLMs: tokenización, embeddings vectoriales y la capa de atención.",
+    points: [
+      "Tokenización: división del lenguaje natural en fragmentos mínimos procesables (tokens).",
+      "Inserciones (Embeddings): vectores numéricos que capturan el significado semántico profundo.",
+      "Capa de atención: conecta lógicamente cada token con las palabras que lo rodean.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Mensajes (Prompts) y Mensajes del Sistema",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/3-prompts/",
+    summary:
+      "Elaboración de instrucciones efectivas y configuración del aviso del sistema (System Prompt).",
+    points: [
+      "System Prompt: define el rol, tono, comportamiento y reglas de seguridad del modelo.",
+      "Contexto y control de alucinaciones en la generación.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Agentes de IA y Arquitectura RAG",
+    duration: "6 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/4-ai-agents/",
+    summary:
+      "Sistemas autónomos que ejecutan tareas mediante herramientas y recuperación aumentada (RAG).",
+    points: [
+      "Los 3 componentes del agente: Modelo (cerebro), Instrucciones (reglas) y Herramientas (acciones/APIs).",
+      "RAG (Retrieval-Augmented Generation): consulta a fuentes internas para responder con datos verídicos.",
+      "Colaboración en ecosistemas multiagente.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Ejercicio: Exploración de la inteligencia artificial generativa",
+    duration: "10 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/5-exercise/",
+    summary:
+      "Práctica guiada interactuando con modelos generativos, ajuste de prompts y agentes.",
+    points: [
+      "Experimentación con prompts de usuario y de sistema.",
+      "Observación del comportamiento y respuesta del modelo.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Evaluación del módulo",
+    duration: "4 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/6-knowledge-check/",
+    summary:
+      "Comprobación de conocimientos oficiales con el cuestionario evaluativo del módulo.",
+    points: [
+      "Preguntas tipo examen sobre LLMs, tokenización, embeddings, atención y agentes.",
+    ],
+  },
+  {
+    id: 7,
+    title: "Resumen",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/explore-generative-ai/7-summary/",
+    summary:
+      "Cierre del Módulo 2 recapitulando conceptos clave antes de avanzar al siguiente módulo.",
+    points: [
+      "Dominio consolidado de LLMs, arquitectura Transformer y agentes autónomos.",
+    ],
+  },
+];
+
+// Resumen oficial y Conceptos Clave del Módulo 2
+export const module2Summary = {
   title: "Resumen del Módulo: Introducción a la IA y Agentes Generativos",
   sections: [
     {
       title: "Modelos de Lenguaje Grandes (LLM)",
       content:
-        "Modelos avanzados de IA entrenados con volúmenes masivos de datos para comprender el lenguaje natural y generar texto coherente similar al humano.",
+        "Modelos de IA entrenados para comprender el lenguaje natural y generar texto similar al humano.",
     },
     {
       title: "Tokenización (Tokenization)",
       content:
-        "El proceso fundamental de fragmentar el texto de entrada en unidades manejables (tokens: palabras, sílabas o caracteres) para que el modelo pueda procesarlos matemáticamente.",
+        "El proceso de fragmentar el texto en unidades manejables (tokens) para que la IA los procese.",
     },
     {
       title: "Inserciones (Embeddings)",
       content:
-        "Vectores matemáticos numéricos en espacios multidimensionales que representan el significado semántico profundo de las palabras y su cercanía conceptual con otros términos.",
+        "Vectores matemáticos que representan el significado semántico de las palabras y su relación.",
     },
     {
       title: "Capa de Atención (Attention Layer)",
       content:
-        "El componente esencial de la arquitectura Transformer que evalúa y conecta lógicamente las relaciones contextuales entre cada token y las palabras que lo rodean en la oración.",
+        "La parte del modelo transformador que conecta lógicamente cada token con las palabras que lo rodean.",
     },
     {
       title: "Mensajes del Sistema (System Prompts)",
       content:
-        "Instrucciones y directrices previas que definen el rol, tono, límites de comportamiento y contexto operativo del modelo de IA antes de que interactúe con el usuario.",
+        "Instrucciones previas que definen el rol, comportamiento y contexto del modelo.",
     },
     {
       title: "RAG (Generación Aumentada por Recuperación)",
       content:
-        "Técnica en la que una aplicación busca datos actualizados en fuentes o bases de datos internas y se los proporciona como contexto al modelo para responder con datos reales y exactos sin alucinar.",
+        "Técnica donde una aplicación busca información en bases de datos internas y se la entrega al modelo para responder con datos reales y exactos sin alucinar.",
     },
     {
       title: "Agentes de IA (AI Agents)",
       content:
-        "Sistemas autónomos estructurados en tres pilares: Modelo (cerebro), Instrucciones (reglas de negocio) y Herramientas (acciones y llamadas a APIs) para resolver tareas complejas en nombre de un usuario o colaborar en sistemas multiagente.",
+        "Sistemas autónomos compuestos por un modelo (cerebro), instrucciones (reglas) y herramientas (acciones) para realizar tareas en nombre de un usuario o en sistemas multiagentes.",
     },
   ],
 };
 
-// Cuestionario y Respuestas Oficiales completadas del Módulo
+// Cuestionario y Respuestas Oficiales del Módulo 2
 export interface QuizQA {
   id: number;
   question: string;
   answer: string;
 }
 
-export const module1QuizQA: QuizQA[] = [
+export const module2QuizQA: QuizQA[] = [
   {
     id: 1,
     question: "¿Qué es un modelo de lenguaje grande (LLM)?",
@@ -389,4 +526,4 @@ export const module1QuizQA: QuizQA[] = [
   },
 ];
 
-export const nextCourseUnit = "Módulo 2: Exploración de la visión por computadora y Azure Foundry";
+export const nextCourseUnit = "Módulo 3: Exploración de la visión por computadora y Azure Foundry";

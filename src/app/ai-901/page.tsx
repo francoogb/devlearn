@@ -19,7 +19,10 @@ import {
   nextCourseUnit,
   module1Info,
   module1Summary,
-  module1QuizQA,
+  module2Info,
+  module2Units,
+  module2Summary,
+  module2QuizQA,
   videoResources,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
@@ -35,8 +38,9 @@ export default function AI901Page() {
     genai: true,
   });
 
-  // Estado para abanico / colapsar el Módulo 1 (permite cerrar y abrir para futuros módulos)
-  const [isModule1Open, setIsModule1Open] = useState<boolean>(true);
+  // Estado para abanicos / colapsar los módulos de forma independiente
+  const [isModule1Open, setIsModule1Open] = useState<boolean>(false);
+  const [isModule2Open, setIsModule2Open] = useState<boolean>(true);
 
   const toggleCheck = (id: string) => {
     setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -290,8 +294,164 @@ export default function AI901Page() {
                 ))}
               </div>
             </div>
+          </div>
+        )}
+      </section>
 
-            {/* Cuestionario y Respuestas Oficiales del Módulo */}
+      {/* ========================================================================= */}
+      {/* MÓDULO 2 (DESPLEGABLE / ABANICO INDEPENDIENTE)                             */}
+      {/* ========================================================================= */}
+      <section className="flex flex-col rounded-xl bg-surface-container-low shadow-md border border-outline-variant/10 overflow-hidden transition-all">
+        {/* Cabecera del Módulo 2 (Botón de abanico / acordeón) */}
+        <div
+          onClick={() => setIsModule2Open((prev) => !prev)}
+          className="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6 cursor-pointer bg-surface-container-low hover:bg-surface-container transition-colors select-none"
+        >
+          <div className="flex flex-col gap-1.5 max-w-xl">
+            <div className="flex items-center gap-2">
+              <span className="rounded bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+                Módulo 2 · {module2Info.totalUnits} Unidades
+              </span>
+              <span className="rounded bg-secondary/15 px-2.5 py-0.5 font-mono text-xs font-bold text-secondary">
+                ⏱️ {module2Info.duration}
+              </span>
+              <span className="rounded bg-surface-container-highest px-2 py-0.5 font-mono text-[10px] text-outline font-semibold">
+                {isModule2Open ? "Abierto" : "Cerrado"}
+              </span>
+            </div>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface flex items-center gap-2">
+              <span>{module2Info.title}</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-on-surface-variant line-clamp-2">
+              {module2Info.description}
+            </p>
+          </div>
+
+          {/* Botón visual de Abanico / Flecha */}
+          <div className="flex items-center gap-2">
+            <a
+              href={module2Info.officialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="rounded-lg p-2 text-primary hover:bg-primary/10 transition-colors"
+              title="Abrir en Microsoft Learn"
+            >
+              <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+            </a>
+
+            <div className="flex items-center gap-1.5 rounded-xl bg-surface-container-high px-3 py-2 font-mono text-xs font-bold text-on-surface shadow-sm">
+              <span>{isModule2Open ? "Plegar módulo" : "Desplegar módulo"}</span>
+              <span
+                className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${
+                  isModule2Open ? "rotate-180 text-secondary" : "rotate-0 text-outline"
+                }`}
+              >
+                expand_more
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Contenido desplegable del Módulo 2: Unidades, Resumen y Cuestionario */}
+        {isModule2Open && (
+          <div className="flex flex-col gap-6 p-6 pt-2 border-t border-surface-container-high animate-in fade-in duration-200">
+            {/* Unidades oficiales del Módulo 2 */}
+            <ol className="relative ml-4 flex flex-col gap-5 border-l-2 border-surface-container-high pl-6 pt-4">
+              {module2Units.map((unit) => (
+                <li key={unit.id} className="relative flex flex-col gap-1.5">
+                  <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full bg-secondary font-mono text-xs font-bold text-on-secondary shadow-sm">
+                    {unit.id}
+                  </span>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-display text-base font-bold text-on-surface">
+                      {unit.url ? (
+                        <a
+                          href={unit.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline text-on-surface hover:text-secondary flex items-center gap-1.5"
+                        >
+                          {unit.title}
+                          <span className="material-symbols-outlined text-[15px] opacity-70">
+                            open_in_new
+                          </span>
+                        </a>
+                      ) : (
+                        unit.title
+                      )}
+                    </h3>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-mono text-[11px] text-outline font-semibold">
+                      {unit.duration}
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm leading-relaxed text-on-surface-variant">
+                    {unit.summary}
+                  </p>
+
+                  {unit.points && (
+                    <ul className="flex flex-col gap-1.5 pt-1">
+                      {unit.points.map((p, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed text-on-surface-variant"
+                        >
+                          <span className="material-symbols-outlined mt-0.5 text-[16px] text-secondary shrink-0">
+                            check
+                          </span>
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+
+              {/* Próximo paso */}
+              <li className="relative flex items-center gap-2.5 pt-2">
+                <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-tertiary bg-surface-container-low">
+                  <span className="material-symbols-outlined text-[16px] text-tertiary">
+                    schedule
+                  </span>
+                </span>
+                <span className="text-xs sm:text-sm text-on-surface-variant">
+                  <strong className="text-on-surface">Próximo paso:</strong>{" "}
+                  {nextCourseUnit}.
+                </span>
+              </li>
+            </ol>
+
+            {/* Resumen y Conceptos Clave del Módulo 2 */}
+            <div className="mt-4 flex flex-col gap-4 rounded-xl border border-secondary/30 bg-secondary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-[26px] text-secondary">
+                  fact_check
+                </span>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
+                  {module2Summary.title}
+                </h3>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {module2Summary.sections.map((sec, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col gap-1 rounded-lg bg-surface-container p-3.5 border border-outline-variant/15"
+                  >
+                    <span className="font-mono font-bold text-xs sm:text-sm text-secondary">
+                      📌 {sec.title}
+                    </span>
+                    <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed whitespace-pre-line">
+                      {sec.content}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Cuestionario y Respuestas Oficiales del Módulo 2 */}
             <div className="mt-2 flex flex-col gap-4 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
               <div className="flex items-center justify-between border-b border-primary/20 pb-3">
                 <div className="flex items-center gap-2">
@@ -299,16 +459,16 @@ export default function AI901Page() {
                     quiz
                   </span>
                   <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
-                    Cuestionario y Respuestas Oficiales
+                    Cuestionario y Respuestas Oficiales del Módulo 2
                   </h3>
                 </div>
                 <span className="rounded-full bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
-                  {module1QuizQA.length} Preguntas Clave
+                  {module2QuizQA.length} Preguntas Clave
                 </span>
               </div>
 
               <div className="flex flex-col gap-3">
-                {module1QuizQA.map((qa) => (
+                {module2QuizQA.map((qa) => (
                   <div
                     key={qa.id}
                     className="flex flex-col gap-1.5 rounded-lg bg-surface-container p-4 border border-outline-variant/15"
@@ -334,7 +494,7 @@ export default function AI901Page() {
           </div>
         )}
       </section>
-        </div>
+    </div>
 
         {/* ========================================================================= */}
         {/* COLUMNA DERECHA (4 COLS): CHECKLIST, EVALUACIÓN Y RECURSOS OFICIALES     */}
