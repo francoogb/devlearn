@@ -11,36 +11,20 @@
 
 import { useState } from "react";
 import {
-  technicalVocabulary,
-  technicalReadings,
   basicStructures,
   phrases,
-  irregularVerbs,
-  texts,
-  phrasalVerbs,
-  connectors,
-  intermediateTexts,
   sessions as initialSessions,
   type PracticeSession,
-  type ReadingExercise,
-  type GrammarTopic,
-  type Phrase,
-  type PhrasalVerb,
-  type IrregularVerb,
 } from "@/content/ingles";
 import { sectionProgressById } from "@/lib/progress";
 import EnglishCurriculumExplorer from "@/components/EnglishCurriculumExplorer";
 
-// Secciones disponibles
-type SectionTab = "basico" | "frases" | "tecnico" | "lectura" | "verbos" | "intermedio";
+// Secciones disponibles: solo Inglés Básico y Frases en Inglés
+type SectionTab = "basico" | "frases";
 
 const sectionLabels: Record<SectionTab, string> = {
   basico: "Inglés Básico",
   frases: "Frases en Inglés",
-  tecnico: "Inglés Técnico",
-  lectura: "Lectura Técnica",
-  verbos: "Verbos Irregulares",
-  intermedio: "Inglés Intermedio",
 };
 
 export default function InglesPage() {
@@ -49,42 +33,15 @@ export default function InglesPage() {
   // Sección activa seleccionada (inicia en basico según el orden pedido)
   const [activeTab, setActiveTab] = useState<SectionTab>("basico");
 
-  // Estado para vocabulario dominado (casillas)
-  const [masteredVocab, setMasteredVocab] = useState<Record<string, boolean>>({
-    array: true,
-    string: true,
-    loop: true,
-    server: true,
-  });
-
-  // Buscador y categoría para vocabulario técnico
-  const [vocabSearch, setVocabSearch] = useState<string>("");
-  const [selectedVocabCategory, setSelectedVocabCategory] = useState<string>("todos");
-
   // Buscador para frases en inglés
   const [phraseSearch, setPhraseSearch] = useState<string>("");
 
   // Modal interactivo de frases (índice de la frase abierta)
   const [activePhraseModalIndex, setActivePhraseModalIndex] = useState<number | null>(null);
 
-  // Buscador para verbos irregulares
-  const [verbSearch, setVerbSearch] = useState<string>("");
-
-  // Respuestas interactivas para preguntas de lectura
-  const [readingAnswers, setReadingAnswers] = useState<Record<string, number | null>>({});
-
   // Historial de sesiones
   const [sessionList, setSessionList] = useState<PracticeSession[]>(initialSessions);
   const [sessionNote, setSessionNote] = useState("");
-
-  const toggleVocab = (id: string) => {
-    setMasteredVocab((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const handleReadingSelect = (readingId: string, qId: number, selectedIndex: number) => {
-    const key = `${readingId}-q-${qId}`;
-    setReadingAnswers((prev) => ({ ...prev, [key]: selectedIndex }));
-  };
 
   const handleSaveSession = (area: "grammar" | "vocabulary" | "reading") => {
     const nueva: PracticeSession = {
@@ -97,27 +54,6 @@ export default function InglesPage() {
     setSessionNote("");
   };
 
-  const totalVocabMastered = Object.values(masteredVocab).filter(Boolean).length;
-
-  // Filtrado de vocabulario técnico
-  const vocabCategories = [
-    "todos",
-    ...Array.from(new Set(technicalVocabulary.map((v) => v.category || "General"))),
-  ];
-
-  const filteredVocab = technicalVocabulary.filter((item) => {
-    const matchesCat =
-      selectedVocabCategory === "todos" || item.category === selectedVocabCategory;
-    if (!matchesCat) return false;
-    if (!vocabSearch.trim()) return true;
-    const q = vocabSearch.toLowerCase();
-    return (
-      item.english.toLowerCase().includes(q) ||
-      item.spanish.toLowerCase().includes(q) ||
-      (item.definition && item.definition.toLowerCase().includes(q))
-    );
-  });
-
   // Filtrado de frases en inglés
   const filteredPhrases = phrases.filter((p) => {
     if (!phraseSearch.trim()) return true;
@@ -126,18 +62,6 @@ export default function InglesPage() {
       p.english.toLowerCase().includes(q) ||
       p.spanish.toLowerCase().includes(q) ||
       (p.context && p.context.toLowerCase().includes(q))
-    );
-  });
-
-  // Filtrado de verbos irregulares
-  const filteredVerbs = irregularVerbs.filter((v) => {
-    if (!verbSearch.trim()) return true;
-    const q = verbSearch.toLowerCase();
-    return (
-      v.base.toLowerCase().includes(q) ||
-      v.past.toLowerCase().includes(q) ||
-      v.participle.toLowerCase().includes(q) ||
-      v.spanish.toLowerCase().includes(q)
     );
   });
 
@@ -155,13 +79,13 @@ export default function InglesPage() {
             </h1>
           </div>
           <p className="text-sm text-on-surface-variant">
-            Aprende a tu ritmo: vocabulario técnico, lecturas, gramática explicada de corrido, verbos irregulares e intermedio.
+            Aprende a tu ritmo: programa estructurado de Inglés Básico (A1–A2) y frases clave de comunicación en inglés.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-secondary/15 px-3 py-1 font-mono text-xs text-secondary">
-            {totalVocabMastered} de {technicalVocabulary.length} términos dominados
+          <span className="rounded-full bg-violet-500/15 px-3 py-1 font-mono text-xs text-violet-300">
+            {phrases.length} frases clave
           </span>
           {progress && (
             <span className="rounded-full bg-primary/15 px-3 py-1 font-mono text-xs text-primary">
@@ -229,358 +153,10 @@ export default function InglesPage() {
               {phrases.length} frases
             </span>
           </button>
-
-          {/* 3. Inglés Técnico */}
-          <button
-            type="button"
-            onClick={() => setActiveTab("tecnico")}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2.5 font-mono text-xs font-medium transition-all ${
-              activeTab === "tecnico"
-                ? "bg-primary font-bold text-on-primary shadow-md ring-2 ring-primary/40"
-                : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">terminal</span>
-            <span>Inglés Técnico</span>
-            <span
-              className={`rounded-full px-1.5 py-0.5 text-[10px] ${
-                activeTab === "tecnico"
-                  ? "bg-on-primary/20 text-on-primary"
-                  : "bg-surface-container-highest text-outline"
-              }`}
-            >
-              {technicalVocabulary.length} términos
-            </span>
-          </button>
-
-          {/* 4. Lectura Técnica */}
-          <button
-            type="button"
-            onClick={() => setActiveTab("lectura")}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2.5 font-mono text-xs font-medium transition-all ${
-              activeTab === "lectura"
-                ? "bg-cyan-600 font-bold text-white shadow-md ring-2 ring-cyan-500/40"
-                : "bg-surface-container text-cyan-300 hover:bg-surface-container-high"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">menu_book</span>
-            <span>Lectura Técnica</span>
-            <span
-              className={`rounded-full px-1.5 py-0.5 text-[10px] ${
-                activeTab === "lectura"
-                  ? "bg-white/20 text-white"
-                  : "bg-surface-container-highest text-outline"
-              }`}
-            >
-              {technicalReadings.length} lectura
-            </span>
-          </button>
-
-          {/* 5. Verbos Irregulares */}
-          <button
-            type="button"
-            onClick={() => setActiveTab("verbos")}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2.5 font-mono text-xs font-medium transition-all ${
-              activeTab === "verbos"
-                ? "bg-amber-500 font-bold text-black shadow-md ring-2 ring-amber-400/50"
-                : "bg-surface-container text-amber-300 hover:bg-surface-container-high"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">table_chart</span>
-            <span>Verbos Irregulares</span>
-            <span
-              className={`rounded-full px-1.5 py-0.5 text-[10px] ${
-                activeTab === "verbos"
-                  ? "bg-black/20 text-black"
-                  : "bg-surface-container-highest text-outline"
-              }`}
-            >
-              {irregularVerbs.length} verbos
-            </span>
-          </button>
-
-          {/* 6. Inglés Intermedio */}
-          <button
-            type="button"
-            onClick={() => setActiveTab("intermedio")}
-            className={`flex items-center gap-2 rounded-xl px-3.5 py-2.5 font-mono text-xs font-medium transition-all ${
-              activeTab === "intermedio"
-                ? "bg-tertiary font-bold text-on-tertiary shadow-md ring-2 ring-tertiary/40"
-                : "bg-surface-container text-tertiary hover:bg-surface-container-high"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[18px]">trending_up</span>
-            <span>Inglés Intermedio</span>
-            <span
-              className={`rounded-full px-1.5 py-0.5 text-[10px] ${
-                activeTab === "intermedio"
-                  ? "bg-on-tertiary/20 text-on-tertiary"
-                  : "bg-surface-container-highest text-outline"
-              }`}
-            >
-              {phrasalVerbs.length} phrasal · {connectors.length} conectores
-            </span>
-          </button>
         </div>
       </div>
 
-      {/* ======================================================== */}
-      {/* 1. SECCIÓN: INGLÉS TÉCNICO (Solo vocabulario informático) */}
-      {/* ======================================================== */}
-      {/* ======================================================== */}
-      {/* 1. SECCIÓN: INGLÉS TÉCNICO (Vocabulario informático ordenado) */}
-      {/* ======================================================== */}
-      {activeTab === "tecnico" && (
-        <section className="flex flex-col gap-6 rounded-xl bg-surface-container-low p-6 shadow-md">
-          {/* Cabecera de la sección */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-surface-container-high pb-4">
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-[28px] text-primary">
-                terminal
-              </span>
-              <div>
-                <h2 className="font-display text-xl font-bold text-on-surface">
-                  Vocabulario Técnico para Informática
-                </h2>
-                <p className="text-sm text-on-surface-variant">
-                  Glosario esencial con pronunciación/significado en español, explicación conceptual y ejemplos de código reales.
-                </p>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-secondary/15 px-3 py-1 font-mono text-xs font-semibold text-secondary">
-                {totalVocabMastered} / {technicalVocabulary.length} dominados
-              </span>
-            </div>
-          </div>
-
-          {/* Barra de herramientas: Buscador y Filtro por Categoría */}
-          <div className="flex flex-col gap-3 rounded-xl border border-surface-container-high bg-surface-container p-4 sm:flex-row sm:items-center sm:justify-between">
-            {/* Buscador */}
-            <div className="relative flex-1">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">
-                search
-              </span>
-              <input
-                type="text"
-                placeholder="Buscar término en inglés, español o concepto..."
-                value={vocabSearch}
-                onChange={(e) => setVocabSearch(e.target.value)}
-                className="w-full rounded-lg border border-surface-container-high bg-surface-container-lowest py-2 pl-9 pr-8 font-mono text-sm text-on-surface placeholder-outline focus:border-primary focus:outline-none"
-              />
-              {vocabSearch && (
-                <button
-                  type="button"
-                  onClick={() => setVocabSearch("")}
-                  className="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[16px] text-outline hover:text-on-surface"
-                >
-                  close
-                </button>
-              )}
-            </div>
-
-            {/* Categorías (Pills / Botones) */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              {vocabCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedVocabCategory(cat)}
-                  className={`rounded-lg px-2.5 py-1 font-mono text-xs font-medium transition-all ${
-                    selectedVocabCategory === cat
-                      ? "bg-primary font-bold text-on-primary shadow-sm"
-                      : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface"
-                  }`}
-                >
-                  {cat === "todos" ? "Todos" : cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Lista de términos en flujo vertical leyendo hacia abajo */}
-          <div className="flex flex-col gap-3.5">
-            {filteredVocab.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-outline/30 p-8 text-center">
-                <span className="material-symbols-outlined text-[32px] text-outline">
-                  search_off
-                </span>
-                <p className="mt-2 text-sm text-on-surface-variant">
-                  No se encontraron términos técnicos que coincidan con &quot;{vocabSearch}&quot;.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setVocabSearch("");
-                    setSelectedVocabCategory("todos");
-                  }}
-                  className="mt-3 font-mono text-xs text-primary underline"
-                >
-                  Limpiar filtros
-                </button>
-              </div>
-            ) : (
-              filteredVocab.map((item) => {
-                const isChecked = !!masteredVocab[item.id];
-                return (
-                  <article
-                    key={item.id}
-                    className={`flex flex-col gap-2.5 rounded-xl border p-4 transition-all sm:p-5 ${
-                      isChecked
-                        ? "border-secondary/40 bg-surface-container/60 shadow-sm"
-                        : "border-surface-container-high bg-surface-container hover:border-outline/40 hover:bg-surface-container-high/60"
-                    }`}
-                  >
-                    {/* Fila superior: Checkbox + Término + Traducción + Categoría */}
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <label
-                        onClick={() => toggleVocab(item.id)}
-                        className="flex cursor-pointer items-center gap-3 select-none"
-                      >
-                        <span
-                          className={`material-symbols-outlined text-[24px] transition-colors ${
-                            isChecked ? "text-secondary" : "text-outline hover:text-primary"
-                          }`}
-                        >
-                          {isChecked ? "check_box" : "check_box_outline_blank"}
-                        </span>
-                        <div className="flex flex-wrap items-baseline gap-2">
-                          <span className="font-mono text-lg font-bold text-primary">
-                            {item.english}
-                          </span>
-                          <span className="text-sm font-medium text-on-surface-variant">
-                            — {item.spanish}
-                          </span>
-                        </div>
-                      </label>
-
-                      {item.category && (
-                        <span className="rounded-full bg-surface-container-highest px-2.5 py-0.5 font-mono text-[11px] font-semibold text-outline">
-                          {item.category}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Explicación conceptual en español (con términos técnicos en inglés) */}
-                    {item.definition && (
-                      <p className="pl-9 text-base leading-relaxed text-on-surface">
-                        {item.definition}
-                      </p>
-                    )}
-
-                    {/* Ejemplo de código práctico */}
-                    {item.example && (
-                      <div className="ml-9 mt-1 rounded-lg border border-surface-container-high bg-surface-container-lowest p-2.5 font-mono text-xs text-on-surface-variant">
-                        <span className="mr-2 text-primary font-bold">Ejemplo:</span>
-                        <code>{item.example}</code>
-                      </div>
-                    )}
-                  </article>
-                );
-              })
-            )}
-          </div>
-        </section>
-      )}
-
-      {/* ======================================================== */}
-      {/* 2. SECCIÓN: LECTURA TÉCNICA (Pestaña propia)              */}
-      {/* ======================================================== */}
-      {activeTab === "lectura" && (
-        <section className="flex flex-col gap-6 rounded-xl bg-surface-container-low p-6 shadow-md">
-          <div className="flex items-center justify-between border-b border-surface-container-high pb-3">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[24px] text-cyan-400">
-                menu_book
-              </span>
-              <div>
-                <h2 className="font-display text-xl font-bold text-on-surface">
-                  Lectura Técnica (Technical Reading)
-                </h2>
-                <p className="text-xs text-on-surface-variant">
-                  Fragmentos de documentación técnica real en inglés para entrenar comprensión lectora.
-                </p>
-              </div>
-            </div>
-            <span className="font-mono text-xs text-outline">
-              {technicalReadings.length} texto de práctica
-            </span>
-          </div>
-
-          {technicalReadings.map((reading) => (
-            <article
-              key={reading.id}
-              className="flex flex-col gap-5 rounded-xl border border-surface-container-high bg-surface-container p-6 shadow-sm"
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-display text-lg font-bold text-on-surface">
-                  {reading.title}
-                </h3>
-                <span className="rounded-full bg-cyan-500/15 px-2.5 py-0.5 font-mono text-xs font-semibold text-cyan-300">
-                  Documentación Web
-                </span>
-              </div>
-
-              {/* Fragmento de lectura amplio y legible */}
-              <blockquote className="rounded-xl border-l-4 border-cyan-500 bg-surface-container-lowest p-5 text-base leading-relaxed text-on-surface shadow-inner">
-                &quot;{reading.text}&quot;
-              </blockquote>
-
-              {/* Preguntas de comprensión */}
-              <div className="flex flex-col gap-4 border-t border-surface-container-high pt-4">
-                <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-300">
-                  Preguntas de comprensión lectora:
-                </span>
-
-                {reading.questions.map((q) => {
-                  const key = `${reading.id}-q-${q.id}`;
-                  const selected = readingAnswers[key];
-                  return (
-                    <div
-                      key={q.id}
-                      className="flex flex-col gap-2.5 rounded-lg bg-surface-container-low p-4 text-sm text-on-surface"
-                    >
-                      <p className="font-semibold text-on-surface">
-                        #{q.id} {q.question}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {q.options.map((opt, idx) => {
-                          const isSelected = selected === idx;
-                          const isCorrect = idx === q.answerIndex;
-                          let btnStyle =
-                            "bg-surface-container-highest text-on-surface hover:bg-surface-bright";
-
-                          if (selected !== undefined && selected !== null) {
-                            if (isSelected && isCorrect) {
-                              btnStyle = "bg-secondary text-on-secondary font-bold";
-                            } else if (isSelected && !isCorrect) {
-                              btnStyle = "bg-error text-on-error";
-                            } else if (isCorrect) {
-                              btnStyle = "bg-secondary/40 text-on-surface font-semibold";
-                            }
-                          }
-
-                          return (
-                            <button
-                              key={opt}
-                              type="button"
-                              onClick={() => handleReadingSelect(reading.id, q.id, idx)}
-                              className={`rounded-lg px-3.5 py-1.5 font-mono text-xs transition-colors ${btnStyle}`}
-                            >
-                              {opt}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </article>
-          ))}
-        </section>
-      )}
 
       {/* ======================================================== */}
       {/* 3. SECCIÓN: INGLÉS BÁSICO (Programa Estructurado A1 - A2) */}
@@ -712,178 +288,7 @@ export default function InglesPage() {
         </section>
       )}
 
-      {/* ======================================================== */}
-      {/* 5. SECCIÓN: VERBOS IRREGULARES (Pestaña propia con tabla)*/}
-      {/* ======================================================== */}
-      {activeTab === "verbos" && (
-        <section className="flex flex-col gap-5 rounded-xl bg-surface-container-low p-6 shadow-md">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-surface-container-high pb-4">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[26px] text-amber-400">
-                table_chart
-              </span>
-              <div>
-                <h2 className="font-display text-2xl font-bold text-on-surface">
-                  Tabla de Verbos Irregulares (Irregular Verbs)
-                </h2>
-                <p className="text-xs text-on-surface-variant">
-                  Los 15 verbos que cambian en pasado y participio: base → past → participle.
-                </p>
-              </div>
-            </div>
-            <span className="font-mono text-xs text-amber-300">
-              {filteredVerbs.length} de {irregularVerbs.length} verbos
-            </span>
-          </div>
 
-          {/* Buscador de verbos */}
-          <div className="relative">
-            <span className="material-symbols-outlined pointer-events-none absolute left-3 top-2.5 text-[18px] text-outline">
-              search
-            </span>
-            <input
-              type="text"
-              placeholder="Buscar verbo en inglés o español (ej. go, saw, escribir, eat)..."
-              value={verbSearch}
-              onChange={(e) => setVerbSearch(e.target.value)}
-              className="w-full rounded-xl bg-surface-container py-2 pl-10 pr-4 font-mono text-xs text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-amber-400"
-            />
-          </div>
-
-          {/* Tabla clara y legible de verbos */}
-          <div className="overflow-x-auto rounded-xl border border-surface-container-high bg-surface-container">
-            <table className="w-full text-left text-sm">
-              <thead className="border-b border-surface-container-high bg-surface-container-high/60 font-mono text-xs uppercase tracking-wider text-outline">
-                <tr>
-                  <th className="px-4 py-3 text-primary">Forma Base (Infinitive)</th>
-                  <th className="px-4 py-3 text-secondary">Pasado Simple (Past)</th>
-                  <th className="px-4 py-3 text-tertiary">Participio (Participle)</th>
-                  <th className="px-4 py-3 text-on-surface">Significado (Español)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-surface-container-high">
-                {filteredVerbs.map((v) => (
-                  <tr
-                    key={v.id}
-                    className="transition-colors hover:bg-surface-container-high/40"
-                  >
-                    <td className="px-4 py-3 font-mono font-bold text-primary">
-                      {v.base}
-                    </td>
-                    <td className="px-4 py-3 font-mono font-semibold text-secondary">
-                      {v.past}
-                    </td>
-                    <td className="px-4 py-3 font-mono font-semibold text-tertiary">
-                      {v.participle}
-                    </td>
-                    <td className="px-4 py-3 text-on-surface-variant font-medium">
-                      {v.spanish}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
-
-      {/* ======================================================== */}
-      {/* 5. SECCIÓN: INGLÉS INTERMEDIO                             */}
-      {/* ======================================================== */}
-      {activeTab === "intermedio" && (
-        <section className="flex flex-col gap-6 rounded-xl bg-surface-container-low p-6 shadow-md">
-          <div className="flex items-center justify-between border-b border-surface-container-high pb-4">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[26px] text-tertiary">
-                trending_up
-              </span>
-              <div>
-                <h2 className="font-display text-2xl font-bold text-on-surface">
-                  Inglés Intermedio (Intermediate English)
-                </h2>
-                <p className="text-xs text-on-surface-variant">
-                  Phrasal verbs, conectores discursivos y textos técnicos de nivel intermedio.
-                </p>
-              </div>
-            </div>
-            <span className="font-mono text-xs text-outline">
-              {phrasalVerbs.length} phrasal verbs · {connectors.length} conectores
-            </span>
-          </div>
-
-          {/* Phrasal verbs */}
-          <div className="flex flex-col gap-3">
-            <h3 className="font-display text-lg font-bold text-on-surface">
-              Phrasal Verbs Comunes en Desarrollo
-            </h3>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-              {phrasalVerbs.map((v) => (
-                <div
-                  key={v.id}
-                  className="flex flex-col gap-1.5 rounded-xl border border-surface-container-high bg-surface-container p-4 shadow-sm"
-                >
-                  <span className="font-mono text-sm font-bold text-primary">
-                    {v.phrasal}
-                  </span>
-                  <span className="text-xs font-semibold text-on-surface">
-                    {v.meaning}
-                  </span>
-                  <span className="text-xs italic leading-relaxed text-on-surface-variant">
-                    &quot;{v.example}&quot;
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Conectores */}
-          <div className="flex flex-col gap-3 border-t border-surface-container-high pt-5">
-            <h3 className="font-display text-lg font-bold text-on-surface">
-              Conectores (Linking Words)
-            </h3>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-              {connectors.map((c) => (
-                <div
-                  key={c.id}
-                  className="flex items-center gap-3 rounded-xl border border-surface-container-high bg-surface-container p-3.5 shadow-sm"
-                >
-                  <span className="material-symbols-outlined text-[18px] text-secondary">
-                    link
-                  </span>
-                  <div className="flex flex-col">
-                    <span className="font-mono text-sm font-bold text-primary">
-                      {c.english}
-                    </span>
-                    <span className="text-xs text-on-surface-variant">{c.spanish}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Texto intermedio */}
-          {intermediateTexts.length > 0 && (
-            <div className="flex flex-col gap-3 border-t border-surface-container-high pt-5">
-              <h3 className="font-display text-lg font-bold text-on-surface">
-                Texto de Práctica Intermedio
-              </h3>
-              {intermediateTexts.map((text) => (
-                <article
-                  key={text.id}
-                  className="rounded-xl border border-surface-container-high bg-surface-container p-5"
-                >
-                  <h4 className="font-display text-base font-bold text-on-surface">
-                    {text.title}
-                  </h4>
-                  <p className="mt-2 text-base leading-relaxed text-on-surface">
-                    {text.text}
-                  </p>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
 
       {/* SECCIÓN: REGISTRO DE SESIONES DE PRÁCTICA */}
       <section className="flex flex-col gap-4 rounded-xl bg-surface-container-low p-6 shadow-md">
