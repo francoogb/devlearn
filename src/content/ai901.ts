@@ -306,41 +306,87 @@ export const courseUnits: CourseUnit[] = [
   },
 ];
 
-// Resumen del Módulo 1 según especificación
+// Resumen del Módulo 1 según especificación oficial completada
 export const module1Summary = {
-  title: "Resumen del Módulo 1: Introducción a los conceptos de inteligencia artificial",
+  title: "Resumen del Módulo: Introducción a la IA y Agentes Generativos",
   sections: [
     {
-      title: "Fundamentos de la IA",
+      title: "Modelos de Lenguaje Grandes (LLM)",
       content:
-        "La inteligencia artificial permite que los sistemas informáticos simulen capacidades humanas para resolver problemas, automatizar procesos y realizar tareas que tradicionalmente requerían la intervención de una persona (como entender texto, reconocer imágenes o conversar).",
+        "Modelos avanzados de IA entrenados con volúmenes masivos de datos para comprender el lenguaje natural y generar texto coherente similar al humano.",
     },
     {
-      title: "Tipos de cargas de trabajo de IA (Concepto clave para el examen)",
+      title: "Tokenización (Tokenization)",
       content:
-        "1. Predicción / Machine Learning: Análisis de datos para predecir tendencias o resultados futuros.\n2. Visión (Computer Vision): Procesamiento e interpretación de imágenes y videos.\n3. Lenguaje (NLP): Comprensión y análisis del lenguaje escrito y hablado.\n4. Generación de contenido (IA Generativa): Creación de material nuevo a partir de instrucciones.",
+        "El proceso fundamental de fragmentar el texto de entrada en unidades manejables (tokens: palabras, sílabas o caracteres) para que el modelo pueda procesarlos matemáticamente.",
     },
     {
-      title: "IA Generativa y Agentes",
+      title: "Inserciones (Embeddings)",
       content:
-        "Introducción al concepto de sistemas capaces de generar contenido nuevo (texto, código o imágenes) en lugar de limitarse a clasificar información existente, sirviendo como asistentes y agentes conversacionales.",
+        "Vectores matemáticos numéricos en espacios multidimensionales que representan el significado semántico profundo de las palabras y su cercanía conceptual con otros términos.",
     },
     {
-      title: "Procesamiento de Lenguaje Natural, Discurso y Visión (Visión General)",
+      title: "Capa de Atención (Attention Layer)",
       content:
-        "Primer vistazo a cómo las aplicaciones interpretan el lenguaje natural, procesan audio/voz y realizan análisis visuales de elementos gráficos.",
+        "El componente esencial de la arquitectura Transformer que evalúa y conecta lógicamente las relaciones contextuales entre cada token y las palabras que lo rodean en la oración.",
     },
     {
-      title: "Extracción de información",
+      title: "Mensajes del Sistema (System Prompts)",
       content:
-        "Capacidad preliminar de los sistemas para extraer datos y valores específicos de distintos orígenes.",
+        "Instrucciones y directrices previas que definen el rol, tono, límites de comportamiento y contexto operativo del modelo de IA antes de que interactúe con el usuario.",
     },
     {
-      title: "IA Generativa Responsable",
+      title: "RAG (Generación Aumentada por Recuperación)",
       content:
-        "Los principios éticos fundamentales de Microsoft para garantizar un desarrollo y uso seguro de la tecnología (enfocados en la equidad, fiabilidad, seguridad, privacidad, inclusión, transparencia y responsabilidad).",
+        "Técnica en la que una aplicación busca datos actualizados en fuentes o bases de datos internas y se los proporciona como contexto al modelo para responder con datos reales y exactos sin alucinar.",
+    },
+    {
+      title: "Agentes de IA (AI Agents)",
+      content:
+        "Sistemas autónomos estructurados en tres pilares: Modelo (cerebro), Instrucciones (reglas de negocio) y Herramientas (acciones y llamadas a APIs) para resolver tareas complejas en nombre de un usuario o colaborar en sistemas multiagente.",
     },
   ],
 };
+
+// Cuestionario y Respuestas Oficiales completadas del Módulo
+export interface QuizQA {
+  id: number;
+  question: string;
+  answer: string;
+}
+
+export const module1QuizQA: QuizQA[] = [
+  {
+    id: 1,
+    question: "¿Qué es un modelo de lenguaje grande (LLM)?",
+    answer: "Un tipo de modelo de IA diseñado para generar texto similar al humano.",
+  },
+  {
+    id: 2,
+    question: "¿Cuál es el propósito de la tokenización?",
+    answer: "Para dividir el texto en unidades más pequeñas.",
+  },
+  {
+    id: 3,
+    question: "¿Qué son las inserciones?",
+    answer:
+      "Representaciones basadas en vectores de tokens que capturan su significado semántico.",
+  },
+  {
+    id: 4,
+    question: "¿Qué hace una capa de atención en un modelo de transformador?",
+    answer: "Examina las relaciones entre cada token y los tokens alrededor de él.",
+  },
+  {
+    id: 5,
+    question: "¿Cuál es el propósito de un aviso del sistema?",
+    answer: "Para proporcionar contexto e instrucciones al modelo de IA.",
+  },
+  {
+    id: 6,
+    question: "¿Qué es un agente en el contexto de la inteligencia artificial?",
+    answer: "Un sistema de inteligencia artificial que puede realizar tareas en nombre de un usuario.",
+  },
+];
 
 export const nextCourseUnit = "Módulo 2: Exploración de la visión por computadora y Azure Foundry";

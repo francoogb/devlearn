@@ -19,6 +19,7 @@ import {
   nextCourseUnit,
   module1Info,
   module1Summary,
+  module1QuizQA,
   videoResources,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
@@ -285,6 +286,47 @@ export default function AI901Page() {
                     <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed whitespace-pre-line">
                       {sec.content}
                     </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Cuestionario y Respuestas Oficiales del Módulo */}
+            <div className="mt-2 flex flex-col gap-4 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex items-center justify-between border-b border-primary/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[24px] text-primary">
+                    quiz
+                  </span>
+                  <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
+                    Cuestionario y Respuestas Oficiales
+                  </h3>
+                </div>
+                <span className="rounded-full bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+                  {module1QuizQA.length} Preguntas Clave
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {module1QuizQA.map((qa) => (
+                  <div
+                    key={qa.id}
+                    className="flex flex-col gap-1.5 rounded-lg bg-surface-container p-4 border border-outline-variant/15"
+                  >
+                    <div className="flex items-start gap-2">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 font-mono text-xs font-bold text-primary shrink-0 mt-0.5">
+                        {qa.id}
+                      </span>
+                      <span className="text-xs sm:text-sm font-bold text-on-surface">
+                        {qa.question}
+                      </span>
+                    </div>
+                    <div className="ml-7 flex items-start gap-2 rounded-md bg-surface-container-high/60 p-2.5 text-xs sm:text-sm text-secondary font-mono border-l-2 border-secondary">
+                      <span>➡️</span>
+                      <span>
+                        <strong className="text-on-surface font-sans">Respuesta:</strong> {qa.answer}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
