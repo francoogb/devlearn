@@ -100,6 +100,15 @@ export const englishWebResources: EnglishWebResource[] = [
       "Biblioteca gratuita con más de 3,000 lecciones de listening para todos los niveles (A1 a C1), con hablantes nativos de todo el mundo, audios, transcripciones completas, vocabulario y quizes interactivos.",
     badge: "Recomendado · Listening",
   },
+  {
+    id: "speak-and-improve",
+    title: "Speak & Improve (Cambridge English)",
+    url: "https://speakandimprove.com/task",
+    category: "Expresión Oral y Pronunciación (Speaking)",
+    description:
+      "Herramienta gratuita desarrollada con la Universidad de Cambridge. Un robot examinador de voz evalúa tus respuestas habladas mediante IA y califica tu nivel de inglés hablado (A1 a C2) al instante.",
+    badge: "Recomendado · Speaking IA",
+  },
 ];
 
 // Videos de estudio y práctica recomendados
