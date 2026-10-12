@@ -80,6 +80,28 @@ export interface EnglishVideoResource {
   topic?: string;
 }
 
+export interface EnglishWebResource {
+  id: string;
+  title: string;
+  url: string;
+  category: string;
+  description: string;
+  badge?: string;
+}
+
+// Plataformas y recursos web para aprender inglés
+export const englishWebResources: EnglishWebResource[] = [
+  {
+    id: "elllo-org",
+    title: "ELLLO (English Listening Lesson Library Online)",
+    url: "https://elllo.org/index.html",
+    category: "Comprensión Auditiva (Listening)",
+    description:
+      "Biblioteca gratuita con más de 3,000 lecciones de listening para todos los niveles (A1 a C1), con hablantes nativos de todo el mundo, audios, transcripciones completas, vocabulario y quizes interactivos.",
+    badge: "Recomendado · Listening",
+  },
+];
+
 // Videos de estudio y práctica recomendados
 export const englishVideos: EnglishVideoResource[] = [
   {

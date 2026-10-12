@@ -48,6 +48,12 @@ export interface EnglishVocabItem {
   exampleTranslation: string;
 }
 
+export interface EnglishLessonTable {
+  title: string;
+  headers: string[];
+  rows: string[][];
+}
+
 export interface EnglishLesson {
   id: string;
   title: string;
@@ -62,6 +68,7 @@ export interface EnglishLesson {
   prerequisites?: string[]; // 4. Requisitos previos
   explanation: string; // 5. Explicación clara en español
   rulesAndFormulas: string[]; // 6. Estructuras o reglas fundamentales (fórmulas)
+  tables?: EnglishLessonTable[]; // Tablas de referencia renderizadas como tabla real
   examples: EnglishExample[]; // 7. Ejemplos en inglés con traducción
   frequentMistakes: EnglishFrequentMistake[]; // 8. Errores frecuentes
   relevantVocabulary: EnglishVocabItem[]; // 9. Vocabulario relevante
