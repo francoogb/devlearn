@@ -526,4 +526,156 @@ export const module2QuizQA: QuizQA[] = [
   },
 ];
 
-export const nextCourseUnit = "Módulo 3: Exploración de la visión por computadora y Azure Foundry";
+// ---------- MÓDULO 3: OFICIAL DE MICROSOFT LEARN ----------
+// Título: Introducción a los conceptos de procesamiento de lenguaje natural
+// Duración estimada: 33 min | 7 Unidades
+export const module3Info = {
+  title: "Introducción a los conceptos de procesamiento de lenguaje natural",
+  officialUrl:
+    "https://learn.microsoft.com/es-es/training/modules/introduction-language/",
+  duration: "33 min.",
+  totalUnits: 7,
+  description:
+    "El procesamiento de lenguaje natural (NLP) admite aplicaciones que pueden analizar texto para deducir el significado semántico, normalizar texto, extraer n-gramas, lematizar y etiquetar categorías gramaticales (POS).",
+};
+
+export const module3Units: CourseUnit[] = [
+  {
+    id: 1,
+    title: "Introducción",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/1-introduction/",
+    summary:
+      "Conceptos fundamentales de NLP y su capacidad para procesar texto no estructurado.",
+    points: [
+      "Subconjunto de la IA enfocado en extraer significado, estructura e información de texto libre.",
+      "Casos de uso: detección de idioma, extracción de términos clave, entidades, PII, clasificación, análisis de sentimiento y resumen.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Tokenización",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/2-how-it-works/",
+    summary:
+      "Segmentación y normalización del texto en unidades procesables.",
+    points: [
+      "División del texto en tokens individuales para el procesamiento de modelos de IA.",
+      "Normalización: conversión a minúsculas y eliminación de palabras vacías (stop words).",
+      "Reducción del volumen de datos enfocándose en las palabras con mayor carga de significado.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Análisis estadístico de texto.",
+    duration: "7 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/3-statistical-techniques/",
+    summary:
+      "Técnicas lingüísticas y estadísticas: N-gramas, derivación (stemming), lematización y etiquetado POS.",
+    points: [
+      "N-gramas (bigramas, trigramas): captura de expresiones compuestas y frases hechas.",
+      "Derivación: recorte mecánico de terminaciones para agrupar bajo una misma raíz.",
+      "Lematización: reducción lingüística a la forma base oficial (lema) mediante reglas y diccionarios.",
+      "Etiquetado POS: asignación de la categoría gramatical (sustantivo, verbo, adjetivo, etc.).",
+    ],
+  },
+  {
+    id: 4,
+    title: "Modelos de lenguaje semántico",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/4-semantic-models/",
+    summary:
+      "Representación vectorial y captura de relaciones semánticas complejas entre palabras y conceptos.",
+    points: [
+      "Embeddings y vectores numéricos en espacios multidimensionales.",
+      "Captura del significado contextual y proximidad conceptual de los términos.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Ejercicio: Exploración del análisis de texto",
+    duration: "10 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/4b-exercise/",
+    summary:
+      "Práctica interactiva aplicando procesamiento de lenguaje natural y análisis de texto.",
+    points: [
+      "Experimentación guiada con análisis de sentimientos y extracción de entidades.",
+      "Comprobación práctica de los conceptos de tokenización y análisis semántico.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Evaluación del módulo",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/5-knowledge-check/",
+    summary:
+      "Comprobación de conocimientos con preguntas tipo examen sobre NLP y análisis de texto.",
+    points: [
+      "Validación de conceptos clave: tokenización, normalización, n-gramas, lematización y POS tagging.",
+    ],
+  },
+  {
+    id: 7,
+    title: "Resumen",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-language/6-summary/",
+    summary:
+      "Recapitulación del módulo de Procesamiento de Lenguaje Natural (PLN).",
+    points: [
+      "Consolidación de las técnicas estadísticas, semánticas y de análisis de texto en IA.",
+    ],
+  },
+];
+
+// Resumen y Conceptos Clave del Módulo 3
+export const module3Summary = {
+  title:
+    "Resumen del Módulo: Introducción a los conceptos de procesamiento de lenguaje natural",
+  sections: [
+    {
+      title: "Introducción al Procesamiento de Lenguaje Natural (PLN)",
+      concept:
+        "Subconjunto de la inteligencia artificial que permite a las máquinas extraer significado, estructura e información de texto no estructurado.",
+      benefit:
+        "Casos de uso comunes: Incluyen la detección de idioma, extracción de términos clave, detección de entidades, detección de información personal (PII), clasificación de texto, análisis de sentimientos y resumen de texto.",
+    },
+    {
+      title: "Tokenización y Normalización",
+      concept:
+        "Proceso de dividir el texto en unidades más pequeñas (tokens) y aplicar limpieza o estandarización (como pasar a minúsculas o eliminar palabras vacías o 'stop words' como artículos y preposiciones).",
+      benefit:
+        "Reduce el volumen de datos a procesar y optimiza el enfoque en las palabras con mayor carga de significado para el análisis estadístico o de frecuencia.",
+    },
+    {
+      title: "Extracción de N-gramas",
+      concept:
+        "Agrupación de secuencias de varias palabras consecutivas (por ejemplo, bigramas o trigramas).",
+      benefit:
+        "Permite capturar expresiones compuestas o frases hechas cuyo sentido cambia por completo al juntarse (como 'inteligencia artificial'), ayudando al modelo a comprender el contexto real.",
+    },
+    {
+      title: "Derivación (Stemming / Wortstammerkennung)",
+      concept:
+        "Técnica que recorta mecánicamente las terminaciones de las palabras (como '-ing', '-ed' o sufijos) para agrupar distintas variantes bajo una misma raíz común.",
+      benefit:
+        "Consolida frecuencias de términos en análisis estadísticos o motores de búsqueda, aunque puede generar palabras que no existan formalmente en el diccionario.",
+    },
+    {
+      title: "Lematización (Lemmatization)",
+      concept:
+        "Un enfoque lingüístico más avanzado que reduce las palabras a su forma base oficial (lema) utilizando diccionarios y reglas gramaticales.",
+      benefit:
+        "Preferible frente a la derivación en la mayoría de aplicaciones porque garantiza obtener palabras reales y válidas, mejorando la precisión semántica.",
+    },
+    {
+      title: "Etiquetado de Categorías Gramaticales (POS Tagging)",
+      concept:
+        "Identificación de la función gramatical exacta que cumple cada palabra dentro de una oración (si es sustantivo, verbo, adjetivo, adverbio, etc.).",
+      benefit:
+        "Esencial para tareas de desambiguación contextual, correctores ortográficos y sistemas de traducción automática.",
+    },
+  ],
+};
+
+export const nextCourseUnit = "Módulo 4: Exploración de la visión por computadora y Azure Foundry";
+
