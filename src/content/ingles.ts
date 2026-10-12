@@ -71,6 +71,35 @@ export interface IrregularVerb {
   spanish: string;
 }
 
+export interface EnglishVideoResource {
+  id: string;
+  title: string;
+  url: string;
+  channel?: string;
+  duration?: string;
+  topic?: string;
+}
+
+// Videos de estudio y práctica recomendados
+export const englishVideos: EnglishVideoResource[] = [
+  {
+    id: "vid-english-level-test",
+    title: "What's Your Real ENGLISH Level? Take This A1–C2 Test",
+    url: "https://www.youtube.com/watch?v=Iu1xIUCKV9M",
+    channel: "Volka English",
+    duration: "Test A1–C2",
+    topic: "Evaluación de nivel MCER, comprensión auditiva y vocabulario",
+  },
+  {
+    id: "vid-english-practice-2",
+    title: "English Listening & Speaking Practice Video",
+    url: "https://www.youtube.com/watch?v=_fueK0Hbh1Q",
+    channel: "Práctica Auditiva",
+    duration: "Video Recomendado",
+    topic: "Comprensión auditiva, conversación y pronunciación",
+  },
+];
+
 // ---------- 1. INGLÉS TÉCNICO (para informática) ----------
 
 export const technicalVocabulary: VocabTerm[] = [

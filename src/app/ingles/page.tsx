@@ -13,6 +13,7 @@ import { useState } from "react";
 import {
   basicStructures,
   phrases,
+  englishVideos,
   sessions as initialSessions,
   type PracticeSession,
 } from "@/content/ingles";
@@ -79,7 +80,7 @@ export default function InglesPage() {
             </h1>
           </div>
           <p className="text-sm text-on-surface-variant">
-            Aprende a tu ritmo: programa estructurado de Inglés Básico (A1–A2) y frases clave de comunicación en inglés.
+            Aprende a tu ritmo: programa estructurado de Inglés Básico (A1) y frases clave de comunicación en inglés.
           </p>
         </div>
 
@@ -357,6 +358,82 @@ export default function InglesPage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* ======================================================== */}
+      {/* SECCIÓN: VIDEOS DE ESTUDIO Y PRÁCTICA RECOMENDADOS       */}
+      {/* ======================================================== */}
+      <section className="flex flex-col gap-4 rounded-xl bg-surface-container-low p-6 shadow-md border border-outline-variant/10">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-surface-container-high pb-3">
+          <div className="flex items-center gap-2.5">
+            <span className="material-symbols-outlined text-[26px] text-red-500">
+              play_circle
+            </span>
+            <div>
+              <h2 className="font-display text-xl font-bold text-on-surface">
+                Videos de Estudio y Práctica Recomendados
+              </h2>
+              <p className="text-xs text-on-surface-variant">
+                Material complementario en YouTube: pruebas de nivel de inglés (A1–C2), comprensión auditiva y fluidez.
+              </p>
+            </div>
+          </div>
+          <span className="rounded-full bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-semibold text-red-400 border border-red-500/20">
+            {englishVideos.length} Videos
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+          {englishVideos.map((vid) => (
+            <a
+              key={vid.id}
+              href={vid.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col justify-between gap-3 rounded-xl border border-outline-variant/15 bg-surface-container p-4 transition-all hover:border-red-500/40 hover:bg-surface-container-high/60 shadow-sm"
+            >
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 text-red-400">
+                    <span className="material-symbols-outlined text-[18px]">
+                      smart_display
+                    </span>
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider">
+                      YouTube
+                    </span>
+                  </div>
+                  {vid.duration && (
+                    <span className="rounded-md bg-surface-container-highest px-2 py-0.5 font-mono text-[10px] text-outline font-semibold">
+                      {vid.duration}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="font-display text-sm sm:text-base font-bold text-on-surface group-hover:text-red-400 transition-colors line-clamp-2">
+                  {vid.title}
+                </h3>
+
+                {vid.topic && (
+                  <p className="text-xs text-on-surface-variant leading-relaxed">
+                    {vid.topic}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between border-t border-surface-container-high/60 pt-3 text-xs">
+                {vid.channel && (
+                  <span className="font-mono text-on-surface-variant text-[11px]">
+                    Canal: <strong className="text-on-surface">{vid.channel}</strong>
+                  </span>
+                )}
+                <span className="flex items-center gap-1 font-mono font-semibold text-red-400 group-hover:underline ml-auto">
+                  <span>Ver en YouTube</span>
+                  <span className="material-symbols-outlined text-[14px]">open_in_new</span>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
       </section>
 
       {/* ======================================================== */}
