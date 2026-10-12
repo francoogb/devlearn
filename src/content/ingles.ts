@@ -464,6 +464,47 @@ export const phrases: Phrase[] = [
     videoTimestamp: "10:02",
     category: "Películas y Conversación",
   },
+  // Bloque: Conflicto y secretos
+  {
+    id: "have-you-been-drinking",
+    english: "Have you been drinking?",
+    spanish: "¿Has estado bebiendo?",
+    context: "Preguntar a alguien ante la sospecha o detección de consumo de alcohol ('Present Perfect Continuous').",
+    videoTimestamp: "11:58",
+    category: "Conflicto y secretos",
+  },
+  {
+    id: "hes-manipulating-you",
+    english: "He's manipulating you.",
+    spanish: "Él te está manipulando.",
+    context: "Advertencia sobre engaño o control emocional ejercido por un tercero.",
+    videoTimestamp: "12:25",
+    category: "Conflicto y secretos",
+  },
+  {
+    id: "hes-taking-advantage-of-you",
+    english: "He's taking advantage of you.",
+    spanish: "Se está aprovechando de ti / Se está tomando atribuciones.",
+    context: "Advertencia sobre abuso de confianza o aprovechamiento injusto ('Take advantage of' = aprovecharse de).",
+    videoTimestamp: "13:00",
+    category: "Conflicto y secretos",
+  },
+  {
+    id: "i-kept-it-to-myself",
+    english: "I kept it to myself.",
+    spanish: "Me lo guardé para mí / Lo mantuve en secreto.",
+    context: "Expresión sobre guardar una información o secreto personal sin contárselo a nadie ('Keep to oneself').",
+    videoTimestamp: "14:51",
+    category: "Conflicto y secretos",
+  },
+  {
+    id: "it-slipped",
+    english: "It slipped.",
+    spanish: "Se me escapó / Se me salió.",
+    context: "Admisión de haber revelado accidentalmente un secreto o comentario que no debías decir ('It slipped out').",
+    videoTimestamp: "15:16",
+    category: "Conflicto y secretos",
+  },
 
   // Frases de comunicación general
   {
