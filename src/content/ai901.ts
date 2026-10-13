@@ -630,49 +630,123 @@ export const module3Units: CourseUnit[] = [
 // Resumen y Conceptos Clave del Módulo 3
 export const module3Summary = {
   title:
-    "Resumen del Módulo: Introducción a los conceptos de procesamiento de lenguaje natural",
-  sections: [
+    "Resumen General del Módulo: Procesamiento de Lenguaje Natural (NLP)",
+  overview:
+    "Este módulo enseña cómo los sistemas de inteligencia artificial y computación leen, procesan y entienden el texto humano. Se divide en el recorrido de cómo pasar de letras sueltas a significados profundos.",
+  stages: [
     {
-      title: "Introducción al Procesamiento de Lenguaje Natural (PLN)",
-      concept:
-        "Subconjunto de la inteligencia artificial que permite a las máquinas extraer significado, estructura e información de texto no estructurado.",
-      benefit:
-        "Casos de uso comunes: Incluyen la detección de idioma, extracción de términos clave, detección de entidades, detección de información personal (PII), clasificación de texto, análisis de sentimientos y resumen de texto.",
+      id: "stage-1",
+      title: "1. Limpieza y Preparación (Tokenización y Normalización)",
+      badge: "Preprocesamiento",
+      items: [
+        {
+          concept: "Tokenización",
+          definition: "Cortar el texto en pedazos pequeños (tokens o palabras manejables).",
+        },
+        {
+          concept: "Normalización",
+          definition: "Limpiar y estandarizar el texto (convertir a minúsculas, eliminar signos y stop words).",
+        },
+        {
+          concept: "Derivación (Stemming)",
+          definition: "Recorta extremos y sufijos mecánicamente (rápido, pero a veces genera palabras inexistentes).",
+        },
+        {
+          concept: "Lematización (Lemmatization)",
+          definition: "Usa diccionarios y reglas gramaticales para buscar la palabra base real (más precisa y válida).",
+        },
+        {
+          concept: "POS Tagging (Etiquetado gramatical)",
+          definition: "Identifica si cada palabra es verbo, sustantivo o adjetivo para aportar contexto y desambiguar.",
+        },
+        {
+          concept: "N-gramas (N-grams)",
+          definition: "Agrupa palabras consecutivas (bigramas, trigramas) para capturar frases hechas o compuestas (ej. 'inteligencia artificial').",
+        },
+      ],
     },
     {
-      title: "Tokenización y Normalización",
-      concept:
-        "Proceso de dividir el texto en unidades más pequeñas (tokens) y aplicar limpieza o estandarización (como pasar a minúsculas o eliminar palabras vacías o 'stop words' como artículos y preposiciones).",
-      benefit:
-        "Reduce el volumen de datos a procesar y optimiza el enfoque en las palabras con mayor carga de significado para el análisis estadístico o de frecuencia.",
+      id: "stage-2",
+      title: "2. Estadística y Conteo Rápido (El filtro previo)",
+      badge: "Optimización y Ahorro",
+      items: [
+        {
+          concept: "Objetivo y Propósito",
+          definition: "Técnicas puramente matemáticas que ayudan a ahorrar tokens y costos antes de llamar a modelos avanzados como OpenAI.",
+        },
+        {
+          concept: "Frecuencia simple",
+          definition: "Cuenta qué palabra se repite más dentro del texto analizado.",
+        },
+        {
+          concept: "TF-IDF (Term Frequency - Inverse Document Frequency)",
+          definition: "Compara un documento con una biblioteca entera para premiar las palabras verdaderamente únicas de ese texto y castigar a las que se repiten en todos lados.",
+        },
+        {
+          concept: "Bag-of-Words (Bolsa de palabras)",
+          definition: "Metes todo a un saco sin importar el orden ni la gramática (ideal para clasificación rápida y detección de spam).",
+        },
+        {
+          concept: "TextRank",
+          definition: "Crea un mapa de conexiones entre oraciones para hacer resúmenes automáticos extrayendo las frases más populares e interconectadas.",
+        },
+      ],
     },
     {
-      title: "Extracción de N-gramas",
-      concept:
-        "Agrupación de secuencias de varias palabras consecutivas (por ejemplo, bigramas o trigramas).",
-      benefit:
-        "Permite capturar expresiones compuestas o frases hechas cuyo sentido cambia por completo al juntarse (como 'inteligencia artificial'), ayudando al modelo a comprender el contexto real.",
+      id: "stage-3",
+      title: "3. Modelos Semánticos (El significado profundo)",
+      badge: "Embeddings y Vectores",
+      items: [
+        {
+          concept: "Representación Vectorial",
+          definition: "Convierten las palabras en vectores (coordenadas numéricas) ubicados en un espacio multidimensional.",
+        },
+        {
+          concept: "Proximidad y Distancias Semánticas",
+          definition: "Permiten que la IA entienda que palabras sinónimas o conceptualmente relacionadas (como 'perro' y 'cachorro') están cerca mediante cálculos de distancia o Similitud de Coseno.",
+        },
+      ],
     },
     {
-      title: "Derivación (Stemming / Wortstammerkennung)",
-      concept:
-        "Técnica que recorta mecánicamente las terminaciones de las palabras (como '-ing', '-ed' o sufijos) para agrupar distintas variantes bajo una misma raíz común.",
-      benefit:
-        "Consolida frecuencias de términos en análisis estadísticos o motores de búsqueda, aunque puede generar palabras que no existan formalmente en el diccionario.",
+      id: "stage-4",
+      title: "4. Práctica Real (Playgrounds)",
+      badge: "Entorno de Pruebas",
+      items: [
+        {
+          concept: "Resumen de Textos",
+          definition: "Uso de herramientas en entorno de pruebas para sintetizar textos con modelos compactos como Phi 3.5.",
+        },
+        {
+          concept: "Detección de Idioma",
+          definition: "Identificación automática de la lengua en la que está redactado un documento o mensaje.",
+        },
+        {
+          concept: "Extracción de PII",
+          definition: "Detección y anonimización de datos privados y confidenciales (nombres, direcciones, correos y números telefónicos).",
+        },
+      ],
+    },
+  ],
+  examTips: [
+    {
+      condition: "Si la pregunta habla de 'dividir' o 'partes más pequeñas' para analizar:",
+      keyword: "Tokenización",
+      explanation: "La respuesta correcta siempre va orientada a trocear el texto en unidades o fragmentos procesables.",
     },
     {
-      title: "Lematización (Lemmatization)",
-      concept:
-        "Un enfoque lingüístico más avanzado que reduce las palabras a su forma base oficial (lema) utilizando diccionarios y reglas gramaticales.",
-      benefit:
-        "Preferible frente a la derivación en la mayoría de aplicaciones porque garantiza obtener palabras reales y válidas, mejorando la precisión semántica.",
+      condition: "Si la pregunta menciona 'comparar un documento específico dentro de una colección mayor' o 'importancia de las palabras según su rareza en varios textos':",
+      keyword: "TF-IDF",
+      explanation: "Recuerda: si evalúa frecuencia contra una colección grande de documentos (biblioteca), la respuesta es TF-IDF.",
     },
     {
-      title: "Etiquetado de Categorías Gramaticales (POS Tagging)",
-      concept:
-        "Identificación de la función gramatical exacta que cumple cada palabra dentro de una oración (si es sustantivo, verbo, adjetivo, adverbio, etc.).",
-      benefit:
-        "Esencial para tareas de desambiguación contextual, correctores ortográficos y sistemas de traducción automática.",
+      condition: "Si la pregunta menciona 'vectores', 'espacio multidimensional' o 'relaciones semánticas':",
+      keyword: "Insertar vectores (Embeddings) / Modelos semánticos",
+      explanation: "Toda referencia a coordenadas matemáticas numéricas y significados relacionales apunta a embeddings.",
+    },
+    {
+      condition: "Si la pregunta se refiere a ocultar o encontrar nombres, correos o teléfonos por privacidad:",
+      keyword: "Extracción de PII (Personally Identifiable Information)",
+      explanation: "Cualquier proceso para resguardar o detectar información confidencial o identificable de usuarios corresponde a PII.",
     },
   ],
 };

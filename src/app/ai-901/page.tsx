@@ -624,39 +624,95 @@ export default function AI901Page() {
               </li>
             </ol>
 
-            {/* Resumen y Conceptos Clave del Módulo 3 */}
-            <div className="mt-4 flex flex-col gap-4 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
-              <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[26px] text-primary">
-                  fact_check
-                </span>
-                <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
-                  {module3Summary.title}
-                </h3>
+            {/* Resumen General y Etapas del Módulo 3 */}
+            <div className="mt-4 flex flex-col gap-5 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex flex-col gap-1.5 border-b border-primary/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[26px] text-primary">
+                    menu_book
+                  </span>
+                  <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
+                    {module3Summary.title}
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                  {module3Summary.overview}
+                </p>
               </div>
 
-              <div className="flex flex-col gap-3">
-                {module3Summary.sections.map((sec, idx) => (
+              {/* Las 4 etapas / bloques clave */}
+              <div className="flex flex-col gap-4">
+                {module3Summary.stages.map((stage) => (
                   <div
-                    key={idx}
-                    className="flex flex-col gap-2 rounded-lg bg-surface-container p-4 border border-outline-variant/15"
+                    key={stage.id}
+                    className="flex flex-col gap-3 rounded-xl bg-surface-container p-4 sm:p-5 border border-outline-variant/15 shadow-sm"
                   >
-                    <span className="font-mono font-bold text-xs sm:text-sm text-primary">
-                      📌 {sec.title}
-                    </span>
-                    <p className="text-xs sm:text-sm text-on-surface leading-relaxed">
-                      <strong className="text-on-surface font-semibold">Concepto:</strong>{" "}
-                      <span className="text-on-surface-variant">{sec.concept}</span>
-                    </p>
-                    <div className="rounded-md bg-surface-container-high/60 p-2.5 text-xs sm:text-sm text-secondary font-mono border-l-2 border-secondary">
-                      <span>💡 </span>
-                      <span className="font-sans text-on-surface-variant">
-                        <strong className="text-on-surface font-semibold font-mono">
-                          {sec.benefit.startsWith("Casos de uso") ? "Detalle:" : "Beneficio y Uso:"}
-                        </strong>{" "}
-                        {sec.benefit}
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container-high pb-2">
+                      <span className="font-display text-sm sm:text-base font-bold text-primary">
+                        {stage.title}
+                      </span>
+                      <span className="rounded-full bg-primary/15 px-2.5 py-0.5 font-mono text-[10px] font-bold text-primary">
+                        {stage.badge}
                       </span>
                     </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {stage.items.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="flex flex-col gap-1 rounded-lg bg-surface-container-low p-3 border border-outline-variant/10"
+                        >
+                          <span className="font-mono text-xs font-bold text-on-surface">
+                            👉 {item.concept}
+                          </span>
+                          <p className="text-xs text-on-surface-variant leading-relaxed">
+                            {item.definition}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Guía de Tips y Trucos Infalibles para Exámenes / Evaluaciones */}
+            <div className="mt-2 flex flex-col gap-4 rounded-xl border border-amber-500/30 bg-amber-500/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-amber-500/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[24px] text-amber-400">
+                    lightbulb
+                  </span>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-on-surface">
+                    💡 Tips y Trucos Infalibles para Preguntas de Evaluación
+                  </h3>
+                </div>
+                <span className="rounded-full bg-amber-500/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-amber-300">
+                  Guía de Keywords
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                Cuando te enfrentes a las preguntas de opción múltiple en Microsoft Learn o en el examen oficial, busca estas palabras clave que delatan la respuesta correcta:
+              </p>
+
+              <div className="flex flex-col gap-3">
+                {module3Summary.examTips.map((tip, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col gap-2 rounded-xl bg-surface-container p-4 border border-amber-500/20 shadow-sm"
+                  >
+                    <span className="text-xs sm:text-sm font-semibold text-on-surface">
+                      ❓ {tip.condition}
+                    </span>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-lg bg-amber-500/20 px-2.5 py-1 font-mono text-xs font-bold text-amber-300">
+                        🎯 {tip.keyword}
+                      </span>
+                    </div>
+                    <p className="text-xs text-on-surface-variant leading-relaxed">
+                      {tip.explanation}
+                    </p>
                   </div>
                 ))}
               </div>
