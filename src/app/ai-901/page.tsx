@@ -26,6 +26,9 @@ import {
   module3Info,
   module3Units,
   module3Summary,
+  module4Info,
+  module4Units,
+  module4Summary,
   videoResources,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
@@ -44,7 +47,8 @@ export default function AI901Page() {
   // Estado para abanicos / colapsar los módulos de forma independiente
   const [isModule1Open, setIsModule1Open] = useState<boolean>(false);
   const [isModule2Open, setIsModule2Open] = useState<boolean>(false);
-  const [isModule3Open, setIsModule3Open] = useState<boolean>(true);
+  const [isModule3Open, setIsModule3Open] = useState<boolean>(false);
+  const [isModule4Open, setIsModule4Open] = useState<boolean>(true);
 
   const toggleCheck = (id: string) => {
     setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -713,6 +717,351 @@ export default function AI901Page() {
                     <p className="text-xs text-on-surface-variant leading-relaxed">
                       {tip.explanation}
                     </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* ========================================================================= */}
+      {/* MÓDULO 4 (DESPLEGABLE / ABANICO INDEPENDIENTE) - VOZ EN IA                 */}
+      {/* ========================================================================= */}
+      <section className="flex flex-col rounded-xl bg-surface-container-low shadow-md border border-outline-variant/10 overflow-hidden transition-all">
+        {/* Cabecera del Módulo 4 (Botón de abanico / acordeón) */}
+        <div
+          onClick={() => setIsModule4Open((prev) => !prev)}
+          className="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6 cursor-pointer bg-surface-container-low hover:bg-surface-container transition-colors select-none"
+        >
+          <div className="flex flex-col gap-1.5 max-w-xl">
+            <div className="flex items-center gap-2">
+              <span className="rounded bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+                Módulo 4 · {module4Info.totalUnits} Unidades
+              </span>
+              <span className="rounded bg-secondary/15 px-2.5 py-0.5 font-mono text-xs font-bold text-secondary">
+                ⏱️ {module4Info.duration}
+              </span>
+              <span className="rounded bg-surface-container-highest px-2 py-0.5 font-mono text-[10px] text-outline font-semibold">
+                {isModule4Open ? "Abierto" : "Cerrado"}
+              </span>
+            </div>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface flex items-center gap-2">
+              <span>{module4Info.title}</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-on-surface-variant line-clamp-2">
+              {module4Info.description}
+            </p>
+          </div>
+
+          {/* Botón visual de Abanico / Flecha */}
+          <div className="flex items-center gap-2">
+            <a
+              href={module4Info.officialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="rounded-lg p-2 text-primary hover:bg-primary/10 transition-colors"
+              title="Abrir en Microsoft Learn"
+            >
+              <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+            </a>
+
+            <div className="flex items-center gap-1.5 rounded-xl bg-surface-container-high px-3 py-2 font-mono text-xs font-bold text-on-surface shadow-sm">
+              <span>{isModule4Open ? "Plegar módulo" : "Desplegar módulo"}</span>
+              <span
+                className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${
+                  isModule4Open ? "rotate-180 text-secondary" : "rotate-0 text-outline"
+                }`}
+              >
+                expand_more
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Contenido desplegable del Módulo 4: Unidades, Pipelines y Guía de Examen */}
+        {isModule4Open && (
+          <div className="flex flex-col gap-6 p-6 pt-2 border-t border-surface-container-high animate-in fade-in duration-200">
+            {/* Unidades oficiales del Módulo 4 */}
+            <ol className="relative ml-4 flex flex-col gap-5 border-l-2 border-surface-container-high pl-6 pt-4">
+              {module4Units.map((unit) => (
+                <li key={unit.id} className="relative flex flex-col gap-1.5">
+                  <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full bg-secondary font-mono text-xs font-bold text-on-secondary shadow-sm">
+                    {unit.id}
+                  </span>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-display text-base font-bold text-on-surface">
+                      {unit.url ? (
+                        <a
+                          href={unit.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline text-on-surface hover:text-secondary flex items-center gap-1.5"
+                        >
+                          {unit.title}
+                          <span className="material-symbols-outlined text-[15px] opacity-70">
+                            open_in_new
+                          </span>
+                        </a>
+                      ) : (
+                        unit.title
+                      )}
+                    </h3>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-mono text-[11px] text-outline font-semibold">
+                      {unit.duration}
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm leading-relaxed text-on-surface-variant">
+                    {unit.summary}
+                  </p>
+
+                  {unit.points && (
+                    <ul className="flex flex-col gap-1.5 pt-1">
+                      {unit.points.map((p, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed text-on-surface-variant"
+                        >
+                          <span className="material-symbols-outlined mt-0.5 text-[16px] text-secondary shrink-0">
+                            check
+                          </span>
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+
+              {/* Próximo paso */}
+              <li className="relative flex items-center gap-2.5 pt-2">
+                <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-tertiary bg-surface-container-low">
+                  <span className="material-symbols-outlined text-[16px] text-tertiary">
+                    schedule
+                  </span>
+                </span>
+                <span className="text-xs sm:text-sm text-on-surface-variant">
+                  <strong className="text-on-surface">Próximo paso:</strong>{" "}
+                  {nextCourseUnit}.
+                </span>
+              </li>
+            </ol>
+
+            {/* Mapa Visual: El Espejo de la Voz */}
+            <div className="mt-4 flex flex-col gap-4 rounded-xl border border-secondary/30 bg-secondary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex flex-col gap-1.5 border-b border-secondary/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[26px] text-secondary">
+                    graphic_eq
+                  </span>
+                  <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
+                    🗺️ Mapa Visual del Módulo: El Espejo de la Voz
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                  {module4Summary.overview}
+                </p>
+              </div>
+
+              {/* Pipeline STT */}
+              <div className="flex flex-col gap-2 rounded-xl bg-surface-container p-4 border border-blue-500/30">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-blue-500/20 px-2 py-0.5 font-mono text-xs font-bold text-blue-300">
+                    🟦 RECONOCIMIENTO DE VOZ (STT: Voz ➔ Texto)
+                  </span>
+                </div>
+                <p className="font-mono text-xs text-on-surface bg-surface-container-low p-2.5 rounded-lg overflow-x-auto leading-relaxed border border-outline-variant/10">
+                  {module4Summary.visualMap.stt}
+                </p>
+              </div>
+
+              {/* Pipeline TTS */}
+              <div className="flex flex-col gap-2 rounded-xl bg-surface-container p-4 border border-amber-500/30">
+                <div className="flex items-center gap-2">
+                  <span className="rounded bg-amber-500/20 px-2 py-0.5 font-mono text-xs font-bold text-amber-300">
+                    🟧 SÍNTESIS DE VOZ (TTS: Texto ➔ Voz)
+                  </span>
+                </div>
+                <p className="font-mono text-xs text-on-surface bg-surface-container-low p-2.5 rounded-lg overflow-x-auto leading-relaxed border border-outline-variant/10">
+                  {module4Summary.visualMap.tts}
+                </p>
+              </div>
+            </div>
+
+            {/* PARTE 1: RECONOCIMIENTO DE VOZ (6 FASES) */}
+            <div className="flex flex-col gap-4 rounded-xl border border-blue-500/30 bg-surface-container p-5 sm:p-6 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container-high pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[24px] text-blue-400">
+                    mic
+                  </span>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-on-surface">
+                    🟦 Parte 1: Reconocimiento de Voz (Speech-to-Text / STT)
+                  </h3>
+                </div>
+                <span className="rounded-full bg-blue-500/15 px-2.5 py-0.5 font-mono text-xs font-bold text-blue-300">
+                  6 Fases
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                Convierte tu voz hablada en texto escrito digital a través de 6 fases secuenciales:
+              </p>
+
+              <div className="flex flex-col gap-3">
+                {module4Summary.sttPhases.map((phase, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col gap-1.5 rounded-xl bg-surface-container-low p-3.5 sm:p-4 border border-outline-variant/15"
+                  >
+                    <span className="font-display text-sm font-bold text-blue-300">
+                      {phase.phase}
+                    </span>
+                    <p className="text-xs sm:text-sm text-on-surface leading-relaxed">
+                      <strong className="text-on-surface font-semibold">Concepto Clave:</strong>{" "}
+                      <span className="text-on-surface-variant">{phase.concept}</span>
+                    </p>
+                    <div className="rounded-md bg-surface-container-high/60 p-2 text-xs text-secondary font-mono border-l-2 border-blue-400">
+                      <span>💡 </span>
+                      <span className="font-sans text-on-surface-variant">
+                        <strong className="text-on-surface font-semibold font-mono">Ejemplo Práctico:</strong>{" "}
+                        {phase.example}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Técnica de memoria STT */}
+              <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4 flex flex-col gap-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[20px] text-blue-400">
+                    psychology
+                  </span>
+                  <span className="font-mono text-xs font-bold text-blue-300 uppercase tracking-wider">
+                    Técnica de Memoria (Acrónimo {module4Summary.sttMnemonic.acronym})
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm font-bold text-on-surface">
+                  {module4Summary.sttMnemonic.phrase}
+                </p>
+                <p className="font-mono text-[11px] text-on-surface-variant">
+                  {module4Summary.sttMnemonic.detail}
+                </p>
+              </div>
+            </div>
+
+            {/* PARTE 2: SÍNTESIS DE VOZ (5 FASES) */}
+            <div className="flex flex-col gap-4 rounded-xl border border-amber-500/30 bg-surface-container p-5 sm:p-6 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-surface-container-high pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[24px] text-amber-400">
+                    volume_up
+                  </span>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-on-surface">
+                    🟧 Parte 2: Síntesis de Voz (Text-to-Speech / TTS)
+                  </h3>
+                </div>
+                <span className="rounded-full bg-amber-500/15 px-2.5 py-0.5 font-mono text-xs font-bold text-amber-300">
+                  5 Fases
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                El proceso inverso: toma texto escrito y genera audio hablado natural en 5 fases:
+              </p>
+
+              <div className="flex flex-col gap-3">
+                {module4Summary.ttsPhases.map((phase, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col gap-1.5 rounded-xl bg-surface-container-low p-3.5 sm:p-4 border border-outline-variant/15"
+                  >
+                    <span className="font-display text-sm font-bold text-amber-300">
+                      {phase.phase}
+                    </span>
+                    <p className="text-xs sm:text-sm text-on-surface leading-relaxed">
+                      <strong className="text-on-surface font-semibold">Concepto Clave:</strong>{" "}
+                      <span className="text-on-surface-variant">{phase.concept}</span>
+                    </p>
+                    <div className="rounded-md bg-surface-container-high/60 p-2 text-xs text-secondary font-mono border-l-2 border-amber-400">
+                      <span>💡 </span>
+                      <span className="font-sans text-on-surface-variant">
+                        <strong className="text-on-surface font-semibold font-mono">Ejemplo Práctico:</strong>{" "}
+                        {phase.example}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Técnica de memoria TTS: Actor de Doblaje */}
+              <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 flex flex-col gap-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[20px] text-amber-400">
+                    theater_comedy
+                  </span>
+                  <span className="font-mono text-xs font-bold text-amber-300 uppercase tracking-wider">
+                    🧠 Técnica de Memoria: {module4Summary.ttsMnemonic.title}
+                  </span>
+                </div>
+                <p className="text-xs text-on-surface-variant">
+                  {module4Summary.ttsMnemonic.description}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                  {module4Summary.ttsMnemonic.steps.map((st, idx) => (
+                    <div
+                      key={idx}
+                      className="flex flex-col gap-0.5 rounded-lg bg-surface-container p-2.5 border border-outline-variant/10 text-xs"
+                    >
+                      <span className="font-mono font-bold text-amber-300">
+                        🎭 {st.step}:
+                      </span>
+                      <span className="text-on-surface-variant">{st.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* TABLA DE GATILLOS RÁPIDOS PARA EL EXAMEN AI-901 */}
+            <div className="mt-2 flex flex-col gap-4 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-primary/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[24px] text-primary">
+                    bolt
+                  </span>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-on-surface">
+                    ⚡ Tabla de &quot;Gatillos Rápidos&quot; para el Examen (AI-901)
+                  </h3>
+                </div>
+                <span className="rounded-full bg-primary/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-primary">
+                  Keywords Directas
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                Si en una pregunta de selección múltiple ves la palabra clave de la izquierda, busca de inmediato el concepto de la derecha:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {module4Summary.examTriggers.map((trig, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col justify-between gap-2 rounded-xl bg-surface-container p-3.5 border border-outline-variant/15 shadow-sm"
+                  >
+                    <div className="flex items-start gap-2">
+                      <span className="text-xs font-semibold text-on-surface">
+                        {trig.trigger}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 pt-1 border-t border-surface-container-high text-xs font-mono font-bold text-secondary">
+                      <span>➔</span>
+                      <span>{trig.target}</span>
+                    </div>
                   </div>
                 ))}
               </div>

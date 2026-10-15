@@ -751,5 +751,206 @@ export const module3Summary = {
   ],
 };
 
-export const nextCourseUnit = "Módulo 4: Exploración de la visión por computadora y Azure Foundry";
+export const module4Info = {
+  title: "Introducción a los conceptos de voz de IA",
+  officialUrl:
+    "https://learn.microsoft.com/es-es/training/modules/introduction-speech/",
+  duration: "30 min.",
+  totalUnits: 6,
+  description:
+    "Exploración de los dos grandes caminos de la voz en IA: Reconocimiento de Voz (Speech-to-Text / STT: cómo la máquina te escucha) y Síntesis de Voz (Text-to-Speech / TTS: cómo la máquina te habla).",
+};
+
+export const module4Units: CourseUnit[] = [
+  {
+    id: 1,
+    title: "Introducción al Procesamiento de Voz",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-speech/1-introduction/",
+    summary:
+      "Visión general de las capacidades de voz en IA: reconocimiento (STT) y síntesis (TTS).",
+    points: [
+      "Reconocimiento de voz (Speech-to-Text): digitalización de ondas sonoras y conversión a texto.",
+      "Síntesis de voz (Text-to-Speech): generación de habla humana fluida y natural a partir de texto.",
+      "Casos de uso: transcripción en tiempo real, subtitulado, asistentes virtuales y accesibilidad.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Reconocimiento de voz (Speech-to-Text)",
+    duration: "7 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-speech/2-speech-to-text/",
+    summary:
+      "Pipeline de 6 fases del reconocimiento de voz: de la onda analógica al texto procesado.",
+    points: [
+      "Captura digital y preprocesamiento con coeficientes MFCC (imitando al oído humano).",
+      "Modelado acústico con Transformers para extraer fonemas elementales.",
+      "Modelado de lenguaje y descodificación mediante Beam Search (búsqueda por haz) para resolver homófonos según contexto.",
+      "Posprocesamiento con normalización, mayúsculas, puntuación y filtrado.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Síntesis de voz (Text-to-Speech)",
+    duration: "7 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-speech/3-text-to-speech/",
+    summary:
+      "Pipeline de 5 fases de la síntesis de voz: del texto escrito a la onda de audio final.",
+    points: [
+      "Análisis de texto / normalización (conversión de abreviaturas, fechas y números a palabras).",
+      "Análisis fonético (Grafema a Fonema / G2P) para determinar la pronunciación exacta.",
+      "Generación de prosodia (ritmo, entonación, pausas y emoción).",
+      "Modelado acústico generador del espectrograma de Mel y Vocoder neuronal emitiendo la onda sonora.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Ejercicio: Exploración de reconocimiento y síntesis de voz",
+    duration: "8 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-speech/4-exercise/",
+    summary:
+      "Práctica interactiva en Azure Speech Studio probando STT y TTS en tiempo real.",
+    points: [
+      "Grabación de audio con micrófono y verificación de transcripción automática.",
+      "Generación de voz neuronal ajustando prosodia, estilo emocional y velocidad de locución.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Evaluación del módulo",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-speech/5-knowledge-check/",
+    summary:
+      "Preguntas tipo examen sobre fonemas, MFCC, Beam Search, prosodia y Vocoder.",
+    points: [
+      "Validación de los conceptos clave para certificar la comprensión teórica y práctica de voz.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Resumen",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-speech/6-summary/",
+    summary:
+      "Cierre del Módulo 4 consolidando los pipelines simétricos de reconocimiento y síntesis.",
+    points: [
+      "Dominio de las fases de STT y TTS y sus aplicaciones clave en soluciones de IA.",
+    ],
+  },
+];
+
+// Resumen General y Guía de Examen del Módulo 4
+export const module4Summary = {
+  title: "Resumen General del Módulo: Introducción a los conceptos de voz de IA",
+  overview:
+    "El módulo se divide en dos grandes caminos opuestos: cómo la máquina te escucha (Reconocimiento / Speech-to-Text) y cómo la máquina te habla (Síntesis / Text-to-Speech).",
+  visualMap: {
+    stt: "[Onda de Voz] ➔ 1. Captura ➔ 2. Preprocesamiento ➔ 3. Acústico ➔ 4. Lenguaje ➔ 5. Descodificación ➔ 6. Posprocesamiento ➔ [Texto Escrito]",
+    tts: "[Texto Escrito] ➔ 1. Análisis/Normalización ➔ 2. Fonético ➔ 3. Prosodia ➔ 4. Acústico (Espectrograma) ➔ 5. Vocoder ➔ [Onda de Voz]",
+  },
+  sttPhases: [
+    {
+      phase: "1. Captura de audio",
+      concept: "Convierte ondas analógicas en señal digital (16 kHz) y quita ruido básico.",
+      example: "Hablas al micrófono y el sistema elimina el zumbido del ventilador de fondo.",
+    },
+    {
+      phase: "2. Preprocesamiento",
+      concept: "Usa MFCC (imita al oído humano) para extraer vectores de características en ventanas de 20-30 ms.",
+      example: "Ignora si gritaste o hablaste bajito y se queda solo con la 'huella' útil de tu voz.",
+    },
+    {
+      phase: "3. Modelado acústico",
+      concept: "Usa redes Transformers para convertir vectores en fonemas (la unidad más pequeña de sonido).",
+      example: "Detecta los sonidos sueltos /k/, /a/, /s/, /a/ sin saber aún qué significan.",
+    },
+    {
+      phase: "4. Modelado de lenguaje",
+      concept: "Aplica reglas de gramática, vocabulario y contexto para armar palabras reales.",
+      example: "Decide si dijiste 'Voy a caza' o 'Voy a casa' según el resto de tu oración.",
+    },
+    {
+      phase: "5. Descodificación",
+      concept: "Usa Búsqueda por haz (Beam search) para cruzar el modelo acústico y de lenguaje, eligiendo la mejor frase.",
+      example: "Descarta opciones raras y se queda con la oración más probable sin colapsar la memoria.",
+    },
+    {
+      phase: "6. Posprocesamiento",
+      concept: "Da formato legible: pone mayúsculas, puntos, filtra insultos y convierte números hablados a dígitos.",
+      example: "Transforma 'son las tres pe eme' en 'Son las 3 P. M.'",
+    },
+  ],
+  sttMnemonic: {
+    acronym: "C-P-A-L-D-P",
+    phrase: "🎤 'Cuando Pablo Abla, Luis Decide Publicar'",
+    detail: "(Captura, Preprocesamiento, Acústico, Lenguaje, Descodificación, Posprocesamiento).",
+  },
+  ttsPhases: [
+    {
+      phase: "1. Análisis de texto (Normalización)",
+      concept: "Limpia el texto y convierte símbolos, fechas o abreviaturas en palabras completas.",
+      example: "Lee 'Dr. Pérez - $100' y lo convierte internamente en 'Doctor Pérez cien dólares'.",
+    },
+    {
+      phase: "2. Análisis fonético",
+      concept: "Convierte las palabras escritas en fonemas (conversión Grafema a Fonema / G2P).",
+      example: "Sabe que en 'guitarra' la 'u' es muda y define exactamente cómo debe sonar cada sílaba.",
+    },
+    {
+      phase: "3. Generación de prosodia",
+      concept: "Define el ritmo, entonación, tono, pausas y emoción para que no suene como robot.",
+      example: "Hace que la voz suba el tono al final si el texto tiene signos de interrogación (¿?).",
+    },
+    {
+      phase: "4. Modelado acústico",
+      concept: "Junta los fonemas y la prosodia para dibujar un espectrograma de Mel (un mapa visual del sonido).",
+      example: "Crea el 'plano visual' de las frecuencias de audio antes de que exista el sonido real.",
+    },
+    {
+      phase: "5. Síntesis de forma de onda (Vocoder)",
+      concept: "Un Vocoder neuronal toma el espectrograma y lo transforma en la onda de audio final que escuchas.",
+      example: "Es el 'parlante virtual' que convierte el mapa visual en un archivo de voz real y fluido.",
+    },
+  ],
+  ttsMnemonic: {
+    title: "La Metáfora del Actor de Doblaje",
+    description: "Imagina a un actor leyendo un guion profesionalmente:",
+    steps: [
+      { step: "Normalización", text: "Entiende las abreviaturas y cifras del guion." },
+      { step: "Fonética", text: "Sabe cómo pronunciar cada palabra difícil o extranjera." },
+      { step: "Prosodia", text: "Le pone actuación, ritmo y emoción a la lectura." },
+      { step: "Acústico (Espectrograma)", text: "Imagina el sonido en su mente (el mapa mental)." },
+      { step: "Vocoder", text: "Usa sus cuerdas vocales para emitir la voz física final." },
+    ],
+  },
+  examTriggers: [
+    {
+      trigger: "👂 'Oído humano' / 'Extracción de vectores' / 'MFCC'",
+      target: "Preprocesamiento (Reconocimiento / STT)",
+    },
+    {
+      trigger: "🔤 'Unidad más pequeña de sonido'",
+      target: "Fonema (Phoneme)",
+    },
+    {
+      trigger: "⚖️ 'Palabras que suenan igual (homófonos)' / 'Contexto'",
+      target: "Modelado de lenguaje (Language Modeling)",
+    },
+    {
+      trigger: "🔦 'Beam search (Búsqueda por haz)'",
+      target: "Descodificación (Decoding)",
+    },
+    {
+      trigger: "🎶 'Pronunciación natural, cadencia, ritmo o entonación'",
+      target: "Prosodia (Síntesis / TTS)",
+    },
+    {
+      trigger: "📊 'Espectrograma de Mel' a 'Onda de audio'",
+      target: "Vocoder (Síntesis / TTS)",
+    },
+  ],
+};
+
+export const nextCourseUnit = "Módulo 5: Visión por computadora y Azure Computer Vision";
+
 
