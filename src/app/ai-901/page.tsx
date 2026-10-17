@@ -29,6 +29,10 @@ import {
   module4Info,
   module4Units,
   module4Summary,
+  module5Info,
+  module5Units,
+  module5Summary,
+  module5QuizQA,
   videoResources,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
@@ -48,7 +52,8 @@ export default function AI901Page() {
   const [isModule1Open, setIsModule1Open] = useState<boolean>(false);
   const [isModule2Open, setIsModule2Open] = useState<boolean>(false);
   const [isModule3Open, setIsModule3Open] = useState<boolean>(false);
-  const [isModule4Open, setIsModule4Open] = useState<boolean>(true);
+  const [isModule4Open, setIsModule4Open] = useState<boolean>(false);
+  const [isModule5Open, setIsModule5Open] = useState<boolean>(true);
 
   const toggleCheck = (id: string) => {
     setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -1061,6 +1066,218 @@ export default function AI901Page() {
                     <div className="flex items-center gap-1.5 pt-1 border-t border-surface-container-high text-xs font-mono font-bold text-secondary">
                       <span>➔</span>
                       <span>{trig.target}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* ========================================================================= */}
+      {/* MÓDULO 5 (DESPLEGABLE / ABANICO INDEPENDIENTE) - COMPUTER VISION           */}
+      {/* ========================================================================= */}
+      <section className="flex flex-col rounded-xl bg-surface-container-low shadow-md border border-outline-variant/10 overflow-hidden transition-all">
+        {/* Cabecera del Módulo 5 (Botón de abanico / acordeón) */}
+        <div
+          onClick={() => setIsModule5Open((prev) => !prev)}
+          className="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6 cursor-pointer bg-surface-container-low hover:bg-surface-container transition-colors select-none"
+        >
+          <div className="flex flex-col gap-1.5 max-w-xl">
+            <div className="flex items-center gap-2">
+              <span className="rounded bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+                Módulo 5 · {module5Info.totalUnits} Unidades
+              </span>
+              <span className="rounded bg-secondary/15 px-2.5 py-0.5 font-mono text-xs font-bold text-secondary">
+                ⏱️ {module5Info.duration}
+              </span>
+              <span className="rounded bg-surface-container-highest px-2 py-0.5 font-mono text-[10px] text-outline font-semibold">
+                {isModule5Open ? "Abierto" : "Cerrado"}
+              </span>
+            </div>
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-on-surface flex items-center gap-2">
+              <span>{module5Info.title}</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-on-surface-variant line-clamp-2">
+              {module5Info.description}
+            </p>
+          </div>
+
+          {/* Botón visual de Abanico / Flecha */}
+          <div className="flex items-center gap-2">
+            <a
+              href={module5Info.officialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="rounded-lg p-2 text-primary hover:bg-primary/10 transition-colors"
+              title="Abrir en Microsoft Learn"
+            >
+              <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+            </a>
+
+            <div className="flex items-center gap-1.5 rounded-xl bg-surface-container-high px-3 py-2 font-mono text-xs font-bold text-on-surface shadow-sm">
+              <span>{isModule5Open ? "Plegar módulo" : "Desplegar módulo"}</span>
+              <span
+                className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${
+                  isModule5Open ? "rotate-180 text-secondary" : "rotate-0 text-outline"
+                }`}
+              >
+                expand_more
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Contenido desplegable del Módulo 5 */}
+        {isModule5Open && (
+          <div className="flex flex-col gap-6 p-6 pt-2 border-t border-surface-container-high animate-in fade-in duration-200">
+            {/* Unidades oficiales del Módulo 5 */}
+            <ol className="relative ml-4 flex flex-col gap-5 border-l-2 border-surface-container-high pl-6 pt-4">
+              {module5Units.map((unit) => (
+                <li key={unit.id} className="relative flex flex-col gap-1.5">
+                  <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full bg-primary font-mono text-xs font-bold text-on-primary shadow-sm">
+                    {unit.id}
+                  </span>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-display text-base font-bold text-on-surface">
+                      {unit.url ? (
+                        <a
+                          href={unit.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline text-on-surface hover:text-primary flex items-center gap-1.5"
+                        >
+                          {unit.title}
+                          <span className="material-symbols-outlined text-[15px] opacity-70">
+                            open_in_new
+                          </span>
+                        </a>
+                      ) : (
+                        unit.title
+                      )}
+                    </h3>
+                    <span className="rounded-full bg-surface-container-high px-2 py-0.5 font-mono text-[11px] text-outline font-semibold">
+                      {unit.duration}
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm leading-relaxed text-on-surface-variant">
+                    {unit.summary}
+                  </p>
+
+                  {unit.points && (
+                    <ul className="flex flex-col gap-1.5 pt-1">
+                      {unit.points.map((p, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed text-on-surface-variant"
+                        >
+                          <span className="material-symbols-outlined mt-0.5 text-[16px] text-secondary shrink-0">
+                            check
+                          </span>
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+
+              {/* Próximo paso */}
+              <li className="relative flex items-center gap-2.5 pt-2">
+                <span className="absolute -left-[35px] flex h-7 w-7 items-center justify-center rounded-full border border-dashed border-tertiary bg-surface-container-low">
+                  <span className="material-symbols-outlined text-[16px] text-tertiary">
+                    schedule
+                  </span>
+                </span>
+                <span className="text-xs sm:text-sm text-on-surface-variant">
+                  <strong className="text-on-surface">Próximo paso:</strong>{" "}
+                  {nextCourseUnit}.
+                </span>
+              </li>
+            </ol>
+
+            {/* Resumen y Conceptos Clave del Módulo 5 */}
+            <div className="mt-4 flex flex-col gap-5 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex flex-col gap-1.5 border-b border-primary/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[26px] text-primary">
+                    visibility
+                  </span>
+                  <h3 className="font-display text-lg sm:text-xl font-bold text-on-surface">
+                    {module5Summary.title}
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
+                  {module5Summary.overview}
+                </p>
+              </div>
+
+              {/* Tarjetas de conceptos */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                {module5Summary.coreConcepts.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col gap-2 rounded-xl bg-surface-container p-4 border border-outline-variant/15 shadow-sm"
+                  >
+                    <span className="font-mono font-bold text-xs sm:text-sm text-primary">
+                      📌 {item.title}
+                    </span>
+                    <p className="text-xs sm:text-sm text-on-surface leading-relaxed">
+                      <strong className="text-on-surface font-semibold">Concepto:</strong>{" "}
+                      <span className="text-on-surface-variant">{item.concept}</span>
+                    </p>
+                    <div className="rounded-md bg-surface-container-high/60 p-2.5 text-xs text-secondary font-mono border-l-2 border-secondary">
+                      <span>💡 </span>
+                      <span className="font-sans text-on-surface-variant">
+                        <strong className="text-on-surface font-semibold font-mono">Impacto / Clave:</strong>{" "}
+                        {item.benefit}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Cuestionario y Respuestas Oficiales del Módulo 5 */}
+            <div className="mt-2 flex flex-col gap-4 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6 shadow-inner">
+              <div className="flex items-center justify-between border-b border-primary/20 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[24px] text-primary">
+                    quiz
+                  </span>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-on-surface">
+                    Cuestionario y Respuestas Oficiales del Módulo 5
+                  </h3>
+                </div>
+                <span className="rounded-full bg-primary/20 px-2.5 py-0.5 font-mono text-xs font-bold text-primary">
+                  {module5QuizQA.length} Preguntas Clave
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {module5QuizQA.map((qa) => (
+                  <div
+                    key={qa.id}
+                    className="flex flex-col gap-2 rounded-lg bg-surface-container p-4 border border-outline-variant/15 shadow-sm"
+                  >
+                    <div className="flex items-start gap-2">
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 font-mono text-xs font-bold text-primary shrink-0 mt-0.5">
+                        {qa.id}
+                      </span>
+                      <span className="text-xs sm:text-sm font-bold text-on-surface">
+                        {qa.question}
+                      </span>
+                    </div>
+                    <div className="ml-7 flex items-start gap-2 rounded-md bg-surface-container-high/60 p-2.5 text-xs sm:text-sm text-secondary font-mono border-l-2 border-secondary">
+                      <span>➡️</span>
+                      <span>
+                        <strong className="text-on-surface font-sans">Respuesta correcta:</strong>{" "}
+                        {qa.answer}
+                      </span>
                     </div>
                   </div>
                 ))}

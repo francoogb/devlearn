@@ -951,6 +951,174 @@ export const module4Summary = {
   ],
 };
 
-export const nextCourseUnit = "Módulo 5: Visión por computadora y Azure Computer Vision";
+// ---------- MÓDULO 5: OFICIAL DE MICROSOFT LEARN ----------
+// Título: Introducción a los conceptos de Computer Vision
+// Duración estimada: 35 min | 7 Unidades
+export const module5Info = {
+  title: "Introducción a los conceptos de Computer Vision",
+  officialUrl:
+    "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/",
+  duration: "35 min.",
+  totalUnits: 7,
+  description:
+    "Fundamentos de cómo la IA procesa la información visual para replicar la percepción humana: manipulación de píxeles, técnicas de clasificación, detección y segmentación, redes CNN, transformadores de visión (ViT), modelos multimodales y difusión generativa.",
+};
+
+export const module5Units: CourseUnit[] = [
+  {
+    id: 1,
+    title: "Introducción a la Visión por Computadora",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/1-introduction/",
+    summary:
+      "Concepto fundamental de cómo la IA procesa la información visual para intentar replicar la percepción humana y entender el entorno.",
+    points: [
+      "Simulación de la vista humana para extraer significado y contexto de imágenes y video.",
+      "Aplicaciones en vehículos autónomos, diagnóstico médico, seguridad e inspección industrial.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Tareas y técnicas de Computer Vision",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/2-vision-techniques/",
+    summary:
+      "Las acciones prácticas que la IA puede realizar con imágenes: clasificar, detectar y segmentar.",
+    points: [
+      "Clasificación de imágenes: identificar qué objeto principal hay en la escena.",
+      "Detección de objetos: determinar qué objetos hay y exactamente dónde están (bounding boxes).",
+      "Segmentación semántica: separar y etiquetar partes de la imagen a nivel de píxeles individuales.",
+      "Análisis facial, reconocimiento óptico de caracteres (OCR) y descripción de escenas.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Imágenes y procesamiento de imágenes",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/3-image-processing/",
+    summary:
+      "La base técnica: las computadoras ven las imágenes como cuadrículas numéricas de píxeles manipulables matemáticamente.",
+    points: [
+      "Representación de imágenes como matrices de valores de píxeles (canales RGB / escala de grises).",
+      "Operaciones matemáticas básicas: filtros, convoluciones, transformaciones de brillo, contraste y detección de bordes.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Redes neuronales convolucionales (CNN)",
+    duration: "6 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/4-convolutional-neural-networks/",
+    summary:
+      "El sistema clásico de IA para visión que aplica filtros por capas para detectar patrones de lo simple a lo complejo.",
+    points: [
+      "Uso de filtros (kernels) convolucionales para extraer características numéricas esenciales.",
+      "Jerarquía de capas: primero detecta bordes y líneas simples; luego texturas, formas complejas y objetos completos.",
+      "Capas de pooling (agrupamiento) para reducir dimensionalidad y capas densas para clasificar.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Transformadores de visión y modelos multimodales (ViT)",
+    duration: "6 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/5-vision-transformers/",
+    summary:
+      "Transformadores que aplican mecanismos de atención sobre fragmentos de imágenes y se combinan con NLP.",
+    points: [
+      "Vision Transformers (ViT): dividen la imagen en parches/fragmentos y crean incrustaciones contextuales mediante atención.",
+      "Modelos multimodales: unen visión artificial con Procesamiento de Lenguaje Natural (NLP) para entender texto e imagen juntos.",
+      "Habilitan preguntas y respuestas visuales (Visual QA), subtitulado y razonamiento avanzado sobre imágenes.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Generación de imágenes con modelos de difusión",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/6-image-generation/",
+    summary:
+      "Creación de elementos visuales a partir de texto mediante difusión: limpiando ruido gaussiano paso a paso.",
+    points: [
+      "Modelos de difusión: parten de una matriz de ruido aleatorio y la limpian iterativamente guiados por el prompt de texto.",
+      "Generación de arte conceptual, fotografías fotorrealistas y edición visual automatizada.",
+    ],
+  },
+  {
+    id: 7,
+    title: "Ejercicio: Exploración de la visión artificial y Evaluación",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-computer-vision/7-exercise-knowledge-check/",
+    summary:
+      "Práctica interactiva en el área de juegos de chat multimodal y comprobación oficial de conocimientos.",
+    points: [
+      "Subida de imagen y comprobación de cómo el modelo multimodal analiza, describe y responde dudas sobre ella.",
+      "Cuestionario evaluativo con preguntas oficiales de examen AI-901.",
+    ],
+  },
+];
+
+// Resumen y Conceptos Clave del Módulo 5
+export const module5Summary = {
+  title: "Resumen General del Módulo: Conceptos de Computer Vision",
+  overview:
+    "Este módulo cubre los fundamentos técnicos de la visión por computadora: desde cómo las computadoras interpretan píxeles numéricos y aplican filtros convolucionales (CNN), hasta la revolución de los Vision Transformers (ViT), modelos multimodales combinados con NLP y la generación por difusión.",
+  coreConcepts: [
+    {
+      title: "1. Introducción y Percepción Visual",
+      concept: "Cómo la IA procesa la información visual para intentar replicar la percepción humana y entender su entorno.",
+      benefit: "Permite a los sistemas interpretar el mundo visual de manera autónoma en múltiples aplicaciones de la vida real.",
+    },
+    {
+      title: "2. Tareas y Técnicas de Computer Vision",
+      concept: "Acciones prácticas realizables con imágenes: Clasificación (¿qué hay?), Detección de objetos (¿dónde está con bounding box?) y Segmentación (separar a nivel de píxel).",
+      benefit: "Fundamento para inspecciones de calidad, inventarios automatizados, vehículos inteligentes y medicina.",
+    },
+    {
+      title: "3. Imágenes y Procesamiento (Píxeles)",
+      concept: "La base técnica: las computadoras ven las imágenes como cuadrículas o matrices numéricas (píxeles con valores de color e intensidad).",
+      benefit: "Permite aplicar manipulaciones y filtros mediante operaciones matemáticas directas.",
+    },
+    {
+      title: "4. Redes Neuronales Convolucionales (CNN)",
+      concept: "El sistema clásico de visión que aplica filtros por capas: primero identifica líneas y bordes simples, y luego reconoce formas complejas y objetos completos.",
+      benefit: "El rol principal de los filtros es extraer características numéricas de las imágenes para que la red neuronal aprenda a clasificarlas.",
+    },
+    {
+      title: "5. Transformadores de Visión (ViT) y Multimodalidad",
+      concept: "Modelos que utilizan mecanismos de atención para procesar fragmentos/parches de imágenes y crear incrustaciones contextuales profundas.",
+      benefit: "Al ser multimodales se combinan con NLP, permitiendo razonar simultáneamente sobre texto e imagen (Visual Question Answering, descripción automática).",
+    },
+    {
+      title: "6. Generación de Imágenes (Modelos de Difusión)",
+      concept: "Creación de elementos visuales a partir de descripciones textuales partiendo de una imagen de ruido puro (píxeles aleatorios) que el modelo limpia paso a paso.",
+      benefit: "Generación de imágenes fotorrealistas de alta fidelidad guiadas con precisión por lenguaje natural.",
+    },
+    {
+      title: "7. Ejercicio Práctico en Playground Multimodal",
+      concept: "Interacción directa en el área de juegos de chat subiendo imágenes para que el modelo multimodal las analice y describa.",
+      benefit: "Comprobación tangible de cómo la visión y el lenguaje colaboran en un asistente de IA moderno.",
+    },
+  ],
+};
+
+// Cuestionario y Respuestas Oficiales del Módulo 5 (Preguntas Clave del Examen AI-901)
+export const module5QuizQA: QuizQA[] = [
+  {
+    id: 1,
+    question: "¿En qué tipos de valores en una imagen se basa la visión por computadora para su manipulación y análisis?",
+    answer: "Píxeles (las computadoras interpretan las imágenes como cuadrículas o matrices de valores numéricos de píxeles).",
+  },
+  {
+    id: 2,
+    question: "¿Cuál es el rol principal de los filtros en una red neuronal convolucional (CNN) que se usa para la clasificación de imágenes?",
+    answer: "Extraer características numéricas de imágenes para su uso en una red neuronal (detectando bordes, patrones y formas complejas).",
+  },
+  {
+    id: 3,
+    question: "¿Qué descripción coincide mejor con un transformador de visión (ViT)?",
+    answer: "Un modelo que utiliza la atención para procesar fragmentos de imágenes y crear incrustaciones contextuales.",
+  },
+];
+
+export const nextCourseUnit = "Módulo 6: Implementación de soluciones en Microsoft Azure Foundry";
+
 
 
