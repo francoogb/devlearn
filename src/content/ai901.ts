@@ -1118,7 +1118,155 @@ export const module5QuizQA: QuizQA[] = [
   },
 ];
 
-export const nextCourseUnit = "Módulo 6: Implementación de soluciones en Microsoft Azure Foundry";
+// ---------- MÓDULO 6: OFICIAL DE MICROSOFT LEARN ----------
+// Título: Introducción a los conceptos de extracción de información
+// Duración estimada: 30 min | 7 Unidades
+export const module6Info = {
+  title: "Introducción a los conceptos de extracción de información",
+  officialUrl:
+    "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/",
+  duration: "30 min.",
+  totalUnits: 7,
+  description:
+    "Cómo la IA procesa contenido no estructurado (documentos escaneados, recibos, imágenes y PDFs) combinando OCR para extraer texto legible por máquina e IA generativa / modelos semánticos para interpretar y mapear campos clave con precisión.",
+};
+
+export const module6Units: CourseUnit[] = [
+  {
+    id: 1,
+    title: "Introducción a la extracción de información",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/1-introduction/",
+    summary:
+      "Concepto fundamental: cómo la IA permite tomar datos no estructurados y analizarlos para identificar y extraer campos y valores útiles.",
+    points: [
+      "Tratamiento de fuentes no estructuradas: documentos escaneados, imágenes, recibos y archivos PDF.",
+      "Identificación automática y extracción selectiva de la información y valores que realmente se necesitan.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Información general sobre la extracción de información",
+    duration: "4 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/2-information-extraction-overview/",
+    summary:
+      "Panorama técnico y flujo de trabajo para transformar documentos no estructurados en datos estructurados empresariales.",
+    points: [
+      "De datos crudos (unstructured data) a esquemas organizados con campos clave.",
+      "Reducción de captura manual y automatización de flujos de trabajo administrativos.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Reconocimiento óptico de caracteres (OCR)",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/3-optical-character-recognition/",
+    summary:
+      "Los 'ojos' del sistema: examina imágenes con texto y las convierte en datos de texto legibles por máquina.",
+    points: [
+      "Conversión de píxeles que contienen caracteres en texto digital codificado y procesable.",
+      "Detección de texto impreso, manuscrito y tablas en diversas orientaciones y resoluciones.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Extracción y mapeo de campos con IA generativa",
+    duration: "6 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/4-field-mapping/",
+    summary:
+      "Rol de los modelos de lenguaje semántico para interpretar el contexto y emparejar valores extraídos con sus campos correspondientes.",
+    points: [
+      "Interpretación semántica contextual posterior a la lectura OCR en bruto.",
+      "Mapeo inteligente de entidades: diferenciar con certeza un número de 'Total' frente a un número de 'Fecha' o 'Factura'.",
+      "Asignación exacta a estructuras de datos requeridas por la aplicación.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Ejercicio: Exploración de la extracción de información de IA",
+    duration: "7 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/5-exercise/",
+    summary:
+      "Práctica directa con la herramienta Information Extractor subiendo documentos PDF para extraer datos relevantes automáticamente.",
+    points: [
+      "Carga de un documento real (ej. PDF) y ejecución del pipeline de extracción.",
+      "Verificación de campos, valores y nivel de confianza obtenidos por el modelo.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Evaluación del módulo",
+    duration: "3 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/6-knowledge-check/",
+    summary:
+      "Comprobación de conocimientos superada al 100% sobre extracción de información, rol de OCR e IA generativa.",
+    points: [
+      "Validación de los tres conceptos clave evaluados en el examen oficial.",
+    ],
+  },
+  {
+    id: 7,
+    title: "Resumen",
+    duration: "2 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-information-extraction/7-summary/",
+    summary:
+      "Cierre del módulo consolidando los pilares de la extracción: análisis de contenido no estructurado, OCR y mapeo de campos.",
+    points: [
+      "Comprensión integral de cómo combinar visión (OCR) y lenguaje semántico para la extracción de datos.",
+    ],
+  },
+];
+
+// Resumen y Conceptos Clave del Módulo 6
+export const module6Summary = {
+  title: "Resumen General del Módulo: Extracción de Información con IA",
+  overview:
+    "Este módulo enseña cómo la inteligencia artificial transforma documentos no estructurados (recibos, PDFs, facturas, imágenes) en datos organizados y estructurados combinando dos pilares: la lectura visual mediante OCR y la interpretación contextual mediante IA generativa.",
+  coreConcepts: [
+    {
+      title: "1. Contenido No Estructurado a Datos Útiles",
+      concept: "La IA analiza fuentes no estructuradas (documentos escaneados, imágenes, recibos o PDFs) para identificar y extraer únicamente la información, campos y valores pertinentes.",
+      benefit: "Elimina la transcripción manual y permite integrar datos físicos directamente en bases de datos o sistemas de gestión.",
+    },
+    {
+      title: "2. Rol del OCR (Reconocimiento Óptico de Caracteres)",
+      concept: "Actúa como los 'ojos' del sistema: examina imágenes con caracteres y las convierte en datos de texto legibles por máquina.",
+      benefit: "Paso habilitador indispensable para que la computadora pueda leer y procesar las palabras y números contenidos en una imagen.",
+    },
+    {
+      title: "3. Extracción y Mapeo de Campos con IA Generativa",
+      concept: "Los modelos de lenguaje semántico interpretan el contexto global para emparejar y asignar con precisión los valores extraídos a sus campos correspondientes.",
+      benefit: "Resuelve ambigüedades lógicas (por ejemplo, distinguir con precisión si una cifra numérica corresponde a 'Total', 'Subtotal' o 'Fecha').",
+    },
+    {
+      title: "4. Práctica con 'Information Extractor'",
+      concept: "Uso práctico de herramientas de extracción de información para procesar documentos de prueba (como archivos PDF) y obtener campos estructurados al instante.",
+      benefit: "Comprobación del flujo de trabajo real que se implementa en soluciones de Azure Document Intelligence / Foundry.",
+    },
+  ],
+};
+
+// Cuestionario y Respuestas Oficiales del Módulo 6 (Quiz 100% Superado)
+export const module6QuizQA: QuizQA[] = [
+  {
+    id: 1,
+    question: "¿Cuál es la definición de extracción de información de IA?",
+    answer: "Análisis de contenido no estructurado para identificar y extraer los campos y valores pertinentes.",
+  },
+  {
+    id: 2,
+    question: "¿Para qué se usa el reconocimiento óptico de caracteres (OCR)?",
+    answer: "Se usa para convertir imágenes de texto en datos de texto legibles por máquina.",
+  },
+  {
+    id: 3,
+    question: "¿Cómo mejora la IA generativa la extracción de información?",
+    answer: "Ayuda mediante el uso de modelos de lenguaje semántico para hacer coincidir con precisión los valores extraídos en los campos de datos.",
+  },
+];
+
+export const nextCourseUnit = "Módulo 7: Inteligencia artificial responsable y principios éticos en Azure";
+
 
 
 
