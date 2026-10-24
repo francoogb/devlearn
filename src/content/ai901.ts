@@ -1265,7 +1265,173 @@ export const module6QuizQA: QuizQA[] = [
   },
 ];
 
-export const nextCourseUnit = "Módulo 7: Inteligencia artificial responsable y principios éticos en Azure";
+// ---------- MÓDULO 7: OFICIAL DE MICROSOFT LEARN ----------
+// Título: Introducción a los conceptos de generación aumentada por recuperación (RAG)
+// Duración estimada: 34 min | 7 Unidades
+export const module7Info = {
+  title: "Introducción a los conceptos de generación aumentada por recuperación (RAG)",
+  officialUrl:
+    "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/",
+  duration: "34 min.",
+  totalUnits: 7,
+  description:
+    "Patrón arquitectónico diseñado para mitigar las alucinaciones en modelos de lenguaje grande (LLM), fundamentando las respuestas en datos externos, seguros y actualizados mediante chunking, embeddings vectoriales, búsqueda semántica y generación contextualizada.",
+};
+
+export const module7Units: CourseUnit[] = [
+  {
+    id: 1,
+    title: "Introducción a la Generación Aumentada por Recuperación",
+    duration: "4 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/1-introduction/",
+    summary:
+      "Propósito fundamental de RAG: mitigar alucinaciones de los LLMs y fundamentar respuestas en fuentes de datos externas y actualizadas.",
+    points: [
+      "Superación de las limitaciones del conocimiento estático del entrenamiento de los modelos.",
+      "Combinación sinérgica de un sistema de recuperación de información con un motor generativo.",
+    ],
+  },
+  {
+    id: 2,
+    title: "Preparación y fragmentación de datos (Chunking)",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/2-chunking/",
+    summary:
+      "División eficiente de documentos de gran tamaño en fragmentos manejables.",
+    points: [
+      "Permite que los pasajes relevantes quepan de forma óptima en el límite de tokens (context window) del prompt.",
+      "Mantiene la coherencia temática de cada segmento sin sobrecargar el modelo.",
+    ],
+  },
+  {
+    id: 3,
+    title: "Vectorización e incrustaciones (Embeddings)",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/3-embeddings/",
+    summary:
+      "Transformación de fragmentos de texto en vectores numéricos semánticos.",
+    points: [
+      "Captura matemática del significado conceptual y relaciones de contexto profundo.",
+      "Proyección en un espacio vectorial multidimensional para cálculo de proximidad.",
+    ],
+  },
+  {
+    id: 4,
+    title: "Indexación y búsqueda semántica de vectores",
+    duration: "6 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/4-indexing-search/",
+    summary:
+      "Almacenamiento en bases de datos vectoriales y recuperación por afinidad de significado.",
+    points: [
+      "Permite encontrar pasajes equivalentes conceptualmente aunque difieran las palabras exactas (ej. 'costos de viaje' vs 'gastos de negocios').",
+      "Búsqueda por similitud vectorial (coseno o distancia euclidiana) de alta velocidad.",
+    ],
+  },
+  {
+    id: 5,
+    title: "Generación fundamentada en contexto (Grounded Generation)",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/5-grounded-generation/",
+    summary:
+      "Envío de la consulta junto con los pasajes recuperados como contexto de referencia al LLM.",
+    points: [
+      "El modelo redacta una respuesta fluida y coherente basada estrictamente en la evidencia provista.",
+      "Reducción directa de sesgos y prevención de respuestas inventadas.",
+    ],
+  },
+  {
+    id: 6,
+    title: "Evaluación y diagnóstico del rendimiento de RAG",
+    duration: "5 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/6-evaluation/",
+    summary:
+      "Auditoría y diagnóstico de fallos: comprobar calidad, vigencia y precisión de los fragmentos recuperados.",
+    points: [
+      "Diagnóstico prioritario: ante respuestas fluidas pero con directivas incorrectas, verificar primero si se recuperó el pasaje actual y correcto.",
+      "Métricas de relevancia, fidelidad y cobertura del contexto.",
+    ],
+  },
+  {
+    id: 7,
+    title: "Evaluación del módulo y Resumen",
+    duration: "4 min.",
+    url: "https://learn.microsoft.com/es-es/training/modules/introduction-retrieval-augmented-generation/7-summary/",
+    summary:
+      "Consolidación de las etapas clave de RAG y comprobación de conocimientos para la certificación AI-901.",
+    points: [
+      "Dominio del flujo completo: Chunking ➔ Embeddings ➔ Búsqueda Vectorial ➔ Prompt Aumentado ➔ Generación Fundamentada.",
+    ],
+  },
+];
+
+// Resumen y Conceptos Clave del Módulo 7
+export const module7Summary = {
+  title: "Resumen General del Módulo: Generación Aumentada por Recuperación (RAG)",
+  overview:
+    "RAG es un patrón arquitectónico indispensable que combina un sistema de recuperación de información externa con un motor de IA generativa para mitigar alucinaciones y fundamentar respuestas en datos actualizados y confiables.",
+  stages: [
+    {
+      id: "stage-1",
+      title: "1. Preparación y Fragmentación (Chunking)",
+      badge: "Segmentación",
+      concept: "Los documentos extensos se dividen en fragmentos más pequeños para que los pasajes relevantes quepan de forma eficiente en el prompt sin exceder el límite de contexto.",
+      detail: "Evita que el contexto se desborde y asegura que solo se inyecte la información más pertinente.",
+    },
+    {
+      id: "stage-2",
+      title: "2. Vectorización (Embeddings)",
+      badge: "Representación Semántica",
+      concept: "Cada fragmento se procesa con un modelo de inserción que lo transforma en un vector numérico capaz de capturar sus características semánticas y significado conceptual.",
+      detail: "Convierte lenguaje natural en coordenadas matemáticas multidimensionales comparables.",
+    },
+    {
+      id: "stage-3",
+      title: "3. Indexación y Búsqueda Semántica de Vectores",
+      badge: "Recuperación Inteligente",
+      concept: "Los vectores se almacenan en un índice. Ante una consulta del usuario, el sistema busca los fragmentos más afines conceptualmente, incluso si las palabras exactas difieren.",
+      detail: "Ejemplo: vincula con éxito 'gastos de viaje de negocios' con 'costos de viaje de empresa'.",
+    },
+    {
+      id: "stage-4",
+      title: "4. Generación Fundamentada (Grounded Generation)",
+      badge: "Respuesta Verídica",
+      concept: "El sistema combina la consulta con los pasajes recuperados en el prompt. El LLM redacta una respuesta coherente, fluida y ceñida a los datos suministrados.",
+      detail: "Mitiga activamente las alucinaciones y garantiza respuestas sustentadas en información verídica y privada.",
+    },
+  ],
+};
+
+// Preguntas Clave de Examen sobre RAG (AI-901)
+export const module7QuizQA: QuizQA[] = [
+  {
+    id: 1,
+    question: "¿Cuál es el propósito principal de la generación aumentada de recuperación (RAG)?",
+    answer: "Para fundamentar las respuestas generadas en la información pertinente recuperada de un origen de datos.",
+  },
+  {
+    id: 2,
+    question: "¿Por qué los documentos de gran tamaño se dividen normalmente en fragmentos antes de que se indexen?",
+    answer: "Así, la solución puede recuperar pasajes relevantes que quepan de forma eficiente en un prompt.",
+  },
+  {
+    id: 3,
+    question: "¿Qué representa una inserción (embedding) en una solución RAG?",
+    answer: "Un vector numérico que captura las características semánticas del contenido.",
+  },
+  {
+    id: 4,
+    question: "¿Qué enfoque de búsqueda puede encontrar un pasaje sobre 'costos de viaje de empresa' cuando la consulta pregunta sobre 'gastos de viaje de negocios', incluso si las palabras difieren?",
+    answer: "Búsqueda semántica de vectores.",
+  },
+  {
+    id: 5,
+    question: "Una respuesta RAG es fluida, pero contiene un límite de directiva incorrecto. ¿Qué se debe examinar primero?",
+    answer: "Si se recuperó y proporcionó el pasaje de directiva correcto y actual como contexto.",
+  },
+];
+
+export const nextCourseUnit = "¡Temario de Microsoft AI-901 completado al 100%! Listo para simulacros de examen.";
+
 
 
 
