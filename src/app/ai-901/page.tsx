@@ -44,6 +44,7 @@ import {
   videoResources,
 } from "@/content/ai901";
 import { sectionProgressById } from "@/lib/progress";
+import AI901PracticeTrainer from "@/components/AI901PracticeTrainer";
 
 export default function AI901Page() {
   const progress = sectionProgressById("ai-901");
@@ -160,6 +161,9 @@ export default function AI901Page() {
           </div>
         </div>
       </div>
+
+      {/* ---------- ENTRENADOR INTERACTIVO DE ASOCIACIÓN DE CONCEPTOS ---------- */}
+      <AI901PracticeTrainer />
 
       {/* ---------- DISTRIBUCIÓN PRINCIPAL (COLUMNA IZQUIERDA Y DERECHA) ---------- */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
